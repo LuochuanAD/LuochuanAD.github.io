@@ -2,7 +2,7 @@
 title: LuochuanAD Blog
 SEOTitle: 青蛙神的博客 | LuochuanAD Blog
 header-img: img/post-bg-desk.jpg
-email: luochuanad@gmail.com luochuanpersonal@163.com
+email: luochuanad@gmail.com
 description: "Set a big goal:Facebook Apple Linkedin Google Microsoft"
 keyword: "iOS,WatchOS, MacOS,SDK,Android"
 url: "http://luochuanad.github.io"          # your host, for absolute URL
@@ -22,7 +22,7 @@ RSS: false
 linkedin_username:     
 github_username:LuochuanAD      
 scdn_username:LuochuanAD   
-twitter_username:  @luochuanAD 
+twitter_username:luochuanAD 
 
 
 
