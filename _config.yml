@@ -1,17 +1,17 @@
 # Site settings
 title: LuochuanAD Blog
-SEOTitle: 青蛙神的博客 | BY Blog
+SEOTitle: 青蛙神的博客 | LuochuanAD Blog
 header-img: img/post-bg-desk.jpg
-email: luochuanad@gmail.com
-description: "Every failure is leading towards success."
-keyword: "iOS, Apple, iPhone"
+email: luochuanad@gmail.com luochuanpersonal@163.com
+description: "Set a big goal:Facebook Apple Linkedin Google Microsoft"
+keyword: "iOS,WatchOS, MacOS,SDK,Android"
 url: "http://luochuanad.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/luochuanad/luochuanad.github.io.git" # you code repository
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "set a big goal: Falm"
+sidebar-about-description: "Set a big goal:Facebook Apple Linkedin Google Microsoft"
 sidebar-avatar: /img/myPicture.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
@@ -19,11 +19,10 @@ sidebar-avatar: /img/myPicture.jpg      # use absolute URL, seeing it's used in 
 # SNS settings
 RSS: false
 # weibo_username:     
-zhihu_username:     
-github_username:    
-facebook_username:  
-jianshu_username:   
-#twitter_username:   
+linkedin_username:     
+github_username:LuochuanAD      
+scdn_username:LuochuanAD   
+twitter_username:  @luochuanAD 
 
 
 
