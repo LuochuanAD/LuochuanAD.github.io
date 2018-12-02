@@ -4,10 +4,11 @@ title:      iOS之自定义AlertView的传参问题
 subtitle:   自定义AlertView
 date:       2016-11-08
 author:     LuochuanAD
-header-img: img/post-bg-cook.jpg
+header-img: img/home_blog_background.jpg
 catalog: true
 tags:
-- iOS AlertView
+- iOS 
+- AlertView
 
 ---
 
