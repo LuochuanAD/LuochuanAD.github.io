@@ -98,16 +98,16 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "Github",
+        title: "Github:LuochuanAD",
         href: "https://github.com/LuochuanAD"
     },{
-        title: "简书·BY",
-        href: "http://www.jianshu.com/u/e71990ada2fd"
+        title: "Twitter:@luochuanAD",
+        href: "https://twitter.com/luochuanAD"
     },{
-        title: "Apple",
-        href: "https://apple.com"
+        title: "LinkedIn",
+        href: "https://www.linkedin.com/in/川-羅-193480135/"
     },{
-        title: "Apple Developer",
-        href: "https://developer.apple.com/"
+        title: "CSDN:LuochuanAD",
+        href: "https://blog.csdn.net/luochuanAD"
     }
 ]
