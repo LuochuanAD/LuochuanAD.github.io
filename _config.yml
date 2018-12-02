@@ -55,14 +55,14 @@ kramdown:
 
 
 # 评论系统
-# Disqus（https://disqus.com/）
-# disqus_username: LuochuanAD
+ Disqus（https://disqus.com/）
+ disqus_username: LuochuanAD
 
 # Gitalk
 gitalk:
-  enable: true    #是否开启Gitalk评论
-  clientID: f2c84e7629bb1446c1a4                            #生成的clientID
-  clientSecret: ca6d6139d1e1b8c43f8b2e19492ddcac8b322d0d    #生成的clientSecret
+  enable: false    #是否开启Gitalk评论
+  clientID:                             #生成的clientID
+  clientSecret:     #生成的clientSecret
   repo: luochuanad.github.io    #仓库名称
   owner: luochuanad    #github用户名
   admin: luochuanad
@@ -98,8 +98,8 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "WY",
-        href: "http://zhengwuyang.com"
+        title: "Github",
+        href: "https://github.com/LuochuanAD"
     },{
         title: "简书·BY",
         href: "http://www.jianshu.com/u/e71990ada2fd"
