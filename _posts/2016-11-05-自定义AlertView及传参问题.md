@@ -14,9 +14,10 @@ tags:
 
 ## 前言
 
-最近在开发SDK的过程中,有一个需求是:点击按钮,弹框显示姓名和身份证号,同时在弹框中可以修改姓名和身份证号.  
+>最近在开发SDK的过程中,有一个需求是:点击按钮,弹框显示姓名和身份证号,同时在弹框中可以修改姓名和身份证号.  
 分析:需要自定义一个AlertView 和双向传值(需要用到Block).
 自定义的样式为下图:
+
 ![](https://raw.githubusercontent.com/LuochuanAD/OC-CommonAlertView/master/LCAlertView/demoExample2016110501.png)
 
 
@@ -24,9 +25,9 @@ tags:
 
 >关键词：自定义View
 
-### 思路 
+### 一,思路 
 
-NewFile 继承自UIView. 添加2个Block : cancelBlock 和 sureBlock 分别用于 自定义AlertView的2个按钮点击事件,之后就是UI页面的搭建了
+>NewFile 继承自UIView. 添加2个Block : cancelBlock 和 sureBlock 分别用于 自定义AlertView的2个按钮点击事件,之后就是UI页面的搭建了
 
 ```
 typedef void(^cancelBlock)();
@@ -39,11 +40,11 @@ typedef void(^sureBlock)(NSString*name,NSString*idnumber);
 
 @end
 ```
-详细代码CommonAlertView已上传到[Github](https://github.com/LuochuanAD/OC-CommonAlertView) 
+>详细代码CommonAlertView已上传到[Github](https://github.com/LuochuanAD/OC-CommonAlertView) 
 
 
 
-### 如何使用CommonAlertView 
+### 二,如何使用CommonAlertView 
 
 ```
 CommonAlertView *alertView=[CommonAlertView alertViewWithCancelbtnClicked:^{
@@ -59,9 +60,9 @@ UIView *keywindow=[UIApplication sharedApplication].keyWindow;
 
 ```
 
-### 代码分析
+### 三,代码分析
 
-在CommonAlertView.h中定义了弹框的返回和修改按钮的Block用来处理按钮的点击事件. 
+>在CommonAlertView.h中定义了弹框的返回和修改按钮的Block用来处理按钮的点击事件. 
 点击修改按钮需要将姓名和身份证号的值传出去,所以修改按钮的block会有2个参数(注:根据你项目的需求,修改参数的多少). 
 接下来,就是创建自定义View的方法,我用类方法,带有4个参数:2个是弹框的返回和修改按钮事件的block,和要初始显示在弹框的姓名和身份证号参数.
 
@@ -72,7 +73,7 @@ withName:(NSString *)name
 withidcard:(NSString *)idnumber;
 
 ```
-在CommonAlertView.m
+>在CommonAlertView.m
 中的initWithFrame:方法中中创建遮罩blackView和弹框alertView,
 
 ```
@@ -90,7 +91,7 @@ return self;
 
 ```
 
-同时给alertview的加上弹出的动画(注:这里的动画可自定义,方法为animationAlert:). 
+>同时给alertview的加上弹出的动画(注:这里的动画可自定义,方法为animationAlert:). 
 
 ```
 //弹框动画自定义(可以修改参数改变动画)
@@ -105,7 +106,7 @@ popAnimation.timingFunctions=@[[CAMediaTimingFunction functionWithName:kCAMediaT
 }
 ```
 
-在layoutSubviews的方法中添加控件到弹框alertView上并布局.
+>在layoutSubviews的方法中添加控件到弹框alertView上并布局.
 
 ```
 - (void)layoutSubviews{
@@ -116,7 +117,7 @@ _nameLable=[[UILabel alloc]initWithFrame:CGRectMake(10, 20, 68, 30)];
 }
 ```
 
-在+(instancetype)alertViewWithCancelbtnClicked:(cancelBlock) cancelBlock andSureBtnClicked:(sureBlock) sureBlock withName:(NSString *)name withidcard:(NSString *)idnumber中定义2个NSString属性分别接收name和idnumber的值,并对定义的2个属性重写,否则会无法显示. 
+>在+(instancetype)alertViewWithCancelbtnClicked:(cancelBlock) cancelBlock andSureBtnClicked:(sureBlock) sureBlock withName:(NSString *)name withidcard:(NSString *)idnumber中定义2个NSString属性分别接收name和idnumber的值,并对定义的2个属性重写,否则会无法显示. 
 
 ```
 +(instancetype)alertViewWithCancelbtnClicked:(cancelBlock) cancelBlock andSureBtnClicked:(sureBlock) sureBlock withName:(NSString *)name withidcard:(NSString *)idnumber{
@@ -140,7 +141,7 @@ _name=[NSString stringWithFormat:@"%@",name];
 _idnumber=[NSString stringWithFormat:@"%@",idnumber];
 }
 ```
-在返回和修改按钮的点击事件中将block块传出去.在修改按钮的事件中要将姓名和身份证号的输入框中的值带入到sure_block中.
+>在返回和修改按钮的点击事件中将block块传出去.在修改按钮的事件中要将姓名和身份证号的输入框中的值带入到sure_block中.
 
 ```
 //取消按钮点击
