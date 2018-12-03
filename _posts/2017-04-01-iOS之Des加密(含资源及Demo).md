@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      iOS之Des加密(含资源及Demo)
-subtitle:   自定义AlertView
+subtitle:   DESEncryption
 date:       2017-04-01
 author:     LuochuanAD
 header-img: img/home_blog_background.jpg
