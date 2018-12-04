@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      iOS之POST请求数组样式参数DES加密问题
-subtitle:   自定义AlertView
+subtitle:   url编码
 date:       2016-11-16
 author:     LuochuanAD
 header-img: img/home_blog_background.jpg

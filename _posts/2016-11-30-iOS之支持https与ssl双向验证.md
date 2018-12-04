@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      iOS之支持https与ssl双向验证
-subtitle:   自定义AlertView
+subtitle:   https和ssl
 date:       2016-11-30
 author:     LuochuanAD
 header-img: img/home_blog_background.jpg
