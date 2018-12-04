@@ -36,7 +36,7 @@ tags:
 
 ```
 >由于GTMBase64是MRC,所以:要添加 -fno-objc-arc
-![](https://img-blog.csdn.net/20170401163152896)
+![](https://ws2.sinaimg.cn/large/006tNbRwgy1fxuz85p0qij31qs0tu459.jpg)
 
 ### 三,代码分析
 
