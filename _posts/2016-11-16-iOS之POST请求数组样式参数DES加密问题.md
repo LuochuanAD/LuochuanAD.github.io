@@ -113,7 +113,7 @@ NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
 
 ## 结语
 
-关于DES加密的讲解及Demo,请看这篇文章:[iOSDES(Des资源及Demo](https://strictfrog.com/2017/04/01/iOS%E4%B9%8BDes%E5%8A%A0%E5%AF%86(%E5%90%AB%E8%B5%84%E6%BA%90%E5%8F%8ADemo)/)
+关于DES加密的讲解及Demo,请看这篇文章:[iOSDES(Des资源及Demo)](https://strictfrog.com/2017/04/01/iOS%E4%B9%8BDes%E5%8A%A0%E5%AF%86(%E5%90%AB%E8%B5%84%E6%BA%90%E5%8F%8ADemo)/)
 
 >总结就一句话, 将数组转为json字符串,再将json字符串先url编码,然后des加密.     后台获取到该参数时,先des解密,在url解码.  
 下面附上URL编码和解码的代码:
