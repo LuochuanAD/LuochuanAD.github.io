@@ -109,7 +109,7 @@ tags:
 ## DES加密常见的问题
 
 * 我曾将手机号DES加密成字符串,上传到服务器,发现有一些手机号加密后的字段有加号("+") 服务端会将加号转为空格  ,导致解密不出来. 那么解决方法是:给des加密后的字符串进行url编码, 再上传服务器.
-* Des加密数组是出现过丢失的情况[https://blog.csdn.net/luochuanad/article/details/53188544](https://blog.csdn.net/luochuanad/article/details/53188544)
+* Des加密数组是出现过丢失的情况,请看这一篇文章:[iOS之POST请求数组样式参数DES加密问题](https://strictfrog.com/2016/11/16/iOS%E4%B9%8BPOST%E8%AF%B7%E6%B1%82%E6%95%B0%E7%BB%84%E6%A0%B7%E5%BC%8F%E5%8F%82%E6%95%B0DES%E5%8A%A0%E5%AF%86%E9%97%AE%E9%A2%98/)
 
 博客旧版原文在CSDN上:[https://blog.csdn.net/luochuanad/article/details/68945526](https://blog.csdn.net/luochuanad/article/details/68945526) 
 
