@@ -23,12 +23,16 @@ tags:
 ### 一,使用未经定义的变量:
 
 (1) alert(variableValue);   报错:调用了未经定义的变量varibleValue.
+
 (2) function getResult(variableValue){
 alert(variableValu); 错误:拼写错误,调用了未经定义的变量variableValu
  }
  
+ 
 定义一个变量有2种:推荐显示定义变量,对变量的作用域是有影响的.
+
  (1) var variableValue = 100;    显示定义变量
+ 
  (2) variableValue = 100; 隐式定义变量 (注:不推荐这种写法)
  
 ### 二,区分大小写
