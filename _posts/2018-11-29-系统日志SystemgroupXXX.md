@@ -1,14 +1,14 @@
 ---
 layout:     post
-title:      [MC] System group container for systemgroup.com.apple.configurationprofiles path is /private...
-subtitle:   [MC]
+title:      System group container for systemgroup.com.apple.configurationprofiles path is /private...
+subtitle:   系统日志
 date:       2018-11-29
 author:     LuochuanAD
 header-img: img/home_blog_background.jpg
 catalog: true
 tags:
 - iOS 
-- 系统日志
+- error
 
 ---
 
