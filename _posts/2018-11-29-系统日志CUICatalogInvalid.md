@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      CUICatalog: Invalid asset name supplied: '(null)'
+title:      CUICatalog Invalid asset name supplied '(null)'
 subtitle:   系统日志
 date:       2018-11-29
 author:     LuochuanAD
