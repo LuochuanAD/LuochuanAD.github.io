@@ -20,7 +20,7 @@ tags:
 
 GITHub地址:[https://github.com/LuochuanAD/LCWebView](https://github.com/LuochuanAD/LCWebView)
 
-![image](https://github.com/LuochuanAD/LCWebView/blob/master/LCWebViewDemo/LCWebView/demo.gif)
+![](https://raw.githubusercontent.com/LuochuanAD/LCWebView/master/LCWebViewDemo/LCWebView/demo.gif)
 
 
 
