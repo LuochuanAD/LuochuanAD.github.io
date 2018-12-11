@@ -19,8 +19,7 @@ tags:
 
 GITHub地址:[https://github.com/LuochuanAD/LCAlertViewController](https://github.com/LuochuanAD/LCAlertViewController)
 
-![gif](https://github.com/LuochuanAD/LCAlertViewController/blob/master/LCAlertViewController/demo.gif)
-
+![](https://raw.githubusercontent.com/LuochuanAD/LCAlertViewController/master/LCAlertViewController/demo.gif)
 
 
 ## 代码分析
