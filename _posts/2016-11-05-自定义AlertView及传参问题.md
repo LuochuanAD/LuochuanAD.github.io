@@ -18,7 +18,7 @@ tags:
 分析:需要自定义一个AlertView 和双向传值(需要用到Block).
 自定义的样式为下图:
 
-![](https://raw.githubusercontent.com/LuochuanAD/OC-CommonAlertView/master/LCAlertView/demoExample2016110501.png)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages/demoExample2016110501.png)
 
 
 ## 分析
