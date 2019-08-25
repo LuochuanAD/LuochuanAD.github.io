@@ -16,7 +16,7 @@ tags:
 
 >在WWDC 2016开发者大会上，苹果宣布了一个最后期限：到2017年1月1日 App Store中的所有应用都必须启用 App Transport Security安全功能。App Transport Security（ATS）是苹果在iOS 9中引入的一项隐私保护功能，屏蔽明文HTTP资源加载，连接必须经过更安全的HTTPS。苹果目前允许开发者暂时关闭ATS，可以继续使用HTTP连接，但到年底所有官方商店的应用都必须强制性使用ATS。
 
-![](https://ws2.sinaimg.cn/large/006tNbRwgy1fxv03xaiv9j30to0jwn0r.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages/20161222131740574.png)
 
 
 ## 分析
@@ -25,7 +25,7 @@ tags:
 我们后台开发的同学,用了nginx服务器,直接将http转为HTTPS.开发只用了一周.
 首先后台会给你提供很多的证书,但是客户端只要几个证书,下面根据你的需求,选择证书.
 
-![](https://ws4.sinaimg.cn/large/006tNbRwgy1fxv05ilxhoj30me0se0uz.jpg) 
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages/20161201085417401.png) 
 
 >现在项目使用AFN3.x  所有接口支持HTTPS.对此更新. :
 证书;只要一个client.p12证书及对应的密码如:lovely_girl
