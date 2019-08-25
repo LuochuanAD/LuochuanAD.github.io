@@ -21,7 +21,7 @@ tags:
  
 >在用post请求时,字典中的一个参数为数组形式,下图为json的格式:
 
-![](https://ws3.sinaimg.cn/large/006tNbRwgy1fxuzhmb6ztj30sq0dywg1.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages/20161116170511172.png)
 
 
 ```
@@ -36,7 +36,7 @@ NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
 ```
 >我为什么说是错误代码:因为post上传的参数中数组是不能用小括号表示,要用中括号表示,(具体,可用控制台打印,如果数组是用小括号输出,则是不符合上传服务器格式的) 正确的格式如下图: 
 
-![](https://ws4.sinaimg.cn/large/006tNbRwgy1fxuzj8dj1fj30o20awab8.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages/20161116170532821.png)
 
 >正确的代码是 将数组转为json字符串,代码如下:
 
@@ -73,11 +73,11 @@ NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
 ```
 >如果用以上代码加密, 然后在本地进行解密输出解密后的数组,如下图:
 
-![](https://ws3.sinaimg.cn/large/006tNbRwgy1fxuzl4ecw4j30xa0ds409.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages/20161116170542602.png)
 
 >有没有发现什么? 是不是少了}]大括号和中括号.  这时有人问,是不是字符串太长,导致加密时丢了一部分,所以解密后,少了}].   答案:不是字符串过长导致.   (注:字符串过长导致加密解密丢失,我会在文章最后给出解决办法.)  现在我在数组中在增加几组数据, 本地解密后输出如下图:
 
-![](https://ws3.sinaimg.cn/large/006tNbRwgy1fxuzmg8513j30pa0g6abt.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages/20161116172721355.png)
 
 >这回发现了吧,某个解密后的数据都少了大括号和中括号.  原因我也找了很久,说是由于des加密的填充方式导致加密的字符串末端是不固定的.  好吧,说说解决办法办:就是先将json字符串进行url编码,然后再加密. 这样就不会出现丢掉大括号和中括号的情况. 一定要先编码后加密,如果顺序错了,仍然是解决不了的. 以下是正确代码:
 
@@ -99,16 +99,16 @@ NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
 
 >控制台输出:
 
- ![](https://ws4.sinaimg.cn/large/006tNbRwgy1fxuznwa485j31sg088wij.jpg)
+ ![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages/20161116174807659.png)
  
 >将数组解密,再解密得到:正确的格式
 
-![](https://ws1.sinaimg.cn/large/006tNbRwgy1fxuzosjjj7j30o20awab8.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages/20161116180006992.png)
 
 >看到这里,接下来说一下真正的由于字符串太长,导致des加密解密丢失的解决办法:
 在des加密和解密的方法中将长度增加:如下图:
 
-![](https://ws3.sinaimg.cn/large/006tNbRwgy1fxuzpos2a3j30u010y4da.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages/20161116180927748.png)
 
 
 ## 结语
