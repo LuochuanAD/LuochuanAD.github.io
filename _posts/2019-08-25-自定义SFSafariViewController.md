@@ -23,7 +23,7 @@ tags:
 
 ## 分析
 
->关键词：自定义View
+>关键词：SFSafariViewController
 
 ### 一,导入
 
@@ -216,6 +216,9 @@ return @[UIActivityTypeAddToReadingList];
 ```
 
 >最后一个代理方法,如果有需求,就需要一个自定义的UIActivity,详细看Demo
+
+
+
 ```
 
 /*
@@ -234,13 +237,16 @@ LCActivity * activity = [[LCActivity alloc]init];
 
 return @[activity];
 }
-```
-
-### 五,自定义UIActivity
->覆盖出血UIActivity的几个方法就好
-
 
 ```
+
+### 六,自定义UIActivity
+
+>覆盖UIActivity的几个方法就好
+
+
+```
+
 #import <UIKit/UIKit.h>
 
 @interface LCActivity : UIActivity
@@ -286,6 +292,7 @@ return NO;
 }
 
 @end
+
 
 ```
 
