@@ -28,7 +28,9 @@ tags:
 
 **- NSObject(Safe)**
 ![NSObject(Safe)](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/34.png)
-导入到项目中, 此分类需在MRC环境下使用,需添加-fno-objc-arc.  防止崩溃,提高代码的健壮性.强烈推荐(因为我自己写的没有它好,这个分类是用的别人).  该分类包含NSString,NSMutableString,NSArray,NSMutableArray,NSDictionary,NSMutableDictionary,NSAttributedString,NSMutableAttributedString,NSSet,NSMutableSet,NSOrderedSet,NSMutableOrderedSet,NSUserDefaults,NSCache.
+导入到项目中, 此分类需在MRC环境下使用,需添加-fno-objc-arc.  防止崩溃,提高代码的健壮性.强烈推荐(因为我自己写的没有它好,这个分类是用的别人).  该分类包含NSString,NSMutableString,NSArray,NSMutableArray,NSDictionary,NSMutableDictionary,
+NSAttributedString,NSMutableAttributedString,NSSet,NSMutableSet,NSOrderedSet,
+NSMutableOrderedSet,NSUserDefaults,NSCache.
 
 **- UITableView**
 ![UITableView](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/35.png)
