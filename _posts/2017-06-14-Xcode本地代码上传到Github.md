@@ -15,44 +15,44 @@ tags:
 
 ### 一,新建仓储,填写描述信息
 
-![](https://ws2.sinaimg.cn/large/006tNbRwgy1fy7ux72l5qj30yk0u0n3i.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/17.png)
 
 
 ### 二,拷贝URL
 
-![](https://ws2.sinaimg.cn/large/006tNbRwgy1fy7uy5yt4ij30u30u0wmr.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/18.png)
 
 ### 三,打开Xcode,选择Perferences
 
-![](https://ws2.sinaimg.cn/large/006tNbRwgy1fy7uzm3ts4j30gi0e675u.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/19.png)
 
 ### 四,添加仓储,并粘贴URL,填写github用户名和密码
 
-![](https://ws2.sinaimg.cn/large/006tNbRwgy1fy7v05dysnj314q0tmtdq.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/20.png)
 
 ### 五,cd +文件路径
 
-![](https://ws3.sinaimg.cn/large/006tNbRwgy1fy7v0pwxbvj30tc04ct9r.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/21.png)
 
 ### 六,git init  此步不可少
 
-![](https://ws2.sinaimg.cn/large/006tNbRwgy1fy7v196mldj30ua056jsw.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/22.png)
 
 ### 七,git add .
 
-![](https://ws4.sinaimg.cn/large/006tNbRwgy1fy7v1rprr2j30me02ajrq.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/23.png)
 
 ### 八,git commit -m "提交信息"
 
-![](https://ws1.sinaimg.cn/large/006tNbRwgy1fy7v2ae0o2j30sw01ydgg.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/24.png)
 
 ### 九,git remote add origin +粘贴第二步的URL
 
-![](https://ws3.sinaimg.cn/large/006tNbRwgy1fy7v3m5yq1j30ve02y75a.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/25.png)
 
 ### 十,git push -u origin master
 
-![](https://ws3.sinaimg.cn/large/006tNbRwgy1fy7v4bm2l3j30sg0a4427.jpg)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/26.png)
 
 
 ## 结语
