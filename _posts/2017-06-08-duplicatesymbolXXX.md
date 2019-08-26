@@ -16,14 +16,14 @@ tags:
 
 >错误提示:
 
-![](https://img-blog.csdn.net/20170608170033206)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/9.png)
 
 ## 问题发现与解决
 
 
 ### 错误种类一:(文件重复,搜索,删掉)
 
-![](https://img-blog.csdn.net/20170608170517168)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/10.png)
 
 ### 错误种类二: (导入的是.m文件  (换成.h))
 

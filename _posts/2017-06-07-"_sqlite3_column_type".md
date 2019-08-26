@@ -16,14 +16,14 @@ tags:
 
 >在接收旧项目时,报错如下:
 
-![](https://img-blog.csdn.net/20170607104621021)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/7.png)
 
 ## 问题发现与解决
 
 
 >(缺少文件,添加libsqlite3.0.tbd)
 
-![](https://img-blog.csdn.net/20170607105102547)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/8.png)
 
 
 
