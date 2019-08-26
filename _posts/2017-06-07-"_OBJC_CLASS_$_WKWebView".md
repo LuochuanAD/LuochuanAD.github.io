@@ -16,7 +16,7 @@ tags:
 
 >在做JS与OC交互时;Xcode报错:如下图:
 
-![](https://github.com/LuochuanAD/BlogSourceImage/blob/master/BlogSourceImage/BlogSourceImages1/7.png)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/7.png)
 
 ## 问题发现与解决
 
