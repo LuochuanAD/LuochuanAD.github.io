@@ -27,11 +27,11 @@ tags:
 ***
 
 **- NSObject(Safe)**
-![NSObject(Safe)](https://img-blog.csdn.net/20180413151039594?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2x1b2NodWFuQUQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![NSObject(Safe)](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/34.png)
 导入到项目中, 此分类需在MRC环境下使用,需添加-fno-objc-arc.  防止崩溃,提高代码的健壮性.强烈推荐(因为我自己写的没有它好,这个分类是用的别人).  该分类包含NSString,NSMutableString,NSArray,NSMutableArray,NSDictionary,NSMutableDictionary,NSAttributedString,NSMutableAttributedString,NSSet,NSMutableSet,NSOrderedSet,NSMutableOrderedSet,NSUserDefaults,NSCache.
 
 **- UITableView**
-![UITableView](https://img-blog.csdn.net/20180413152258571?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2x1b2NodWFuQUQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![UITableView](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/35.png)
 
 ```python
 #import <UIKit/UIKit.h>
@@ -59,7 +59,7 @@ CustomAnimationTypeRote,        //翻转动画
 ```
 
 **- NSData**
-![NSData](https://img-blog.csdn.net/20180413152523382?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2x1b2NodWFuQUQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![NSData](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/36.png)
 ```python
 #import <Foundation/Foundation.h>
 
@@ -84,7 +84,7 @@ DataEncryptionSHA512,
 - (NSData *) dataEncryptionType:(DataEncryption)type;
 ```
 **- NSObject**
-![NSObject](https://img-blog.csdn.net/20180413154009912?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2x1b2NodWFuQUQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![NSObject](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/37.png)
 *NSObject+Category.h*
 ```python
 #import <Foundation/Foundation.h>
@@ -187,7 +187,7 @@ DataEncryptionSHA512,
 @end
 ```
 **- NSString**
-![NSString](https://img-blog.csdn.net/20180413154522458?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2x1b2NodWFuQUQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![NSString](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/38.png)
 *NSString+Category.h*
 ```python
 #import <Foundation/Foundation.h>
@@ -268,7 +268,7 @@ PredicateType_IDnumberFor18,     //检测有效身份证 18位
 
 ```
 **- UIButton**
-![UIButton](https://img-blog.csdn.net/20180413154950464?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2x1b2NodWFuQUQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![UIButton](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/39.png)
 ```python
 #import <UIKit/UIKit.h>
 @interface UIButton (EnlargeTouchArea)
@@ -289,7 +289,7 @@ PredicateType_IDnumberFor18,     //检测有效身份证 18位
 @end
 ```
 **- UIColor**
-![UIColor](https://img-blog.csdn.net/20180413155310328?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2x1b2NodWFuQUQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![UIColor](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/40.png)
 ```python
 #import <UIKit/UIKit.h>
 /**
@@ -348,7 +348,7 @@ UIColor *rgbA(CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha);
 
 ```
 **- UIImage**
-![UIImage](https://img-blog.csdn.net/20180413155447282?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2x1b2NodWFuQUQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![UIImage](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/41.png)
 ```python
 #import <UIKit/UIKit.h>
 
@@ -439,7 +439,7 @@ maskImage:(UIImage *)maskImage;
 @end
 ```
 **- UILable**
-![UILable](https://img-blog.csdn.net/20180413155604706?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2x1b2NodWFuQUQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![UILable](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/42.png)
 ```python
 #import <UIKit/UIKit.h>
 
@@ -454,7 +454,7 @@ maskImage:(UIImage *)maskImage;
 @end
 ```
 **- UITabBar**
-![UITabBar](https://img-blog.csdn.net/20180413155658394?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2x1b2NodWFuQUQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![UITabBar](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/43.png)
 ```python
 #import <UIKit/UIKit.h>
 
@@ -491,7 +491,7 @@ kCustomBadgeStyleNone
 ***三,UsefulHeader.h***
 
 ***
-![UsefulHeader](https://img-blog.csdn.net/20180413155911494?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2x1b2NodWFuQUQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![UsefulHeader](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/44.png)
 ```python
 #ifndef UsefulHeader_h
 #define UsefulHeader_h
