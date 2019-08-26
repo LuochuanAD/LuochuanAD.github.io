@@ -16,14 +16,14 @@ tags:
 
 >在做JS与OC交互时;Xcode报错:如下图:
 
-![](https://img-blog.csdn.net/20170607102558698)
+![](https://github.com/LuochuanAD/BlogSourceImage/blob/master/BlogSourceImage/BlogSourceImages1/7.png)
 
 ## 问题发现与解决
 
 
 >(添加Webkit.framework  status:optional)
 
-![](https://img-blog.csdn.net/20170607103035154)
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImages1/8.png)
 
 Go to your Project, click on General, scroll down to Linked Frameworks and Libraries, and add WebKit.framework as Optional. See here: Xcode 6 + iOS 8 SDK but deploy on iOS 7 (UIWebKit & WKWebKit)
 
