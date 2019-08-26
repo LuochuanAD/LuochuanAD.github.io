@@ -30,7 +30,7 @@ tags:
 >导入#import <SafariServices/SafariServices.h> 并且遵守SFSafariViewControllerDelegate代理
 
 
->详细代码CommonAlertView已上传到[Github](https://github.com/LuochuanAD/LCSafariViewControllerDemo) 
+>详细代码LCSafariViewController已上传到[Github](https://github.com/LuochuanAD/LCSafariViewControllerDemo) 
 
 
 
