@@ -43,7 +43,7 @@ yum -y install gcc
 wget https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz
 ```
 
-< 截图如下:
+截图如下:
 ![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImage2020/2020122501.png)
 
 
@@ -90,7 +90,7 @@ cd Python-3.6.8
 ```
 make && make install  
 ```
-< 安装完成后,截图如下:
+安装完成后,截图如下:
 ![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImage2020/2020122502.png)
 
 ### 运行并测试Python3.6.8
@@ -125,7 +125,7 @@ print(‘hello world’)
 ```
 exit()
 ```
-< 测试截图如下:
+测试截图如下:
 
 ![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImage2020/2020122503.png)
 
@@ -137,7 +137,7 @@ exit()
 
 报错:Cannot find a valid baseurl for repo: base/7/x86_64
 
-< 报错截图如下
+报错截图如下
 ![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImage2020/2020122504.png)
 
 解决方法:
@@ -157,7 +157,7 @@ exit()
 命令:
 ./configure —prefix=/usr/local/python3
 
-< 报错截图:
+报错截图:
 ![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImage2020/2020122507.png)
 
 解决方法:(下载perl5)
