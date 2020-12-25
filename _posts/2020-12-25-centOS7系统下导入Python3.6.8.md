@@ -169,6 +169,7 @@ vi ifcfg-ens33  编辑含有”ifcfg-ens”信息的文件夹
 ![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImage2020/2020122507.png)
 
 解决方法:(下载perl5)
+
 (1)下载安装包
 
 wget http://www.cpan.org/src/5.0/perl-5.16.1.tar.gz
