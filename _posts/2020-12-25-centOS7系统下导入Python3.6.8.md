@@ -141,13 +141,20 @@ exit()
 ![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImage2020/2020122504.png)
 
 解决方法:
-(1), 输入命令:  cd /etc/sysconfig/network-scripts   切换到该文件夹
 
-(2), 输入命令: ls -a   查看该文件夹信息
+(1), 输入命令: 
+
+ cd /etc/sysconfig/network-scripts   切换到该文件夹
+
+(2), 输入命令: 
+
+ls -a   查看该文件夹信息
 
 ![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImage2020/2020122505.png)
 
-(3),输入命令: vi ifcfg-ens33  编辑含有”ifcfg-ens”信息的文件夹
+(3),输入命令: 
+
+vi ifcfg-ens33  编辑含有”ifcfg-ens”信息的文件夹
 
 ![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImage2020/2020122506.png)
 (注:现在进入到编辑模式，按 i 键进入，然后按往下的方向键，将光标移动到 ONBOOT=no ，然后按往右的方向键，将光标移动到 ONBOOT=no 的 n下面，然后再按 del键。将 no 改成 yes ，也就是 ONBOOT=yes 。然后按 Esc ，再输入 :wq ，保存后退出。)
@@ -155,6 +162,7 @@ exit()
 
 ### 问题2:编译，安装1 时提示需要导入Perl5
 命令:
+
 ./configure —prefix=/usr/local/python3
 
 报错截图:
@@ -162,24 +170,32 @@ exit()
 
 解决方法:(下载perl5)
 (1)下载安装包
+
 wget http://www.cpan.org/src/5.0/perl-5.16.1.tar.gz
 
 (2)解压源码包
+
 tar -xzf perl-5.16.1.tar.gz
 
 (3)进入源码目录
+
 cd perl-5.16.1
 
 (4)自定义安装目录
+
 ./Configure -des -Dusethreads -Dprefix=/usr/local/perl
 
 (5)下面这三个命令要依次都执行，这是在编译源码
+
 make
+
 make test
+
 make install
 
 
 (6)查看版本
+
 perl -v
 
 ![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/master/BlogSourceImage/BlogSourceImage2020/2020122508.png)
