@@ -19,11 +19,10 @@ header-img: "img/tags_head_background.jpg"
     </div>
 </header>
 
+<div id="mountNode"></div>
 <script>/*Fixing iframe window.innerHeight 0 issue in Safari*/document.body.clientHeight;</script>
 <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.5.1/dist/g2.min.js"></script>
 <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.10.1/dist/data-set.min.js"></script>
-<script src="https://gw.alipayobjects.com/os/antv/assets/lib/jquery-3.2.1.min.js"></script>
-
 <!-- Main Content -->
 <div class="container">
 	<div class="row">
@@ -77,85 +76,132 @@ header-img: "img/tags_head_background.jpg"
 	</div>
 </div>
 
+
+
 <script>
-	var _G = G2,
-    Global = _G.Global;
+  var _DataSet = DataSet,
+    DataView = _DataSet.DataView;
 
-  var colorMap = {
-    'Asia': Global.colors[0],
-    'Americas': Global.colors[1],
-    'Europe': Global.colors[2],
-    'Oceania': Global.colors[3]
-  };
-
-  var blogData = [];
-  var title = '';
+  var data = [];
+  var name = '';
   var url = '';
-  var date = '';
+  var type = '';
 
   {% for tag in site.tags %}
       {% for post in tag[1] %}
          {% if post.title %}
-            title = "{{ post.title }}";
+            name = "{{ post.title }}";
           {% endif %} 
           {% if post.url %}
             url = "{{ post.url }}";
           {% endif %}
           {% if post.date %}
-            date = "{{ post.date }}".substring(0,4);
+            type = "{{ post.date }}".substring(0,4);
             document.write(date);
           {% endif %}  
-          var message = {"title":title,"date":date,"url":url};
+          var message = {"name":name,"type":type,"url":url,"value":1};
           blogData.push(message);
         {% endfor %}
       
     {% endfor %}
 
-  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/bubble.json', function(data) {
-    var chart = new G2.Chart({
-      container: 'mountNode',
-      forceFit: true,
-      height: window.innerHeight
-    });
-    
-    
-    
-    chart.source(blogData);
-    // 为各个字段设置别名
-    chart.scale({
-      title: {
-        alias: '标题'
-      },
-      url: {
-        type: 'pow',
-        alias: '链接'
-      },
-      date: {
-        alias: '时间'
-      }
-    });
-    chart.axis('date', {
-      label: {
-        formatter: function formatter(value) {
-          return value;
-        } // 格式化坐标轴的显示
-      }
-    });
-    chart.tooltip({
-      showTitle: false // 不显示默认标题
-    });
-    chart.legend('title', false); // 该图表默认会生成多个图例，设置不展示 Population 和 Country 两个维度的图例
-    chart.point().position('date').size('title', [4, 65]).color('continent', function(val) {
-      return colorMap[val];
-    }).shape('circle').tooltip('date').style('continent', {
-      lineWidth: 1,
-      strokeOpacity: 1,
-      fillOpacity: 0.3,
-      opacity: 0.65,
-      stroke: function stroke(val) {
-        return colorMap[val];
-      }
-    });
-    chart.render();
+  // var data = [{
+  //   value: 251,
+  //   type: '大事例一',
+  //   name: '子事例一'
+  // }, {
+  //   value: 1048,
+  //   type: '大事例一',
+  //   name: '子事例二'
+  // }, {
+  //   value: 610,
+  //   type: '大事例二',
+  //   name: '子事例三'
+  // }, {
+  //   value: 434,
+  //   type: '大事例二',
+  //   name: '子事例四'
+  // }, {
+  //   value: 335,
+  //   type: '大事例三',
+  //   name: '子事例五'
+  // }, {
+  //   value: 250,
+  //   type: '大事例三',
+  //   name: '子事例六'
+  // }];
+  // 通过 DataSet 计算百分比
+  var dv = new DataView();
+  dv.source(data).transform({
+    type: 'percent',
+    field: 'value',
+    dimension: 'type',
+    as: 'percent'
   });
+  var chart = new G2.Chart({
+    container: 'mountNode',
+    forceFit: true,
+    height: window.innerHeight,
+    padding: 0
+  });
+  chart.source(dv, {
+    percent: {
+      formatter: function formatter(val) {
+        val = (val * 100).toFixed(2) + '%';
+        return val;
+      }
+    }
+  });
+  chart.coord('theta', {
+    radius: 0.5
+  });
+  chart.tooltip({
+    showTitle: false
+  });
+  chart.legend(false);
+  chart.intervalStack().position('percent').color('type').label('type', {
+    offset: -10
+  }).tooltip('name*percent', function(item, percent) {
+    percent = (percent * 100).toFixed(2) + '%';
+    return {
+      name: item,
+      value: percent
+    };
+  }).select(false).style({
+    lineWidth: 1,
+    stroke: '#fff'
+  });
+
+  var outterView = chart.view();
+  var dv1 = new DataView();
+  dv1.source(data).transform({
+    type: 'percent',
+    field: 'value',
+    dimension: 'name',
+    as: 'percent'
+  });
+  outterView.source(dv1, {
+    percent: {
+      formatter: function formatter(val) {
+        val = (val * 100).toFixed(2) + '%';
+        return val;
+      }
+    }
+  });
+  outterView.coord('theta', {
+    innerRadius: 0.5 / 0.75,
+    radius: 0.75
+  });
+  outterView.intervalStack().position('percent').color('name', ['#BAE7FF', '#7FC9FE', '#71E3E3', '#ABF5F5', '#8EE0A1', '#BAF5C4']).label('name').tooltip('name*percent', function(item, percent) {
+    percent = (percent * 100).toFixed(2) + '%';
+    return {
+      name: item,
+      value: percent
+    };
+  }).select(false).style({
+    lineWidth: 1,
+    stroke: '#fff'
+  });
+
+  chart.render();
 </script>
