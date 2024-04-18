@@ -88,16 +88,24 @@ header-img: "img/tags_head_background.jpg"
     'Oceania': Global.colors[3]
   };
 
+  var title;
+  var url;
+  var date;
 
   {% for tag in site.tags %}
-      
-        {% for post in tag[1] %}
-          
-                {% if post.subtitle %}
-                var subtitle = "{{ post.title }}";
-                document.write(subtitle);
-                {% endif %}
-                
+      {% for post in tag[1] %}
+         {% if post.title %}
+            title = "{{ post.title }}";
+          {% endif %} 
+          {% if post.url %}
+            url = "{{ post.url }}";
+          {% endif %}
+          {% if post.date %}
+            date = "{{ post.date }}";
+          {% endif %}  
+          document.write(title); 
+          document.write(url);     
+          document.write(date); 
         {% endfor %}
       
     {% endfor %}
