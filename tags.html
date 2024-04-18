@@ -88,7 +88,7 @@ header-img: "img/tags_head_background.jpg"
     'Oceania': Global.colors[3]
   };
 
-  blogData :[];
+  var blogData = [];
   var title = '';
   var url = '';
   var date = '';
@@ -105,7 +105,7 @@ header-img: "img/tags_head_background.jpg"
             date = "{{ post.date }}";
           {% endif %}  
           var message = {"title":title,"date":date,"url":url};
-          this.blogData.push(message);
+          blogData.push(message);
         {% endfor %}
       
     {% endfor %}
