@@ -119,37 +119,34 @@ header-img: "img/tags_head_background.jpg"
     
     
     
-    chart.source(data);
+    chart.source(blogData);
     // 为各个字段设置别名
     chart.scale({
-      LifeExpectancy: {
-        alias: '人均寿命（年）'
+      title: {
+        alias: '标题'
       },
-      Population: {
+      url: {
         type: 'pow',
-        alias: '人口总数'
+        alias: '链接'
       },
-      GDP: {
-        alias: '人均国内生产总值($)'
-      },
-      Country: {
-        alias: '国家/地区'
+      date: {
+        alias: '时间'
       }
     });
-    chart.axis('GDP', {
+    chart.axis('date', {
       label: {
         formatter: function formatter(value) {
-          return (value / 1000).toFixed(0) + 'k';
+          return (value).toFixed(0) + 'k';
         } // 格式化坐标轴的显示
       }
     });
     chart.tooltip({
       showTitle: false // 不显示默认标题
     });
-    chart.legend('Population', false); // 该图表默认会生成多个图例，设置不展示 Population 和 Country 两个维度的图例
-    chart.point().position('GDP*LifeExpectancy').size('Population', [4, 65]).color('continent', function(val) {
+    chart.legend('title', false); // 该图表默认会生成多个图例，设置不展示 Population 和 Country 两个维度的图例
+    chart.point().position('date').size('title', [4, 65]).color('continent', function(val) {
       return colorMap[val];
-    }).shape('circle').tooltip('Country*Population*GDP*LifeExpectancy').style('continent', {
+    }).shape('circle').tooltip('date').style('continent', {
       lineWidth: 1,
       strokeOpacity: 1,
       fillOpacity: 0.3,
