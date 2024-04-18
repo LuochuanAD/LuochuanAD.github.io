@@ -40,7 +40,10 @@ header-img: "img/tags_head_background.jpg"
                     <li>行业观察、职位、公司优先使用中文</li>
                     <li>外国产品、术语优先使用英文</li>
             </blockquote>-->
-      <div id="mountNode"></div>
+       <!-- 图表 -->     
+      <div id="mountNode">
+        <span class="tag-text">'图表位置'</span>
+      </div>
             <!-- 标签列表 -->
 			{% for tag in site.tags %}
 			<div class="one-tag-list">
@@ -100,11 +103,11 @@ header-img: "img/tags_head_background.jpg"
   },{title:'11111'
       url:'1266'
       time:'2025'
-  },
+  }
 
-    ];
+];
   
-  document.write(site.tags)
+  document.write(data);
 
   var chart = new G2.Chart({
       container: 'mountNode',
