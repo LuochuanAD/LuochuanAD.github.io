@@ -87,12 +87,15 @@ header-img: "img/tags_head_background.jpg"
     'Europe': Global.colors[2],
     'Oceania': Global.colors[3]
   };
+
+
   {% for tag in site.tags %}
       
         {% for post in tag[1] %}
           
                 {% if post.subtitle %}
-                document.write({{ post.title }});
+                var subtitle = {{ post.title }};
+                document.write(subtitle);
                 {% endif %}
                 
         {% endfor %}
@@ -106,7 +109,7 @@ header-img: "img/tags_head_background.jpg"
       height: window.innerHeight
     });
     
-    document.write(site.tags);
+    
     
     chart.source(data);
     // 为各个字段设置别名
