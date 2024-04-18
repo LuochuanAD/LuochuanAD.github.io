@@ -99,7 +99,7 @@ header-img: "img/tags_head_background.jpg"
             type = "{{ post.date }}".substring(0,4);
           {% endif %}  
           var message = {"name":name,"type":type,"url":url,"value":1};
-          blogData.push(message);
+          data.push(message);
         {% endfor %}
       
     {% endfor %}
