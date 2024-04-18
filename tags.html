@@ -97,7 +97,6 @@ header-img: "img/tags_head_background.jpg"
           {% endif %}
           {% if post.date %}
             type = "{{ post.date }}".substring(0,4);
-            document.write(date);
           {% endif %}  
           var message = {"name":name,"type":type,"url":url,"value":1};
           blogData.push(message);
