@@ -94,7 +94,7 @@ header-img: "img/tags_head_background.jpg"
         {% for post in tag[1] %}
           
                 {% if post.subtitle %}
-                var subtitle = {{ post.title }};
+                var subtitle = '{{ post.title }}';
                 document.write(subtitle);
                 {% endif %}
                 
