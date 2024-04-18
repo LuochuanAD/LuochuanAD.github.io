@@ -42,7 +42,7 @@ header-img: "img/tags_head_background.jpg"
             </blockquote>-->
        <!-- 图表 -->     
       <div id="mountNode">
-        <span class="tag-text">'图表位置'</span>
+        
       </div>
             <!-- 标签列表 -->
 			{% for tag in site.tags %}
@@ -87,6 +87,18 @@ header-img: "img/tags_head_background.jpg"
     'Europe': Global.colors[2],
     'Oceania': Global.colors[3]
   };
+  {% for tag in site.tags %}
+      
+        {% for post in tag[1] %}
+          
+                {% if post.subtitle %}
+                document.write(post.subtitle);
+                {% endif %}
+                
+        {% endfor %}
+      
+    {% endfor %}
+
   $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/bubble.json', function(data) {
     var chart = new G2.Chart({
       container: 'mountNode',
