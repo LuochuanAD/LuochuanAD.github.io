@@ -87,49 +87,30 @@ header-img: "img/tags_head_background.jpg"
     'Europe': Global.colors[2],
     'Oceania': Global.colors[3]
   };
-  var data = [
-    {title:'1',
-      url:'1222',
-      time:'2024'
-  },{title:'11',
-      url:'1233',
-      time:'2020'
-  },{title:'111',
-      url:'1244',
-      time:'2021'
-  },{title:'1111',
-      url:'1255',
-      time:'2022'
-  },{title:'11111',
-      url:'1266',
-      time:'2025'
-  }
-
-];
-  
-  document.write(data);
-
-  var chart = new G2.Chart({
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/bubble.json', function(data) {
+    var chart = new G2.Chart({
       container: 'mountNode',
       forceFit: true,
       height: window.innerHeight
     });
     chart.source(data);
-    
     // 为各个字段设置别名
     chart.scale({
-      title: {
-        alias: '标题'
+      LifeExpectancy: {
+        alias: '人均寿命（年）'
       },
-
-      url: {
-        alias: 'url'
+      Population: {
+        type: 'pow',
+        alias: '人口总数'
       },
-      time: {
-        alias: 'time'
+      GDP: {
+        alias: '人均国内生产总值($)'
+      },
+      Country: {
+        alias: '国家/地区'
       }
     });
-    chart.axis('time', {
+    chart.axis('GDP', {
       label: {
         formatter: function formatter(value) {
           return (value / 1000).toFixed(0) + 'k';
@@ -137,12 +118,12 @@ header-img: "img/tags_head_background.jpg"
       }
     });
     chart.tooltip({
-      showTitle: true // 不显示默认标题
+      showTitle: false // 不显示默认标题
     });
-    chart.legend('title', false); // 该图表默认会生成多个图例，设置不展示 Population 和 Country 两个维度的图例
-    chart.point().position('time').size('title', [4, 65]).color('continent', function(val) {
+    chart.legend('Population', false); // 该图表默认会生成多个图例，设置不展示 Population 和 Country 两个维度的图例
+    chart.point().position('GDP*LifeExpectancy').size('Population', [4, 65]).color('continent', function(val) {
       return colorMap[val];
-    }).shape('circle').tooltip('time').style('continent', {
+    }).shape('circle').tooltip('Country*Population*GDP*LifeExpectancy').style('continent', {
       lineWidth: 1,
       strokeOpacity: 1,
       fillOpacity: 0.3,
@@ -152,4 +133,5 @@ header-img: "img/tags_head_background.jpg"
       }
     });
     chart.render();
+  });
 </script>
