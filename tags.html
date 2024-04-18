@@ -84,9 +84,28 @@ header-img: "img/tags_head_background.jpg"
     'Europe': Global.colors[2],
     'Oceania': Global.colors[3]
   };
-  var data = []
+  var data = [
+    {title:'1'
+      url:'1222'
+      time:'2024'
+  },{title:'11'
+      url:'1233'
+      time:'2020'
+  },{title:'111'
+      url:'1244'
+      time:'2021'
+  },{title:'1111'
+      url:'1255'
+      time:'2022'
+  },{title:'11111'
+      url:'1266'
+      time:'2025'
+  },
+
+    ];
   
   document.write(site.tags)
+
   var chart = new G2.Chart({
       container: 'mountNode',
       forceFit: true,
@@ -103,6 +122,9 @@ header-img: "img/tags_head_background.jpg"
       url: {
         alias: 'url'
       }
+      time: {
+        alias: 'time'
+      }
     });
     chart.axis('time', {
       label: {
@@ -114,8 +136,8 @@ header-img: "img/tags_head_background.jpg"
     chart.tooltip({
       showTitle: true // 不显示默认标题
     });
-    chart.legend('Population', false); // 该图表默认会生成多个图例，设置不展示 Population 和 Country 两个维度的图例
-    chart.point().position('time').size('Population', [4, 65]).color('continent', function(val) {
+    chart.legend('title', false); // 该图表默认会生成多个图例，设置不展示 Population 和 Country 两个维度的图例
+    chart.point().position('time').size('title', [4, 65]).color('continent', function(val) {
       return colorMap[val];
     }).shape('circle').tooltip('time').style('continent', {
       lineWidth: 1,
