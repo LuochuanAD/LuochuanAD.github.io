@@ -85,15 +85,8 @@ header-img: "img/tags_head_background.jpg"
     'Oceania': Global.colors[3]
   };
   var data = []
-  {% for tag in site.tags %}    
-  {% for post in tag[1] %}
-    data.push({
-      'title':post.title,
-      'url':post.url,
-      'time':post.data;
-    });
-  {% endif %}
-  {% endif %}
+  
+  document.write(site.tags)
   var chart = new G2.Chart({
       container: 'mountNode',
       forceFit: true,
