@@ -81,7 +81,7 @@ header-img: "img/tags_head_background.jpg"
 
   var data = [];
   var name = '';
-  var url = '';
+  var date = '';
   var type = '';
 
   {% for tag in site.tags %}
@@ -89,13 +89,11 @@ header-img: "img/tags_head_background.jpg"
          {% if post.title %}
             name = "{{ post.title }}";
           {% endif %} 
-          {% if post.url %}
-            url = "{{ post.url }}";
-          {% endif %}
           {% if post.date %}
             type = "{{ post.date }}".substring(0,4);
+            date = "{{ post.date }}".substring(0,10);
           {% endif %}  
-          var message = {"name":name,"type":type,"url":url,"value":1};
+          var message = {"name":name,"type":type,"date":date,"value":1};
           data.push(message);
         {% endfor %}
       
@@ -131,11 +129,11 @@ header-img: "img/tags_head_background.jpg"
   chart.legend(false);
   chart.intervalStack().position('percent').color('type').label('type', {
     offset: -10
-  }).tooltip('name*percent', function(item, percent) {
-    percent = (percent * 100).toFixed(2) + '%2';
+  }).tooltip('name*date', function(item, date) {
+    date = date + '%2';
     return {
       name: item,
-      value: percent
+      value: date
     };
   }).select(false).style({
     lineWidth: 1,
