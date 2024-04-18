@@ -40,7 +40,7 @@ header-img: "img/tags_head_background.jpg"
                     <li>行业观察、职位、公司优先使用中文</li>
                     <li>外国产品、术语优先使用英文</li>
             </blockquote>-->
-            <div id="mountNode"></div>
+      <div id="mountNode"></div>
             <!-- 标签列表 -->
 			{% for tag in site.tags %}
 			<div class="one-tag-list">
@@ -89,7 +89,8 @@ header-img: "img/tags_head_background.jpg"
       forceFit: true,
       height: window.innerHeight
     });
-    chart.source(data);
+    chart.source(site.tags[1]);
+    
     // 为各个字段设置别名
     chart.scale({
       LifeExpectancy: {
