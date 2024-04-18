@@ -84,24 +84,34 @@ header-img: "img/tags_head_background.jpg"
     'Europe': Global.colors[2],
     'Oceania': Global.colors[3]
   };
+  var data = []
+  {% for tag in site.tags %}    
+  {% for post in tag[1] %}
+    data.push({
+      'title':post.title,
+      'url':post.url,
+      'time':post.data;
+    });
+  {% endif %}
+  {% endif %}
   var chart = new G2.Chart({
       container: 'mountNode',
       forceFit: true,
       height: window.innerHeight
     });
-    chart.source(site.tags[1]);
+    chart.source(data);
     
     // 为各个字段设置别名
     chart.scale({
-      LifeExpectancy: {
+      title: {
         alias: '标题'
       },
 
-      GDP: {
+      url: {
         alias: 'url'
       }
     });
-    chart.axis('GDP', {
+    chart.axis('time', {
       label: {
         formatter: function formatter(value) {
           return (value / 1000).toFixed(0) + 'k';
@@ -112,9 +122,9 @@ header-img: "img/tags_head_background.jpg"
       showTitle: true // 不显示默认标题
     });
     chart.legend('Population', false); // 该图表默认会生成多个图例，设置不展示 Population 和 Country 两个维度的图例
-    chart.point().position('GDP*LifeExpectancy').size('Population', [4, 65]).color('continent', function(val) {
+    chart.point().position('time').size('Population', [4, 65]).color('continent', function(val) {
       return colorMap[val];
-    }).shape('circle').tooltip('Country*Population*GDP*LifeExpectancy').style('continent', {
+    }).shape('circle').tooltip('time').style('continent', {
       lineWidth: 1,
       strokeOpacity: 1,
       fillOpacity: 0.3,
