@@ -19,13 +19,14 @@ header-img: "img/tags_head_background.jpg"
     </div>
 </header>
 
-<div id="mountNode"></div>
+
 <script>/*Fixing iframe window.innerHeight 0 issue in Safari*/document.body.clientHeight;</script>
 <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.5.1/dist/g2.min.js"></script>
 <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.10.1/dist/data-set.min.js"></script>
 <!-- Main Content -->
 <div class="container">
 	<div class="row">
+    <div id="mountNode"></div>
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <!-- 标签云 -->
 			<div id='tag_cloud' class="tags">
@@ -39,10 +40,6 @@ header-img: "img/tags_head_background.jpg"
                     <li>行业观察、职位、公司优先使用中文</li>
                     <li>外国产品、术语优先使用英文</li>
             </blockquote>-->
-       <!-- 图表 -->     
-      <div id="mountNode">
-        
-      </div>
             <!-- 标签列表 -->
 			{% for tag in site.tags %}
 			<div class="one-tag-list">
@@ -104,32 +101,6 @@ header-img: "img/tags_head_background.jpg"
       
     {% endfor %}
 
-  // var data = [{
-  //   value: 251,
-  //   type: '大事例一',
-  //   name: '子事例一'
-  // }, {
-  //   value: 1048,
-  //   type: '大事例一',
-  //   name: '子事例二'
-  // }, {
-  //   value: 610,
-  //   type: '大事例二',
-  //   name: '子事例三'
-  // }, {
-  //   value: 434,
-  //   type: '大事例二',
-  //   name: '子事例四'
-  // }, {
-  //   value: 335,
-  //   type: '大事例三',
-  //   name: '子事例五'
-  // }, {
-  //   value: 250,
-  //   type: '大事例三',
-  //   name: '子事例六'
-  // }];
-  // 通过 DataSet 计算百分比
   var dv = new DataView();
   dv.source(data).transform({
     type: 'percent',
