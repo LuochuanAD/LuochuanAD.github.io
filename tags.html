@@ -117,7 +117,7 @@ header-img: "img/tags_head_background.jpg"
   chart.source(dv, {
     percent: {
       formatter: function formatter(val) {
-        val = (val * 100).toFixed(2) + '%';
+        val = (val * 100).toFixed(2) + '%1';
         return val;
       }
     }
@@ -132,7 +132,7 @@ header-img: "img/tags_head_background.jpg"
   chart.intervalStack().position('percent').color('type').label('type', {
     offset: -10
   }).tooltip('name*percent', function(item, percent) {
-    percent = (percent * 100).toFixed(2) + '%';
+    percent = (percent * 100).toFixed(2) + '%2';
     return {
       name: item,
       value: percent
@@ -153,7 +153,7 @@ header-img: "img/tags_head_background.jpg"
   outterView.source(dv1, {
     percent: {
       formatter: function formatter(val) {
-        val = (val * 100).toFixed(2) + '%';
+        val = (val * 100).toFixed(2) + '%3';
         return val;
       }
     }
@@ -163,7 +163,7 @@ header-img: "img/tags_head_background.jpg"
     radius: 0.75
   });
   outterView.intervalStack().position('percent').color('name', ['#BAE7FF', '#7FC9FE', '#71E3E3', '#ABF5F5', '#8EE0A1', '#BAF5C4']).label('name').tooltip('name*percent', function(item, percent) {
-    percent = (percent * 100).toFixed(2) + '%';
+    percent = (percent * 100).toFixed(2) + '%4';
     return {
       name: item,
       value: percent
