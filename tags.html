@@ -19,6 +19,11 @@ header-img: "img/tags_head_background.jpg"
     </div>
 </header>
 
+<script>/*Fixing iframe window.innerHeight 0 issue in Safari*/document.body.clientHeight;</script>
+<script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.5.1/dist/g2.min.js"></script>
+<script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.10.1/dist/data-set.min.js"></script>
+<script src="https://gw.alipayobjects.com/os/antv/assets/lib/jquery-3.2.1.min.js"></script>
+
 <!-- Main Content -->
 <div class="container">
 	<div class="row">
@@ -35,7 +40,7 @@ header-img: "img/tags_head_background.jpg"
                     <li>行业观察、职位、公司优先使用中文</li>
                     <li>外国产品、术语优先使用英文</li>
             </blockquote>-->
-
+            <div id="mountNode"></div>
             <!-- 标签列表 -->
 			{% for tag in site.tags %}
 			<div class="one-tag-list">
@@ -68,3 +73,54 @@ header-img: "img/tags_head_background.jpg"
 		</div>
 	</div>
 </div>
+
+<script>
+	var _G = G2,
+    Global = _G.Global;
+
+  var colorMap = {
+    'Asia': Global.colors[0],
+    'Americas': Global.colors[1],
+    'Europe': Global.colors[2],
+    'Oceania': Global.colors[3]
+  };
+  var chart = new G2.Chart({
+      container: 'mountNode',
+      forceFit: true,
+      height: window.innerHeight
+    });
+    chart.source(data);
+    // 为各个字段设置别名
+    chart.scale({
+      LifeExpectancy: {
+        alias: '标题'
+      },
+
+      GDP: {
+        alias: 'url'
+      }
+    });
+    chart.axis('GDP', {
+      label: {
+        formatter: function formatter(value) {
+          return (value / 1000).toFixed(0) + 'k';
+        } // 格式化坐标轴的显示
+      }
+    });
+    chart.tooltip({
+      showTitle: true // 不显示默认标题
+    });
+    chart.legend('Population', false); // 该图表默认会生成多个图例，设置不展示 Population 和 Country 两个维度的图例
+    chart.point().position('GDP*LifeExpectancy').size('Population', [4, 65]).color('continent', function(val) {
+      return colorMap[val];
+    }).shape('circle').tooltip('Country*Population*GDP*LifeExpectancy').style('continent', {
+      lineWidth: 1,
+      strokeOpacity: 1,
+      fillOpacity: 0.3,
+      opacity: 0.65,
+      stroke: function stroke(val) {
+        return colorMap[val];
+      }
+    });
+    chart.render();
+</script>
