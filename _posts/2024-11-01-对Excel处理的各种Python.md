@@ -24,7 +24,8 @@ tags:
 ### 一,案例一
 
 > 对比2个Excel的不同,将不同的地方标记成黄色,并生成2个Excel结果文件来展示黄色不同的地方.
-> 
+
+**代码片段**
 
 ```
 workbook1 = pxl.load_workbook(r"/Users/luochuan/Desktop/用Python对比2个Excel的不同/Resume_Louis.Luo_Test1.xlsx")
@@ -48,7 +49,10 @@ workbook1.save(r'result1.xlsx')
 workbook2.save(r'result2.xlsx')
 ```
 
->详细代码及测试数据已上传到GitHub[用Python对比2个Excel的不同](https://github.com/LuochuanAD/PythonProject/tree/main/%E7%94%A8Python%E5%AF%B9%E6%AF%942%E4%B8%AAExcel%E7%9A%84%E4%B8%8D%E5%90%8C) 
+**效果显示:(已将2个excel的不同之处用黄色显示)**
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/refs/heads/master/BlogSourceImage/BlogSourceImage2024/matchExcel_screen.png)
+
+**详细代码及测试数据已上传到GitHub**[用Python对比2个Excel的不同](https://github.com/LuochuanAD/PythonProject/tree/main/%E7%94%A8Python%E5%AF%B9%E6%AF%942%E4%B8%AAExcel%E7%9A%84%E4%B8%8D%E5%90%8C) 
 
 
 
