@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      对Excel处理的各种Python
-subtitle:   Excel
+subtitle:   openpyxl框架
 date:       2024-11-01
 author:     LuochuanAD
 header-img: img/home_blog_background.jpg
