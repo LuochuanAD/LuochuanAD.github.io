@@ -57,5 +57,44 @@ workbook2.save(r'result2.xlsx')
 
 
 ### 二,案例2
-> ...
+> Excel的某一列包含多个值, 这些值使用空格,斜杠,等等被隔开. 要求将这些值单独拆成多行.
+
+**代码片段**
+```
+splitString = "\n"
+
+
+for i in range(1, (workbook1_sheet1.max_row)):
+    value = workbook1_sheet1.cell(i, 3).value
+    if value != None:
+        list = value.split(splitString)
+        if len(list) > 1:
+            
+            workbook1_sheet1.cell(i, 3).value = list[0]
+            workbook1_sheet1.insert_rows(idx=(i+1), amount= (len(list)-1))
+
+
+            for j in range(1, len(list)):
+                
+                for col in range(1, workbook1_sheet1.max_column+1):
+                    cell = workbook1_sheet1.cell(i, column = col)
+                    targetCell = workbook1_sheet1.cell(row=(i+j), column=col)
+                    if col == 3: 
+                        
+                        targetCell.value = list[j]
+                    else:
+                        
+                        targetCell.value = cell.value
+                    
+                    # targetCell.fill=PatternFill("solid", fgColor='FFFF00')
+                    targetCell.font = Font(color=colors.BLACK, bold=False, size=16)
+                                    
+```
+**效果显示:(已将2个excel的不同之处用黄色显示)**
+![](https://raw.githubusercontent.com/LuochuanAD/PythonProject/refs/heads/main/splitColumn/splitColumn_screenshot.png)
+
+
+**详细代码及测试数据已上传到GitHub**[splitColumn](https://github.com/LuochuanAD/PythonProject/tree/main/splitColumn) 
+
+
 
