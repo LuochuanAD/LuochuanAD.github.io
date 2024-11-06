@@ -90,7 +90,7 @@ for i in range(1, (workbook1_sheet1.max_row)):
                     targetCell.font = Font(color=colors.BLACK, bold=False, size=16)
                                     
 ```
-**效果显示:(已将2个excel的不同之处用黄色显示)**
+**效果显示:(已将某一列中数据按照空格分割成多行数据)**
 ![](https://raw.githubusercontent.com/LuochuanAD/PythonProject/refs/heads/main/splitColumn/splitColumn_screenshot.png)
 
 
