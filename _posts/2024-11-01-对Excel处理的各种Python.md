@@ -22,7 +22,7 @@ tags:
 ## 案例
 
 
-### 一,案例一
+### 一,案例1
 
 > 对比2个Excel的不同,将不同的地方标记成黄色,并生成2个Excel结果文件来展示黄色不同的地方.
 
@@ -137,7 +137,7 @@ f.close
                                     
 ```
 
-**效果显示:(将testData.csv某一列的为Null的数据, 在rultes.xlsx中查找对应正确的数据,修改testData.csv的)**
+**效果显示:(将testData.csv某一列的为Null的数据, 在rultes.xlsx中查找对应正确的数据,修改testData.csv)**
 ![](https://raw.githubusercontent.com/LuochuanAD/PythonProject/refs/heads/main/changeForCsv/changeForCsv_screenshot.png)
 
 
