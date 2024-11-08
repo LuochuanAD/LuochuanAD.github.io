@@ -137,7 +137,7 @@ f.close
                                     
 ```
 
-**效果显示:(已将某一列中数据按照空格分割成多行数据)**
+**效果显示:(将testData.csv某一列的为Null的数据, 在rultes.xlsx中查找对应正确的数据,修改testData.csv的)**
 ![](https://raw.githubusercontent.com/LuochuanAD/PythonProject/refs/heads/main/changeForCsv/changeForCsv_screenshot.png)
 
 
