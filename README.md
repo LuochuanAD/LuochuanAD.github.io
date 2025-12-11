@@ -1,4 +1,4 @@
-
+https://strictfrog.com
 ### Mac:
 
 <figure class="third"><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fy7wjkyc41j31c00u0qv8.jpg" width="300px"/><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fy7wjnjr9oj31c00u0x6q.jpg" width="300px"/><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fy7wjpejojj31c00u04qq.jpg" width="300px"/></figure>
