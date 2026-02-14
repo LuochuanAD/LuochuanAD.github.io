@@ -65,11 +65,17 @@ type_keywords = {
 	“project_chunk” = [“项目经验”,“担当”,“时期”,...]
 }
 ```
-例如: Question: 我想查找一个姓名叫Louis的人的个人信息.
-	Question分类(或者称用户意图分析): 在向量数据库中查找Chunk的类型为:Basic,关键词为:Louis
+例如: 
 
-例如:  Question: 我想查找一个拥有英语6级证书,并且Python开发经验有3年的人.
-	Question分类(或者称用户意图分析): 在向量数据库中查找Chunk的类型为:certification,关键词为:英语6级证书;Chunk的类型为:Skills,关键词为:Python 3年;
+Question: 我想查找一个姓名叫Louis的人的个人信息.
+
+Question分类(或者称用户意图分析): 在向量数据库中查找Chunk的类型为:Basic,关键词为:Louis
+
+例如:  
+
+Question: 我想查找一个拥有英语6级证书,并且Python开发经验有3年的人.
+	
+Question分类(或者称用户意图分析): 在向量数据库中查找Chunk的类型为:certification,关键词为:英语6级证书;Chunk的类型为:Skills,关键词为:Python 3年;
 
 #### 提示: 向量数据库中的每个Chunk都包含数据来源: 
 ```
@@ -80,7 +86,7 @@ type_keywords = {
 ```
 通过{"file": "简历(Louis).pdf"} 可以再次在向量数据库中找到这个人的完整信息:basic,skills, introduction等等
 
-将这些你需要信息形成结构化的上下文就可以交给LLM来处理了.
+将这些信息形成结构化的上下文就可以交给LLM来处理了.
 
 
 ### 3 Question ReWriting的提示词怎么设计? 
