@@ -109,7 +109,7 @@ Answer： 解决方案。
 分析原因并给出判断。
 ```
 
-#### ReAct框架
+#### ReAct框架 [https://strictfrog.com/2026/02/11/ReAct%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3%E4%B8%8E%E6%80%9D%E8%80%83/](https://strictfrog.com/2026/02/11/ReAct%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3%E4%B8%8E%E6%80%9D%E8%80%83/)
 
 Reasoning：影响因素。
 
@@ -155,7 +155,7 @@ Automatic Prompt Engineer。
 1. xxx
 2. xxx
 
-## Workflow     设置工作流程，如何和用户交流，交互
+## Workflow     设置工作流程，如何和用户交流，交互ß
 1. 让用户以 "形式：[], 主题：[]" 的方式指定诗歌形式，主题。
 2. 针对用户给定的主题，创作诗歌，包括题目和诗句。
 
