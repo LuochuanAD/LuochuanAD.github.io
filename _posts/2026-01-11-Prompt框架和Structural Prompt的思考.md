@@ -109,17 +109,11 @@ Answer： 解决方案。
 分析原因并给出判断。
 ```
 
-#### ReAct框架 [https://strictfrog.com/2026/02/11/ReAct%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3%E4%B8%8E%E6%80%9D%E8%80%83/](https://strictfrog.com/2026/02/11/ReAct%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3%E4%B8%8E%E6%80%9D%E8%80%83/)
+#### ReAct框架 
 
-Reasoning：影响因素。
+[https://strictfrog.com/2026/02/11/ReAct%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3%E4%B8%8E%E6%80%9D%E8%80%83/](https://strictfrog.com/2026/02/11/ReAct%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3%E4%B8%8E%E6%80%9D%E8%80%83/)
 
-Acting： 行动。
 
-```
-先列出所有影响项目NPV的因素。
-然后逐一分析其影响方向，最后综合给出结论。
-
-```
 
 #### APE框架 （让AI自己优化Prompt）
 
