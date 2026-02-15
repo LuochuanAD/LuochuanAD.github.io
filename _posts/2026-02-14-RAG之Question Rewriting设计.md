@@ -108,6 +108,7 @@ Tools
 
 ```
 那么针对FAQ设计的Question ReWriting的提示词 和针对整个AI Agent设计的Question ReWriting的提示词就要区分了.
+这里用到了Plan-and-Execute框架思路:[https://strictfrog.com/2026/02/15/Plan-and-Execute%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3%E4%B8%8E%E6%80%9D%E8%80%83/](https://strictfrog.com/2026/02/15/Plan-and-Execute%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3%E4%B8%8E%E6%80%9D%E8%80%83/)
 
 #### FAQ:
 ```
