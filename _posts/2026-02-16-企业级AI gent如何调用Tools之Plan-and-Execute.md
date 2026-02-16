@@ -1,8 +1,8 @@
 ---
 layout:     post
-title:      企业级AIAgent如何调用Tools
+title:      企业级AIAgent如何调用Tools之Plan-and-Execute
 subtitle:   Plan-and-Execute框架
-date:       2026-02-15
+date:       2026-02-16
 author:     LuochuanAD
 header-img: img/home_blog_background.jpg
 catalog: true
@@ -135,7 +135,7 @@ def execute_tool(tool_name, args, memory):
 
 ```
 
-## 评价: (Plan-and-Execute框架 推荐指数:🌟🌟)
+## 评价: (Plan-and-Execute框架 + Function Calling 推荐指数:🌟🌟)
 ```
 优点:
 
