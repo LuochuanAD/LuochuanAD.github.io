@@ -52,7 +52,7 @@ Plan-and-Execute将任务分解为:Plan,Execute
 ```
 **总结:调用一次LLM生成5个plan, 调用5次 ReAct Agent处理这5个Plan.**
 
-##企业级AI gent如何调用Tools(Plan-and-Execute框架)
+## 企业级AI gent如何调用Tools(Plan-and-Execute框架)
 
 [https://strictfrog.com/2026/02/15/%E4%BC%81%E4%B8%9A%E7%BA%A7AI-gent%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8Tools(Plan-and-Execute%E6%A1%86%E6%9E%B6)/](https://strictfrog.com/2026/02/15/%E4%BC%81%E4%B8%9A%E7%BA%A7AI-gent%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8Tools(Plan-and-Execute%E6%A1%86%E6%9E%B6)/)
 
