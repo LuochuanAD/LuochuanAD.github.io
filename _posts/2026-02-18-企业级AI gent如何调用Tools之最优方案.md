@@ -14,7 +14,7 @@ tags:
 ---
 
 ## 背景
-
+> 用户的Query既有简单的信息搜索又有工具调用,那么就需要设计一个通用可复用的成熟的系统架构
 
 
 ## 架构结构 Architecture
@@ -102,8 +102,10 @@ while True:
 ```
 
 ## 3, 第三层:Structured Tool Layer
+
 > 这里采用ChatGPT的Function Calling的思想,通过定义“**Tools Schema**”来连接LLM和Tools的调用.
 
+企业级AI gent如何调用Tools之ReAct:
 []()
 
 ## 4, 第四层:Guardrails & Policies
