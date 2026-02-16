@@ -58,8 +58,22 @@ Plan-and-Execute将任务分解为:Plan,Execute
 |-4- Louis和刘亦菲的结婚请柬内容:“我们结婚啦, 您好xxx先生/女士,欢迎您在2026年2月31日,参加我们在月球的北极宫殿举行的太阳历大婚礼,届时我们会派遣星际飞船LL001号去接您,请在2月30日晚上12点上海的东方明珠塔顶楼乘坐飞船.”
 |-5- 调用工sendMail,发送结婚请柬内容
 ```
-
 **总结:调用一次LLM生成5个plan, 调用5次 ReAct Agent处理这5个Plan.**
+
+## 通用可复制的Planner Prompt:
+```
+prompt = ‘
+	You are a task planner in a multi-step AI system.
+	User query: {Query}
+	Your job:
+	1, Break down the user query into executable steps.
+	2, Each step must be atomic and tool-executable.
+	3, Steps should be ordered logically.
+	4, Do NOT execute anything.
+	5, Only return JSON.
+’
+```
+
 
 ## 参考
 
