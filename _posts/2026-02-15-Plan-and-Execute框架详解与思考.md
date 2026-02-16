@@ -16,14 +16,6 @@ tags:
 
 > LangChain的Plan-and-Execute框架受到关于Plan-and-Solve的论文的启发.Plan-and-Execute非常适合更复杂的长期规划,把复杂问题拆分成一个个子任务,逐个击破. 这会频繁的的调用大模型,但可以避免ReAct Agent循环过程中产生提示词过长的问题.
 
-### 优势:
-```
-1, 任务分解: 通过将大任务分解为小任务,可以有效管理和解决复杂任务.
-
-2, 详细指导: 通过提供详细的指导来改善推理步骤的质量和准确性.
-
-3, 适应性: 可以根据不同类型的任务进行调整,在各种复杂问题中表现出色.
-```
 
 ## Plan-and-Solve 策略
 
@@ -59,20 +51,6 @@ Plan-and-Execute将任务分解为:Plan,Execute
 |-5- 调用工sendMail,发送结婚请柬内容
 ```
 **总结:调用一次LLM生成5个plan, 调用5次 ReAct Agent处理这5个Plan.**
-
-## 通用可复制的Planner Prompt:
-```
-prompt = ‘
-	You are a task planner in a multi-step AI system.
-	User query: {Query}
-	Your job:
-	1, Break down the user query into executable steps.
-	2, Each step must be atomic and tool-executable.
-	3, Steps should be ordered logically.
-	4, Do NOT execute anything.
-	5, Only return JSON.
-’
-```
 
 
 ## 参考
