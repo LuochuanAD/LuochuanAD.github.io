@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      企业级AIAgent如何调用Tools之ReAct
+title:      企业级AIAgent:ReAct + Function Calling
 subtitle:   ReAct框架
 date:       2026-02-17
 author:     LuochuanAD

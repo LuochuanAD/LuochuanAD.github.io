@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      企业级AIAgent如何调用Tools之Plan-and-Execute
+title:      企业级AIAgent:Plan-and-Execute + Function Calling
 subtitle:   Plan-and-Execute框架
 date:       2026-02-16
 author:     LuochuanAD

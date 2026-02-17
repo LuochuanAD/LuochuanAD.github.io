@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      企业级AIAgent如何调用Tools之最优方案
-subtitle:   ReAct框架
+title:      企业级AIAgent:Router + ReAct + Function Calling
+subtitle:   Architecture
 date:       2026-02-18
 author:     LuochuanAD
 header-img: img/home_blog_background.jpg
@@ -119,6 +119,17 @@ max_steps = 15
 ```
 if tool = send_mail:
 	require confirmation
+```
+## 评价: (ReAct框架 + Function Calling 推荐指数:🌟🌟🌟🌟🌟)
+```
+优点:
+
+1, 通用性    极高
+2, 可控性    高
+3, 扩展性    极高
+4, 复杂任务	极高
+5, 简单任务效率 极高
+
 ```
 
 
