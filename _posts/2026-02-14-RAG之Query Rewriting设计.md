@@ -108,79 +108,10 @@ Tools
 
 ```
 那么设计Query ReWriting的提示词就需要通用可复用.
-这里用到了Plan-and-Execute框架思路:[https://strictfrog.com/2026/02/15/Plan-and-Execute%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3%E4%B8%8E%E6%80%9D%E8%80%83/](https://strictfrog.com/2026/02/15/Plan-and-Execute%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3%E4%B8%8E%E6%80%9D%E8%80%83/)
+这里用到了Router + ReAct + Function Calling框架思路:
 
-#### Planner Prompt:
-```
-prompt = ‘
-	You are a task planner in a multi-step AI system.
-	User query: {Query}
-	Your job:
-	1, Break down the user query into executable steps.
-	2, Each step must be atomic and tool-executable.
-	3, Steps should be ordered logically.
-	4, Do NOT execute anything.
-	5, Only return JSON.
-’
-```
+[]()
 
-**例如:**
-
-Query: 我想查找一个拥有英语6级证书,并且Python开发经验有3年的人.然后将这个人的个人信息发送到luochuanad@gmail.com
-
-通过LLM(**Planner Prompt**)得出以下结果:
-
-```
-json
-[
- {
-	"step: 1,
-	"action": "Search Database"
-	"description": "Query the database to find individuals with an English CET-6 certificate 					and 3 years of Python development experience.",
-	"parameters": {
-		"certificate": "CET-6",
-		"experience": {
-			"Language": "Python",
-			"years": 3
-		}
-	}
- },
- {
-	"step": 2,
-	"action": "Retrieve Personal Information",
-	"description": "Extract the personal information of the individual(s) found in the 					previous step.",
-	"parameters": {
-		"fields": ["name", "email", "phone", "address"]
-	}
- },
- {
-	"step": 3,
-	"action": "Format Email",
-	"description": "Prepare an email containing the personal information of the individual(s) 					found.",
-	"parameters": {
-		"recipient": "luochuanad@gmail.com",
-		"subject": "Candidate Information",
-		"body": Include the personal information retrieved in step 2."
- 	}
- },
- {
- 	"step": 4,
-	"action": "Send Email"
-	"description": "Send the formatted email to the specified email address.",
-	"parameters": {
-		"recipient": "xxx@gmail.com",
-		"content": "Use the email content prepared in step 3."
- 	}
- }
-
-
-]
-
-```
-
-#### 提示: {step: 1, "action": "Search Database"}
-
-在"step: 1,"action"为 "Search Database"的时候,根据关键词certificate, experience,分别查找向量数据库中的certification_chunk和skills_chunk.
 
 
 

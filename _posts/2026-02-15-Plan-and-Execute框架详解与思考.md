@@ -30,6 +30,8 @@ tags:
 
 场景: 在一个构建了RAG系统的完整AI Agent系统中
 
+**例如:**
+
 **Question**: 查找Louis和刘亦菲的个人信息, 并且根据他们的个人信息生成一个结婚请柬,将此结婚请柬的内容发送到worldXXTest@gmail.com邮箱中.
 
 Plan-and-Execute将任务分解为:Plan,Execute
@@ -52,9 +54,73 @@ Plan-and-Execute将任务分解为:Plan,Execute
 ```
 **总结:调用一次LLM生成5个plan, 调用5次 ReAct Agent处理这5个Plan.**
 
-## 企业级AI gent如何调用Tools(Plan-and-Execute框架)
+#### Planner Prompt:
+```
+prompt = ‘
+	You are a task planner in a multi-step AI system.
+	User query: {Query}
+	Your job:
+	1, Break down the user query into executable steps.
+	2, Each step must be atomic and tool-executable.
+	3, Steps should be ordered logically.
+	4, Do NOT execute anything.
+	5, Only return JSON.
+’
+```
 
-[https://strictfrog.com/2026/02/15/%E4%BC%81%E4%B8%9A%E7%BA%A7AI-gent%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8Tools(Plan-and-Execute%E6%A1%86%E6%9E%B6)/](https://strictfrog.com/2026/02/15/%E4%BC%81%E4%B8%9A%E7%BA%A7AI-gent%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8Tools(Plan-and-Execute%E6%A1%86%E6%9E%B6)/)
+**例如:**
+
+Query: 我想查找一个拥有英语6级证书,并且Python开发经验有3年的人.然后将这个人的个人信息发送到luochuanad@gmail.com
+
+通过LLM(**Planner Prompt**)得出以下结果:
+
+```
+json
+[
+ {
+	"step: 1,
+	"action": "Search Database"
+	"description": "Query the database to find individuals with an English CET-6 certificate 					and 3 years of Python development experience.",
+	"parameters": {
+		"certificate": "CET-6",
+		"experience": {
+			"Language": "Python",
+			"years": 3
+		}
+	}
+ },
+ {
+	"step": 2,
+	"action": "Retrieve Personal Information",
+	"description": "Extract the personal information of the individual(s) found in the 					previous step.",
+	"parameters": {
+		"fields": ["name", "email", "phone", "address"]
+	}
+ },
+ {
+	"step": 3,
+	"action": "Format Email",
+	"description": "Prepare an email containing the personal information of the individual(s) 					found.",
+	"parameters": {
+		"recipient": "luochuanad@gmail.com",
+		"subject": "Candidate Information",
+		"body": Include the personal information retrieved in step 2."
+ 	}
+ },
+ {
+ 	"step": 4,
+	"action": "Send Email"
+	"description": "Send the formatted email to the specified email address.",
+	"parameters": {
+		"recipient": "xxx@gmail.com",
+		"content": "Use the email content prepared in step 3."
+ 	}
+ }
+
+
+]
+
+```
 
 ## 参考
 
