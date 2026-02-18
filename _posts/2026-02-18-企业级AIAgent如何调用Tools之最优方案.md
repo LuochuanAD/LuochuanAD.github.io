@@ -120,7 +120,7 @@ max_steps = 15
 if tool = send_mail:
 	require confirmation
 ```
-## 评价: (ReAct框架 + Function Calling 推荐指数:🌟🌟🌟🌟🌟)
+## 评价: (Router + ReAct框架 + Function Calling 推荐指数:🌟🌟🌟🌟🌟)
 ```
 优点:
 
