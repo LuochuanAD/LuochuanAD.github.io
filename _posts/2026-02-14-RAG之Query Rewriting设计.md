@@ -110,7 +110,7 @@ Tools
 那么设计Query ReWriting的提示词就需要通用可复用.
 这里用到了Router + ReAct + Function Calling框架思路:
 
-[]()
+[https://strictfrog.com/2026/02/18/%E4%BC%81%E4%B8%9A%E7%BA%A7AIAgent%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8Tools%E4%B9%8B%E6%9C%80%E4%BC%98%E6%96%B9%E6%A1%88/](https://strictfrog.com/2026/02/18/%E4%BC%81%E4%B8%9A%E7%BA%A7AIAgent%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8Tools%E4%B9%8B%E6%9C%80%E4%BC%98%E6%96%B9%E6%A1%88/)
 
 
 
