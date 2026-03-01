@@ -212,11 +212,11 @@ layout: default
             <div class="
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
-                sidebar-container">
+                sidebar-container donation-box">
                 <h5>关于作者</h5>
-                <p>我是Louis,一名长期从事<strong>iOS与AI相关工程实践</strong>的工程师,也是一个正在探索产品与商业可能性的准创始人.</p>
-                <p>这里的文章,更多是我在项目中用过,踩过坑,反复验证过的东西,而不是为了流量而写的“快内容”.</p>
-                <hr>
+                <p class="donation-intro">我是Louis,一名长期从事<strong>iOS与AI相关工程实践</strong>的工程师,也是一个正在探索产品与商业可能性的准创始人.</p>
+                <p class="donation-intro">这里的文章,更多是我在项目中用过,踩过坑,反复验证过的东西,而不是为了流量而写的“快内容”.</p>
+                
                 
                 <section class="donation-box">
                   <h5>☕ 打赏</h5>
@@ -278,11 +278,11 @@ layout: default
                 {% if site.friends %}
                 <hr>
                 <h5>联系与合作</h5>
-                <p><strong>如果你:</strong></p>
-                <p>· 正在做iOS App / AI / 自动化相关的项目</p>
-                <p>· 对技术选型、架构设计、产品落地有困惑</p>
-                <p>· 或希望进行技术交流、合作探讨</p>
-                <p><strong>欢迎通过以下方式联系我:</strong></p>
+                <p class="donation-intro"><strong>如果你:</strong></p>
+                <p class="donation-intro">· 正在做iOS App / AI / 自动化相关的项目</p>
+                <p class="donation-intro">· 对技术选型、架构设计、产品落地有困惑</p>
+                <p class="donation-intro">· 或希望进行技术交流、合作探讨</p>
+                <p class="donation-intro"><strong>欢迎通过以下方式联系我:</strong></p>
                 <ul class="list-inline">
                     {% for friend in site.friends %}
                         <li><a href="{{friend.href}}">{{friend.title}}</a></li>
