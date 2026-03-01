@@ -144,28 +144,25 @@ layout: default
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 sidebar-container">
+                <h5>关于作者</h5>
+                <p>我是Louis,一名长期从事<strong>iOS与AI相关工程实践</strong>的工程师,也是一个正在探索产品与商业可能性的准创始人.</p>
+                <p>这里的文章,更多是我在项目中用过,踩过坑,反复验证过的东西,而不是为了流量而写的“快内容”.</p>
+                <hr>
+                <h5>打赏</h5>
+                <p>如果这篇文章对你有帮助,</p>
+                <p>欢迎请我喝一杯咖啡☕️</p>
 
-                <!-- Featured Tags -->
-                {% if site.featured-tags %}
-                <section>
-                    <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS33</a></h5>
-                    <div class="tags">
-        				{% for tag in site.tags %}
-                            {% if tag[1].size > {{site.featured-condition-size}} %}
-                				<a href="/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
-                                    {{ tag[0] }}
-                                </a>
-                            {% endif %}
-        				{% endfor %}
-        			</div>
-                </section>
-                {% endif %}
-
+                <p>你的支持会让我有更多时间,把真实项目中的经验持续整理和分享出来.</p>
+                <p>不打赏也完全没关系,感谢你读到这里.</p>
                 <!-- Friends Blog -->
                 {% if site.friends %}
                 <hr>
-                <h5>FRIENDS</h5>
+                <h5>联系与合作</h5>
+                <p><strong>如果你:</strong></p>
+                <p>· 正在做iOS App / AI / 自动化相关的项目</p>
+                <p>· 对技术选型、架构设计、产品落地有困惑</p>
+                <p>· 或希望进行技术交流、合作探讨</p>
+                <p><strong>欢迎通过以下方式联系我:</strong></p>
                 <ul class="list-inline">
                     {% for friend in site.friends %}
                         <li><a href="{{friend.href}}">{{friend.title}}</a></li>
