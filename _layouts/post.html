@@ -21,6 +21,75 @@ layout: default
         background: rgba(0,0,0, {{ page.header-mask }});
     }
     {% endif %}
+
+        /* Donation Box */
+    .donation-box {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e5e7eb;
+      font-size: 0.95rem;
+      color: #374151;
+    }
+
+    .donation-box h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .donation-intro {
+      margin-bottom: 1rem;
+      color: #6b7280;
+    }
+
+    /* Primary sponsor button */
+    .sponsor-primary {
+      display: inline-block;
+      padding: 0.45rem 0.9rem;
+      margin-bottom: 0.8rem;
+      border-radius: 6px;
+      background-color: #24292e;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .sponsor-primary:hover {
+      opacity: 0.9;
+    }
+
+    /* Toggle button */
+    .donation-toggle {
+      display: inline-block;
+      margin-left: 0.5rem;
+      background: none;
+      border: none;
+      color: #2563eb;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .donation-toggle:hover {
+      text-decoration: underline;
+    }
+
+    /* Hidden methods */
+    .donation-methods {
+      display: none;
+      margin-top: 1rem;
+      padding-left: 0.5rem;
+    }
+
+    .donation-item {
+      margin-bottom: 1.2rem;
+    }
+
+    .donation-item img {
+      margin-top: 0.4rem;
+      width: 150px;
+      max-width: 100%;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+    }
 </style>
 <header class="intro-header" >
     
@@ -148,10 +217,54 @@ layout: default
                 <p>我是Louis,一名长期从事<strong>iOS与AI相关工程实践</strong>的工程师,也是一个正在探索产品与商业可能性的准创始人.</p>
                 <p>这里的文章,更多是我在项目中用过,踩过坑,反复验证过的东西,而不是为了流量而写的“快内容”.</p>
                 <hr>
-                <h5>打赏</h5>
-                <p>如果这篇文章对你有帮助,</p>
-                <p>欢迎请我喝一杯咖啡☕️</p>
+                
+                <section class="donation-box">
+                  <h5>☕ 打赏</h5>
 
+                  <p class="donation-intro">
+                    如果这篇文章对你有帮助,欢迎请我喝一杯咖啡☕️
+                  </p >
+
+                  <!-- GitHub Sponsors -->
+                  <a
+                    class="sponsor-primary"
+                    href="https://github.com/sponsors/LuochuanAD"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    GitHub Sponsors（推荐）
+                  </a >
+
+                  <!-- Toggle button -->
+                  <button class="donation-toggle" onclick="toggleDonate()">
+                    其他支持方式
+                  </button>
+
+                  <!-- Hidden donation methods -->
+                  <div id="donation-methods" class="donation-methods">
+                    <div class="donation-item">
+                      <strong>PayPal</strong><br />
+                      <a href="https://www.paypal.me/你的用户名" target="_blank">
+                        https://www.paypal.me/你的用户名
+                      </a >
+                    </div>
+
+                    <div class="donation-item">
+                      <strong>PayPay</strong><br />
+                      < img src="/images/paypay.png" alt="PayPay QR" />
+                    </div>
+
+                    <div class="donation-item">
+                      <strong>微信支付</strong><br />
+                      < img src="/images/wechat.png" alt="WeChat Pay QR" />
+                    </div>
+
+                    <div class="donation-item">
+                      <strong>支付宝</strong><br />
+                      < img src="/images/alipay.png" alt="Alipay QR" />
+                    </div>
+                  </div>
+                </section>
                 <p>你的支持会让我有更多时间,把真实项目中的经验持续整理和分享出来.</p>
                 <p>不打赏也完全没关系,感谢你读到这里.</p>
                 <!-- Friends Blog -->
@@ -174,7 +287,12 @@ layout: default
     </div>
 </article>
 
-
+<script>
+  function toggleDonate() {
+    const el = document.getElementById("donation-methods");
+    el.style.display = el.style.display === "block" ? "none" : "block";
+  }
+</script>
 {% if site.disqus_username %}
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
