@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Workflow+limitedPplanning的设计思想
+title:      Workflow+limitedPlanning的设计思想
 subtitle:   Workflow+limitedPlanning
 date:       2026-03-07
 author:     LuochuanAD
