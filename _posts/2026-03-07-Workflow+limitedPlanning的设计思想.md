@@ -7,7 +7,8 @@ author:     LuochuanAD
 header-img: img/home_blog_background.jpg
 catalog: true
 tags:
-- Prompt 
+- workflows
+- structured
 
 
 ---
