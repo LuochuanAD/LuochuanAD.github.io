@@ -24,7 +24,7 @@ header-img: "img/tags_head_background.jpg"
 <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.5.1/dist/g2.min.js"></script>
 <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.10.1/dist/data-set.min.js"></script>
 <!-- Main Content -->
-<div class="intro-header" id="mountNode"></div>
+<div id="mountNode"></div>
 <div class="container">
 	<div class="row">
     
@@ -107,10 +107,11 @@ header-img: "img/tags_head_background.jpg"
     dimension: 'type',
     as: 'percent'
   });
+  var width = document.getElementById('mountNode').offsetWidth;
   var chart = new G2.Chart({
     container: 'mountNode',
     forceFit: true,
-    height: window.innerHeight,
+    height: width,
     padding: 0
   });
   chart.source(dv, {
