@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      AIAgent之成本控制
+title:      AIAgent之token成本控制
 subtitle:   成本管理
 date:       2026-02-28
 author:     LuochuanAD
@@ -8,6 +8,7 @@ header-img: img/home_blog_background.jpg
 catalog: true
 tags:
 - AIAgent
+- token
 
 ---
 
@@ -92,6 +93,8 @@ Cached input 缓存输入 一个最重要的原则: 能不动的尽量别动,最
 ```
 
 ### 5, prompt提示词写法: 充分利用Cached input 缓存输入
+
+**为了方便说明,这里用中文写prompt了,最好是英文写**
 
 ```
 在每一次调用LLM时,prompt提示词都会使用,
@@ -205,6 +208,15 @@ cached_prompt = “
 如果用户是提供给外部人员使用,那肯定需要设置Max_token,并且对于用户的使用tokens进行监控和限制.
 
 ```
+
+### 10, prompt最好用英文写
+
+```
+平均而言 
+一个英文单词 = 0.75 token
+一个中文单词 = 1.0 token
+```
+
 
 ## 总结
 
