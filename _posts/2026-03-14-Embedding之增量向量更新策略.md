@@ -95,7 +95,7 @@ vector
 metadata
 ```
 
-### 二, 向量数据库的Metadata设计(方案一和方案三)
+### 向量数据库的Metadata设计(方案一和方案三)
 
 **推荐的metadata:**
 
@@ -114,7 +114,7 @@ metadata
 - 更新某个文件
 - 过滤来源
 
-## 去重策略 (避免重复embedding)
+## 二，去重策略 (避免重复embedding)
 
 ### 方案一: 去重段落
 
