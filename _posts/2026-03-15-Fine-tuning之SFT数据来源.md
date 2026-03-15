@@ -59,6 +59,7 @@ def generate_data(prompt):
 - Reddit
 - StackOverflow
 - GitHub issues
+- Wikipedia
 
 真实用户问题质量很高。
 
