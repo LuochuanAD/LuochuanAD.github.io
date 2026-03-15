@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Fine-tuning之数据准备与预处理
+title:      Fine-tuning之简单的数据准备与预处理
 subtitle:   Fine-tuning
 date:       2026-03-15
 author:     LuochuanAD
@@ -110,12 +110,6 @@ if __name__ == "__main__":
 完整的代码链接如下:
 
 [https://github.com/LuochuanAD/Fine-tuning-Learn](https://github.com/LuochuanAD/Fine-tuning-Learn)
-
-## 顶级的SFT数据结构设计
-
-请看下面的文章:
-
-[]()
 
 
 ## 参考
