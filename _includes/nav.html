@@ -26,12 +26,21 @@
                     </li>
                     {% endif %}{% endfor %}
                     <li class="language-menu">
-                      <a href="#">🌐 <span id="current-lang">EN</span></a>
-                      <ul class="language-dropdown">
-                          <li><a href="/zh/">中文</a></li>
-                          <li><a href="/en/">English</a></li>
-                          <li><a href="/jp/">日本語</a></li>
-                      </ul>
+
+                    <a href="#">
+                    🌐 <span id="current-lang">EN</span>
+                    </a>
+
+                    <ul class="language-dropdown">
+
+                    <li><a href="{{ '/zh/' | prepend: site.baseurl }}">中文</a></li>
+
+                    <li><a href="{{ '/en/' | prepend: site.baseurl }}">English</a></li>
+
+                    <li><a href="{{ '/jp/' | prepend: site.baseurl }}">日本語</a></li>
+
+                    </ul>
+
                     </li>
                 </ul>
             </div>
@@ -102,8 +111,12 @@
     else if(path.startsWith("/jp")){
     lang = "JP";
     }
+    else if(path.startsWith("/en")){
+    lang = "EN";
+    }
 
     document.getElementById("current-lang").innerText = lang;
+
 
 </script>
 <script>

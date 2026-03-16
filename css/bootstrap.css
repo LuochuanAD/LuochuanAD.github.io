@@ -4219,31 +4219,33 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .language-menu {
-position: relative;
+  position: relative;
 }
 
 .language-dropdown {
-display: none;
-position: absolute;
-background: white;
-list-style: none;
-padding: 10px 0;
-right: 0;
-top: 40px;
-border-radius: 6px;
-box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background: rgba(255,255,255,0.95);
+  list-style: none;
+  padding: 10px 0;
+  border-radius: 6px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  z-index: 9999;
 }
 
 .language-dropdown li {
-padding: 5px 20px;
+  padding: 6px 20px;
 }
 
 .language-dropdown li a {
-color: #333;
+  color: #333;
+  text-decoration: none;
 }
 
 .language-menu:hover .language-dropdown {
-display: block;
+  display: block;
 }
 .navbar-nav {
   margin: 7.5px -15px;
