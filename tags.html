@@ -5,193 +5,273 @@ description: keep hungry keep foolish
 header-img: "img/tags_head_background.jpg"
 ---
 
+{% assign path_parts = page.url | split:"/" %}
+{% assign lang = path_parts[1] | default:"en" %}
+
+{% if lang == "zh" %}
+{% assign posts = site.posts | where_exp:"post","post.path contains '/zh/'" %}
+{% elsif lang == "jp" %}
+{% assign posts = site.posts | where_exp:"post","post.path contains '/jp/'" %}
+{% else %}
+{% assign posts = site.posts | where_exp:"post","post.path contains '/en/'" %}
+{% endif %}
+
+
+{% assign tags = "" | split:"" %}
+
+{% for post in posts %}
+  {% for tag in post.tags %}
+    {% unless tags contains tag %}
+      {% assign tags = tags | push: tag %}
+    {% endunless %}
+  {% endfor %}
+{% endfor %}
+
+
+
 <!-- Page Header -->
 <header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading" id="tag-heading">
-                    <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
-                    <span class="subheading">{{ page.description }}</span>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="container">
+<div class="row">
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<div class="site-heading" id="tag-heading">
+<h1>{{ page.title }}</h1>
+<span class="subheading">{{ page.description }}</span>
+</div>
+</div>
+</div>
+</div>
 </header>
 
 
-<script>/*Fixing iframe window.innerHeight 0 issue in Safari*/document.body.clientHeight;</script>
+<script>document.body.clientHeight;</script>
 <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.5.1/dist/g2.min.js"></script>
 <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.10.1/dist/data-set.min.js"></script>
-<!-- Main Content -->
+
+
+
+<!-- 圆盘图 -->
 <div id="mountNode"></div>
+
+
+
 <div class="container">
-	<div class="row">
-    
-		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 标签云 -->
-			<div id='tag_cloud' class="tags">
-				{% for tag in site.tags %}
-				<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
-				{% endfor %}
-			</div>
+<div class="row">
 
-            <!--<blockquote class="tag-comments">
-                标签命名规范：
-                    <li>行业观察、职位、公司优先使用中文</li>
-                    <li>外国产品、术语优先使用英文</li>
-            </blockquote>-->
-            <!-- 标签列表 -->
-			{% for tag in site.tags %}
-			<div class="one-tag-list">
-			  	<span class="fa fa-tag listing-seperator" id="{{ tag[0] }}">
-                    <span class="tag-text">{{ tag[0] }}</span>
-                </span>
-				{% for post in tag[1] %}
-				  <!-- <li class="listing-item">
-				  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-				  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-				  </li> -->
-				 <div class="post-preview">
-				    <a href="{{ post.url | prepend: site.baseurl }}">
-				        <h2 class="post-title">
-                            {{ post.title }}
-				        </h2>
-				        {% if post.subtitle %}
-				        <h3 class="post-subtitle">
-				            {{ post.subtitle }}
-				        </h3>
-				        {% endif %}
-				    </a>
-				    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-				</div>
-				<hr>
-				{% endfor %}
-			</div>
-			{% endfor %}
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-		</div>
-	</div>
+
+<!-- tag cloud -->
+<div id="tag_cloud" class="tags">
+
+{% for tag in tags %}
+
+<a href="#{{ tag }}">{{ tag }}</a>
+
+{% endfor %}
+
+</div>
+
+
+
+<!-- tag list -->
+
+{% for tag in tags %}
+
+<div class="one-tag-list">
+
+<span class="fa fa-tag listing-seperator" id="{{ tag }}">
+<span class="tag-text">{{ tag }}</span>
+</span>
+
+
+{% for post in posts %}
+
+{% if post.tags contains tag %}
+
+<div class="post-preview">
+
+<a href="{{ post.url | prepend: site.baseurl }}">
+
+<h2 class="post-title">
+{{ post.title }}
+</h2>
+
+{% if post.subtitle %}
+
+<h3 class="post-subtitle">
+{{ post.subtitle }}
+</h3>
+
+{% endif %}
+
+</a>
+
+</div>
+
+<hr>
+
+{% endif %}
+
+{% endfor %}
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
 </div>
 
 
 
 <script>
-  var _DataSet = DataSet,
-    DataView = _DataSet.DataView;
 
-  var data = [];
-  var name = '';
-  var date = '';
-  var type = '';
+var DataView = DataSet.DataView;
 
-  {% for tag in site.tags %}
-      {% for post in tag[1] %}
-         {% if post.title %}
-            name = "{{ post.title }}";
-          {% endif %} 
-          {% if post.date %}
-            type = "{{ post.date }}".substring(0,4);
-            date = "{{ post.date }}".substring(0,10);
-          {% endif %}  
-          var message = {"name":name,"type":type,"date":date,"value":1};
-          data.push(message);
-        {% endfor %}
-      
-    {% endfor %}
+var data = [];
 
-  var dv = new DataView();
-  dv.source(data).transform({
-    type: 'percent',
-    field: 'value',
-    dimension: 'type',
-    as: 'percent'
-  });
-  var width = document.getElementById('mountNode').offsetWidth;
-  var chart = new G2.Chart({
-    container: 'mountNode',
-    forceFit: true,
-    height: width,
-    padding: 0
-  });
-  chart.source(dv, {
-    percent: {
-      formatter: function formatter(val) {
-        val = (val * 100).toFixed(2) + '%';
-        return val;
-      }
-    }
-  });
-  chart.coord('theta', {
-    radius: 0.5
-  });
-  chart.tooltip({
-    showTitle: false
-  });
-  chart.legend(false);
-  chart.intervalStack().position('percent').color('type').label('type', {
-    offset: -10
-  }).tooltip('name*date', function(item, date) {
-    date = date;
-    return {
-      name: item,
-      value: date
-    };
-  }).select(false).style({
-    lineWidth: 1,
-    stroke: '#fff'
-  });
+{% for post in posts %}
 
-  var outterView = chart.view();
-  var dv1 = new DataView();
-  dv1.source(data).transform({
-    type: 'percent',
-    field: 'value',
-    dimension: 'name',
-    as: 'percent'
-  });
-  outterView.source(dv1, {
-    percent: {
-      formatter: function formatter(val) {
-        val = (val * 100).toFixed(2) + '%';
-        return val;
-      }
-    }
-  });
-  outterView.coord('theta', {
-    innerRadius: 0.5 / 0.75,
-    radius: 0.75
-  });
-  outterView.intervalStack().position('percent').color('name', ['#BAE7FF', '#7FC9FE', '#71E3E3', '#ABF5F5', '#8EE0A1', '#BAF5C4']).label('name').tooltip('name*date', function(item, date) {
-    date = date;
-    return {
-      name: item,
-      value: date
-    };
-  }).select(false).style({
-    lineWidth: 1,
-    stroke: '#fff'
-  });
+var name = "{{ post.title }}";
+var type = "{{ post.date | date: '%Y' }}";
+var date = "{{ post.date | date: '%Y-%m-%d' }}";
 
-  chart.render();
+data.push({
+name:name,
+type:type,
+date:date,
+value:1
+});
+
+{% endfor %}
+
+
+var dv = new DataView();
+
+dv.source(data).transform({
+type:'percent',
+field:'value',
+dimension:'type',
+as:'percent'
+});
+
+
+var width=document.getElementById('mountNode').offsetWidth;
+
+var chart=new G2.Chart({
+container:'mountNode',
+forceFit:true,
+height:width,
+padding:0
+});
+
+
+chart.source(dv,{
+percent:{
+formatter:function(val){
+return (val*100).toFixed(2)+'%';
+}
+}
+});
+
+
+chart.coord('theta',{radius:0.5});
+
+chart.tooltip({showTitle:false});
+
+chart.legend(false);
+
+
+chart.intervalStack()
+.position('percent')
+.color('type')
+.label('type',{offset:-10})
+.tooltip('name*date',function(item,date){
+
+return{
+name:item,
+value:date
+};
+
+})
+.select(false)
+.style({
+lineWidth:1,
+stroke:'#fff'
+});
+
+
+var outterView=chart.view();
+
+var dv1=new DataView();
+
+dv1.source(data).transform({
+type:'percent',
+field:'value',
+dimension:'name',
+as:'percent'
+});
+
+
+outterView.source(dv1,{
+percent:{
+formatter:function(val){
+return (val*100).toFixed(2)+'%';
+}
+}
+});
+
+
+outterView.coord('theta',{
+innerRadius:0.5/0.75,
+radius:0.75
+});
+
+
+outterView.intervalStack()
+.position('percent')
+.color('name')
+.label('name')
+.tooltip('name*date',function(item,date){
+
+return{
+name:item,
+value:date
+};
+
+})
+.select(false)
+.style({
+lineWidth:1,
+stroke:'#fff'
+});
+
+
+chart.render();
+
 </script>
+
+
+
 <script>
 
-const path = window.location.pathname;
+const path=window.location.pathname;
 
-if (path === "/tags/" || path === "/tags") {
+if(path==="/tags/"||path==="/tags"){
 
-    const lang = navigator.language || navigator.userLanguage;
+const lang=navigator.language||navigator.userLanguage;
 
-    if (lang.startsWith("zh")) {
-        window.location.href = "/zh/tags/";
-    }
-    else if (lang.startsWith("ja")) {
-        window.location.href = "/jp/tags/";
-    }
-    else {
-        window.location.href = "/en/tags/";
-    }
+if(lang.startsWith("zh")){
+window.location.href="/zh/tags/";
+}
+else if(lang.startsWith("ja")){
+window.location.href="/jp/tags/";
+}
+else{
+window.location.href="/en/tags/";
+}
 
 }
 
