@@ -2,19 +2,15 @@
 title: Tags
 layout: default
 description: keep hungry keep foolish
-header-img: "img/tags_head_background.jag"
+header-img: "img/tags_head_background.jpg"
 ---
+
 
 {% assign path_parts = page.url | split:"/" %}
 {% assign lang = path_parts[1] | default:"en" %}
 
-{% if lang == "zh" %}
+
 {% assign posts = site.posts | where_exp:"post","post.path contains '/zh/'" %}
-{% elsif lang == "ja" %}
-{% assign posts = site.posts | where_exp:"post","post.path contains '/ja/'" %}
-{% else %}
-{% assign posts = site.posts | where_exp:"post","post.path contains '/en/'" %}
-{% endif %}
 
 
 {% assign tags = "" | split:"" %}
@@ -250,29 +246,5 @@ stroke:'#fff'
 
 
 chart.render();
-
-</script>
-
-
-
-<script>
-
-const path = window.location.pathname;
-
-if (path === "/tags/" || path === "/tags") {
-
-    const lang = navigator.language || navigator.userLanguage;
-
-    if (lang.startsWith("zh")) {
-        window.location.href = "/zh/tags/";
-    }
-    else if (lang.startsWith("ja")) {
-        window.location.href = "/ja/tags/";
-    }
-    else {
-        window.location.href = "/en/tags/";
-    }
-
-}
 
 </script>

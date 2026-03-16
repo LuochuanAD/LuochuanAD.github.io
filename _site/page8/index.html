@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="keep hungry keep foolish">
+    <meta name="keywords"  content="iOS,AI,Agent,Python">
+    <meta name="theme-color" content="#000000">
+    
+    <title>Louis | strictfrog.com </title>
+    
+     
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- canonical -->
+    <link rel="canonical" href="http://localhost:4000/page8/">
+
+    
+
+    <link rel="alternate" hreflang="zh" href="http://localhost:4000/zh/page8/">
+    <link rel="alternate" hreflang="en" href="http://localhost:4000/en/page8/">
+    <link rel="alternate" hreflang="ja" href="http://localhost:4000/jp/page8/">
+    <link rel="alternate" hreflang="x-default" href="http://localhost:4000/en/page8/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4199R84NLQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-4199R84NLQ');
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</head>
+
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+</style>
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+  
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Strict Frog's Blog</a>
+            <p class="navbar-brand" id="my-link"> 🌐 <span id="current-lang">EN</span></p>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+
+    const path = window.location.pathname;
+
+    let lang = "EN";
+    document.getElementById('my-link').style.display = 'block';
+
+    if(path.startsWith("/zh")){
+    lang = "中文";
+    }
+    else if(path.startsWith("/jp")){
+    lang = "JP";
+    }
+    else if(path.startsWith("/en")){
+    lang = "EN";
+    }else{
+        document.getElementById('my-link').style.display = 'none';
+    }
+
+    document.getElementById("current-lang").innerText = lang;
+
+
+</script>
+<script>
+
+
+
+</script>
+
+
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/img/home_head_background.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>Strict Frog's Blog</h1>
+                    <!--<hr class="small">-->
+                    <span class="subheading">When Heaven is about to confer a great responsibility on man, it will first fill his heart with suffering...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- PostList Container -->
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                postlist-container
+            ">
+    			
+
+
+
+
+  
+    <div class="post-preview">
+        <a href="/zh/2018-01-09-ipa%E5%8C%85%E7%98%A6%E8%BA%AB%E4%B9%8B%E5%9B%BE%E7%89%87%E6%97%A0%E6%8D%9F%E5%8E%8B%E7%BC%A9%E7%98%A6%E8%BA%AB/">
+            <h2 class="post-title">ipa包瘦身之图片无损压缩瘦身</h2>
+            
+            <h3 class="post-subtitle">ipa包瘦身</h3>
+            
+            <div class="post-content-preview">
+                前言
+
+
+  我的项目这个版本支持了多国语言, 意味着ipa包从17.5M升到了35.6M,图片和代码也增加了很多. ipa包瘦身最有效的方法是图片.所以接下只讲关于图片的瘦身,这会用到2个工具:cartool(github地址:https://github.com/steventroughtonsmith/cartool) 和 ImageOptim (github地址:https://li...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by LuochuanAD
+            on January 9, 2018
+        </p>
+    </div>
+    <hr>
+  
+
+  
+    <div class="post-preview">
+        <a href="/zh/2018-01-04-iOS%E4%B9%8BLCWebView/">
+            <h2 class="post-title">iOS之LCWebView</h2>
+            
+            <h3 class="post-subtitle">兼容iOS7及以上</h3>
+            
+            <div class="post-content-preview">
+                前言
+
+
+  我的项目是从iOS7开始支持, 一直用UIWebView作为网页容器.  但是,为了更好的用户体验. 我将UIWebView和WKWebView封装合并成一个网页容器LCWebView. 下面是我的做法:
+
+
+GITHub地址:https://github.com/LuochuanAD/LCWebView
+
+
+
+代码分析
+
+一,LCWebViewDelegate (此代理所有方...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by LuochuanAD
+            on January 4, 2018
+        </p>
+    </div>
+    <hr>
+  
+
+  
+    <div class="post-preview">
+        <a href="/zh/2017-12-19-iOS%E4%B9%8B%E8%A7%A3%E5%86%B3%E5%BC%BA%E5%BC%B1%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E7%9A%84%E5%AE%8F/">
+            <h2 class="post-title">iOS之解决强弱循环引用的宏</h2>
+            
+            <h3 class="post-subtitle">强弱循环引用</h3>
+            
+            <div class="post-content-preview">
+                代码
+
+#define WeakSelf @weakify(self);
+#define StrongSelf @strongify(self);
+#ifndef weakify
+#if DEBUG
+#if __has_feature(objc_arc)
+#define weakify(object) autoreleasepool{} __weak __typeof__(object) w...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by LuochuanAD
+            on December 19, 2017
+        </p>
+    </div>
+    <hr>
+  
+
+  
+    <div class="post-preview">
+        <a href="/zh/2017-07-25-JavaScript%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%B8%B8%E8%A7%81%E7%9A%84%E9%94%99%E8%AF%AF/">
+            <h2 class="post-title">JavaScript基础之常见的错误</h2>
+            
+            <h3 class="post-subtitle">JavaScript</h3>
+            
+            <div class="post-content-preview">
+                前言
+
+
+  这是JavaScript上书写的常见错误, 我就犯过,在此记录一下
+
+
+错误集
+
+一,使用未经定义的变量:
+
+(1) alert(variableValue);   报错:调用了未经定义的变量varibleValue.
+
+(2) function getResult(variableValue){
+alert(variableValu); 错误:拼写错误,调用了未经定义的变量v...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by LuochuanAD
+            on July 25, 2017
+        </p>
+    </div>
+    <hr>
+  
+
+  
+    <div class="post-preview">
+        <a href="/zh/2017-07-24-iOS%E4%B9%8B%E8%87%AA%E5%8A%A8%E6%A3%80%E6%B5%8B%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E6%97%A0%E7%94%A8%E7%9A%84%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/">
+            <h2 class="post-title">iOS之自动检测项目中的无用的图片资源</h2>
+            
+            <h3 class="post-subtitle">ipa包</h3>
+            
+            <div class="post-content-preview">
+                前言
+
+项目大改版, 几乎所有的界面图片都需要重新更换.   那么对于之前一个或多个版本的旧的,无用的无效的图片资源,我们不可能一个一个的就找,然后复制图片名字搜索吧(注:这是一种笨方法). 那么接下来讲解的是我用的方法.
+
+分析
+
+一,这里有个检测工具LSUnusedResources
+
+
+  地址:LSUnusedResources在github上下载下来后,用mymac模拟器运行
+
+
+...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by LuochuanAD
+            on July 24, 2017
+        </p>
+    </div>
+    <hr>
+  
+
+  
+    <div class="post-preview">
+        <a href="/zh/2017-06-14-Xcode%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%A0%81%E4%B8%8A%E4%BC%A0%E5%88%B0Github/">
+            <h2 class="post-title">Xcode本地代码上传到Github</h2>
+            
+            <h3 class="post-subtitle">Git</h3>
+            
+            <div class="post-content-preview">
+                一,新建仓储,填写描述信息
+
+
+
+二,拷贝URL
+
+
+
+三,打开Xcode,选择Perferences
+
+
+
+四,添加仓储,并粘贴URL,填写github用户名和密码
+
+
+
+五,cd +文件路径
+
+
+
+六,git init  此步不可少
+
+
+
+七,git add .
+
+
+
+八,git commit -m “提交信息”
+
+
+
+九,git remote add origin +粘贴第二步的URL...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by LuochuanAD
+            on June 14, 2017
+        </p>
+    </div>
+    <hr>
+  
+
+  
+    <div class="post-preview">
+        <a href="/zh/2017-06-14-Canvas%E4%B9%8B%E7%94%BB%E6%9F%B1%E7%8A%B6%E5%9B%BE/">
+            <h2 class="post-title">Canvas之画柱状图</h2>
+            
+            <h3 class="post-subtitle">Canvas画柱状图</h3>
+            
+            <div class="post-content-preview">
+                前言
+
+
+  用HTML画圆柱图, 效果图如下,那么我只需要画圆柱就行:
+
+
+
+
+
+  详细代码CanvasForHtml5已上传到Github
+
+
+分析
+
+&lt;canvas id="bchart_b" width="850" height="300"&gt;&lt;/canvas&gt;
+
+
+
+
+&lt;script type="text/javascript"&gt;
+// char...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by LuochuanAD
+            on June 14, 2017
+        </p>
+    </div>
+    <hr>
+  
+
+  
+    <div class="post-preview">
+        <a href="/zh/2017-06-14-Canvas%E4%B9%8B%E7%94%BB%E6%8A%98%E7%BA%BF%E5%92%8C%E6%9F%B1%E7%8A%B6%E5%9B%BE/">
+            <h2 class="post-title">Canvas之画折线和柱状图</h2>
+            
+            <h3 class="post-subtitle">Canvas画折线和柱状图</h3>
+            
+            <div class="post-content-preview">
+                前言
+
+
+  使用HTML画折线和柱状图,效果图如下:
+
+
+
+
+
+  详细代码CanvasForHtml5已上传到Github
+
+
+分析
+
+&lt;canvas id="a_canvas" width="950" height="290"&gt;&lt;/canvas&gt;
+
+
+
+
+&lt;script type="text/javascript"&gt;
+var a_canvas;
+va...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by LuochuanAD
+            on June 14, 2017
+        </p>
+    </div>
+    <hr>
+  
+
+  
+    <div class="post-preview">
+        <a href="/zh/2017-06-14-Canvas%E4%B9%8B%E7%94%BB%E5%A4%9A%E8%89%B2%E5%9C%86%E7%8E%AF%E5%8A%A8%E7%94%BB/">
+            <h2 class="post-title">Canvas之画多色圆环动画</h2>
+            
+            <h3 class="post-subtitle">Canvas多色圆环</h3>
+            
+            <div class="post-content-preview">
+                前言
+
+
+  使用HTML画出可动画的多色圆环.效果图如下:
+
+
+
+
+
+  详细代码CanvasForHtml5已上传到Github
+
+
+分析
+
+&lt;canvas id="canvas_a" width="800" height="800" &gt;&lt;/canvas&gt;
+
+
+
+
+&lt;script type="text/javascript"&gt;
+
+
+window.onl...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by LuochuanAD
+            on June 14, 2017
+        </p>
+    </div>
+    <hr>
+  
+
+  
+    <div class="post-preview">
+        <a href="/zh/2017-06-14-Canvas%E4%B9%8B%E7%94%BB%E5%A4%9A%E4%B8%AA%E6%8A%98%E7%BA%BF%E5%9B%BE/">
+            <h2 class="post-title">Canvas之画多个折线图</h2>
+            
+            <h3 class="post-subtitle">Canvas多个折线图</h3>
+            
+            <div class="post-content-preview">
+                前言
+
+
+  使用html画多个折线图,效果图如下:
+
+
+
+
+
+  详细代码CanvasForHtml5已上传到Github
+
+
+分析
+
+&lt;canvas id="a_canvas" width="850" height="450" &gt;&lt;/canvas&gt;
+
+
+
+&lt;script&gt;
+var a_canvas;
+var a_context;
+
+var b_canv...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by LuochuanAD
+            on June 14, 2017
+        </p>
+    </div>
+    <hr>
+  
+
+  
+    <div class="post-preview">
+        <a href="/zh/2017-06-14-Canvas%E4%B9%8B%E7%94%BB%E5%8D%95%E4%B8%80%E8%89%B2%E5%9C%86%E7%8E%AF/">
+            <h2 class="post-title">Canvas之画单一色圆环</h2>
+            
+            <h3 class="post-subtitle">Canvas单一圆环</h3>
+            
+            <div class="post-content-preview">
+                前言
+
+
+  用HTML画出可动画的圆环.效果图如下:
+
+
+
+
+
+  详细代码CanvasForHtml5已上传到Github
+
+
+分析
+
+&lt;canvas id="canvas" width="600" height="600" style="background: "#ffffff";" &gt;&lt;/canvas&gt;
+
+
+
+&lt;script&gt;
+
+
+window.o...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by LuochuanAD
+            on June 14, 2017
+        </p>
+    </div>
+    <hr>
+  
+
+  
+    <div class="post-preview">
+        <a href="/zh/2017-06-14-Canvas%E4%B9%8B%E7%94%BB%E5%8D%95%E4%B8%80%E6%8A%98%E7%BA%BF%E5%9B%BE/">
+            <h2 class="post-title">Canvas之画单一折线图</h2>
+            
+            <h3 class="post-subtitle">Canvas折线图</h3>
+            
+            <div class="post-content-preview">
+                前言
+
+
+  使用HTML画单一折线图,效果图如下; 我只需要画折现和小圆就可以了.
+
+
+
+
+
+  详细代码CanvasForHtml5已上传到Github
+
+
+分析
+
+&lt;canvas id="a_canvas" width="950" height="300"&gt;&lt;/canvas&gt;
+
+
+
+
+
+&lt;script type="text/javascript"&gt;
+...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by LuochuanAD
+            on June 14, 2017
+        </p>
+    </div>
+    <hr>
+  
+
+  
+    <div class="post-preview">
+        <a href="/zh/2017-06-08-duplicatesymbolXXX/">
+            <h2 class="post-title">duplicate symbol _OBJC_CLASS_$_XXX in</h2>
+            
+            <h3 class="post-subtitle">系统日志</h3>
+            
+            <div class="post-content-preview">
+                问题描述
+
+
+  错误提示:
+
+
+
+
+问题发现与解决
+
+错误种类一:(文件重复,搜索,删掉)
+
+
+
+错误种类二: (导入的是.m文件  (换成.h))
+
+
+  在CanvasView.m文件里面,系统自动引入了CanvasView.h文件.
+
+
+结语
+
+博客旧版原文在CSDN上:https://blog.csdn.net/luochuanAD/article/details/72927744
+
+
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by LuochuanAD
+            on June 8, 2017
+        </p>
+    </div>
+    <hr>
+  
+
+  
+    <div class="post-preview">
+        <a href="/zh/2017-06-07-%22_sqlite3_column_type%22/">
+            <h2 class="post-title">_sqlite3_column_type,referenced fromXXX</h2>
+            
+            <h3 class="post-subtitle">系统日志</h3>
+            
+            <div class="post-content-preview">
+                问题描述
+
+
+  在接收旧项目时,报错如下:
+
+
+
+
+问题发现与解决
+
+
+  (缺少文件,添加libsqlite3.0.tbd)
+
+
+
+
+结语
+
+博客旧版原文在CSDN上:https://blog.csdn.net/luochuanAD/article/details/72897316
+
+
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by LuochuanAD
+            on June 7, 2017
+        </p>
+    </div>
+    <hr>
+  
+
+  
+    <div class="post-preview">
+        <a href="/zh/2017-06-07-%22_OBJC_CLASS_$_WKWebView%22/">
+            <h2 class="post-title">_OBJC_CLASS_$_WKWebView, referenced from...and linker command failed with exit code 1 (use -v...</h2>
+            
+            <h3 class="post-subtitle">系统日志</h3>
+            
+            <div class="post-content-preview">
+                问题描述
+
+
+  在做JS与OC交互时;Xcode报错:如下图:
+
+
+
+
+问题发现与解决
+
+
+  (添加Webkit.framework  status:optional)
+
+
+
+
+Go to your Project, click on General, scroll down to Linked Frameworks and Libraries, and add WebKit.frame...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by LuochuanAD
+            on June 7, 2017
+        </p>
+    </div>
+    <hr>
+  
+
+
+<div class="pagination">
+  
+    <a href="/page7/">
+      ← Newer Posts
+    </a>
+  
+
+  <span>
+    Page 8 / 9
+  </span>
+
+  
+    <a href="/page9/">
+      Older Posts →
+    </a>
+  
+</div>
+
+
+
+    		</div>
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                            
+                                <a href="/tags/#iOS" title="iOS" rel="37">
+                                    iOS
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#error" title="error" rel="6">
+                                    error
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Html" title="Html" rel="6">
+                                    Html
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#JavaScript" title="JavaScript" rel="7">
+                                    JavaScript
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#ipa" title="ipa" rel="2">
+                                    ipa
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#HTML" title="HTML" rel="2">
+                                    HTML
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#Python" title="Python" rel="6">
+                                    Python
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#python" title="python" rel="3">
+                                    python
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#Excel" title="Excel" rel="2">
+                                    Excel
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Csv" title="Csv" rel="2">
+                                    Csv
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Prompt" title="Prompt" rel="11">
+                                    Prompt
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#AI" title="AI" rel="17">
+                                    AI
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#RAG" title="RAG" rel="8">
+                                    RAG
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Chunks" title="Chunks" rel="3">
+                                    Chunks
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#QueryReWriting" title="QueryReWriting" rel="2">
+                                    QueryReWriting
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Reranker" title="Reranker" rel="2">
+                                    Reranker
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Function Tools" title="Function Tools" rel="7">
+                                    Function Tools
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#AI Agent" title="AI Agent" rel="13">
+                                    AI Agent
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#ReAct" title="ReAct" rel="5">
+                                    ReAct
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Architecture" title="Architecture" rel="12">
+                                    Architecture
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Router" title="Router" rel="3">
+                                    Router
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#AIAgent" title="AIAgent" rel="12">
+                                    AIAgent
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#token" title="token" rel="3">
+                                    token
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Reflection" title="Reflection" rel="3">
+                                    Reflection
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Autonomous" title="Autonomous" rel="3">
+                                    Autonomous
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#AutoGPT" title="AutoGPT" rel="3">
+                                    AutoGPT
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#workflows" title="workflows" rel="3">
+                                    workflows
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#structured" title="structured" rel="3">
+                                    structured
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#ChatGPT" title="ChatGPT" rel="2">
+                                    ChatGPT
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#AgentOS" title="AgentOS" rel="3">
+                                    AgentOS
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#SelfImproving" title="SelfImproving" rel="3">
+                                    SelfImproving
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Embedding" title="Embedding" rel="3">
+                                    Embedding
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Self-Evolving" title="Self-Evolving" rel="3">
+                                    Self-Evolving
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Fine-tuning" title="Fine-tuning" rel="12">
+                                    Fine-tuning
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#SFT" title="SFT" rel="3">
+                                    SFT
+                                </a>
+                            
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Short About -->
+                <section class="visible-xs visible-sm visible-md visible-lg">
+                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
+                    <div class="short-about">
+                        
+                            <a href="/about">
+                                <img src="/img/myPicture.PNG"/>
+                            </a>
+                        
+
+                        
+                            <p>keep hungry keep foolish</p>
+                            <span id="busuanzi_container_site_pv">Total visits <span id="busuanzi_value_site_pv"></span> </span>
+                            <span id="busuanzi_container_site_uv">Total visitors <span id="busuanzi_value_site_uv"></span> </span>
+                        
+                        <!-- SNS Link -->
+                        <ul class="list-inline">
+                            
+                            <!-- add jianshu add target = "_blank" to <a> by BY -->
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        </ul>
+                        
+                            <p>✉️ luochuanad@gmail.com</p>
+                        
+                    </div>
+                </section>
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="https://github.com/LuochuanAD">Github:LuochuanAD</a></li>
+                    
+                        <li><a href="https://twitter.com/luochuanAD">X:@luochuanAD</a></li>
+                    
+                        <li><a href="https://www.linkedin.com/in/luochuanad/">Linkedin:luochuan</a></li>
+                    
+                        <li><a href="https://blog.csdn.net/luochuanAD">CSDN:LuochuanAD</a></li>
+                    
+                        <li><a href="https://www.instagram.com/louis_monet_w?igsh=MTN3bXNpYXVyMjE4OA%3D%3D&utm_source=qr">Instagram:louis_monet_w</a></li>
+                    
+                        <li><a href="https://www.facebook.com/share/1JV6mMhGCf/?mibextid=wwXIfr">Facebook:Louis Luo</a></li>
+                    
+                </ul>
+                
+    		</div>
+        
+	</div>
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <!-- add jianshu add target = "_blank" to <a> by BY -->
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Strict Frog's Blog 2026
+                    <br>
+                    Theme on <a href="https://github.com/luochuanad/luochuanad.github.io.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=&repo=.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/apple-touch-icon.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

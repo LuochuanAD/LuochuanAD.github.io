@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="keep hungry keep foolish">
+    <meta name="keywords"  content="iOS,AI,Agent,Python">
+    <meta name="theme-color" content="#000000">
+    
+    <title>Louis | strictfrog.com </title>
+    
+     
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- canonical -->
+    <link rel="canonical" href="http://localhost:4000/ja/">
+
+    
+
+    <link rel="alternate" hreflang="zh" href="http://localhost:4000/zh/ja/">
+    <link rel="alternate" hreflang="en" href="http://localhost:4000/en/ja/">
+    <link rel="alternate" hreflang="ja" href="http://localhost:4000/jp/ja/">
+    <link rel="alternate" hreflang="x-default" href="http://localhost:4000/en/ja/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4199R84NLQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-4199R84NLQ');
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</head>
+
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+</style>
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+  
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Strict Frog's Blog</a>
+            <p class="navbar-brand" id="my-link"> 🌐 <span id="current-lang">EN</span></p>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+
+    const path = window.location.pathname;
+
+    let lang = "EN";
+    document.getElementById('my-link').style.display = 'block';
+
+    if(path.startsWith("/zh")){
+    lang = "中文";
+    }
+    else if(path.startsWith("/jp")){
+    lang = "JP";
+    }
+    else if(path.startsWith("/en")){
+    lang = "EN";
+    }else{
+        document.getElementById('my-link').style.display = 'none';
+    }
+
+    document.getElementById("current-lang").innerText = lang;
+
+
+</script>
+<script>
+
+
+
+</script>
+
+
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/img/home_head_background.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>Strict Frog's Blog</h1>
+                    <!--<hr class="small">-->
+                    <span class="subheading">When Heaven is about to confer a great responsibility on man, it will first fill his heart with suffering...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- PostList Container -->
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                postlist-container
+            ">
+    			
+
+
+
+  <div class="post-preview">
+    <a href="/ja/2026-02-21-%E8%B4%A2%E5%8B%99%E8%AB%B8%E8%A1%A8%E5%88%86%E6%9E%90aiagent%E3%81%AE%E6%A7%8B%E7%AF%89%E3%81%A8%E8%80%83%E5%AF%9F-react-rag%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88/">
+      <h2 class="post-title"></h2>
+      
+      <div class="post-content-preview">
+        背景
+
+  複雑なRAG設計なしに、LlamaIndexのReAct RAG Agentフレームワークを使って財務諸表の分析を行うだけで、初級のビジネスアナリストと同レベルの成果が得られます。しかし、多くの制限もあります。個人的には、小規模な企業向けに適していると考えています。
+
+
+財務分析構造図
+
+
+
+1. A社、B社などの財務諸表ファイルの読み込み
+
+from llama_index.c...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 Strict Frog's Blog，
+      日期 2026-03-17
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-03-15-%E5%BE%AE%E8%AA%BF%E6%95%B4%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E7%B0%A1%E5%8D%98%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%BA%96%E5%82%99%E3%81%A8%E5%89%8D%E5%87%A6%E7%90%86/">
+      <h2 class="post-title">微調整のための簡単なデータ準備と前処理</h2>
+      
+      <h3 class="post-subtitle">ファインチューニング</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  プライベートLLMで最も重要なのは、プライベートデータを使ってLLMをファインチューニングすることです。本記事ではまずデータ準備と前処理の方法を解説します。
+
+
+データ準備
+
+スタンフォードのAlpacaトレーニングで使用されているデータセットをダウンロードすると、次のような形式のJSONファイルが得られます:
+alpaca_data.json
+
+[
+    {
+       ...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-03-15
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-03-15-%E5%BE%AE%E8%AA%BF%E6%95%B4%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%83%87%E3%83%BC%E3%82%BF%E5%93%81%E8%B3%AA%E3%81%AE%E5%87%A6%E7%90%86/">
+      <h2 class="post-title">微調整におけるデータ品質の処理</h2>
+      
+      <h3 class="post-subtitle">データクリーニング</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  微調モデルの性能 ＝ 70% データ構造設計 ＋ 20% データ品質 ＋ 10% トレーニングパラメータ
+
+
+この記事はデータ品質、つまりデータクリーニングについてのみ説明します。
+
+完全なデータクリーニングパイプライン
+
+原データ
+   ↓
+フォーマット統一
+   ↓
+簡易重複除去
+   ↓
+意味的重複除去
+   ↓
+ノイズフィルタリング
+   ↓
+長さ制御
+   ↓
+言語フ...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-03-15
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-03-15-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%B3%E3%83%81%E3%83%A5%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8Bsft%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%87%BA%E6%89%80/">
+      <h2 class="post-title">ファインチューニングにおけるSFTデータの出所</h2>
+      
+      <h3 class="post-subtitle">データソース分析</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  LMをファインチューニングするためのSFTデータソースは何がありますか？
+
+
+1 オープンデータセット
+
+代表例：
+
+Stanford University Alpaca
+
+https://raw.githubusercontent.com/tatsu-lab/stanford_alpaca/refs/heads/main/alpaca_data.json
+
+Hugging F...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-03-15
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-03-15-%E9%AB%98%E5%93%81%E8%B3%AAsft%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0%E8%A8%AD%E8%A8%88%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%B3%E3%83%81%E3%83%A5%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0/">
+      <h2 class="post-title">高品質SFTデータ構造設計のファインチューニング</h2>
+      
+      <h3 class="post-subtitle">高品質SFTデータ構造</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  ファインチューニングモデルの性能 ＝ 70% データ構造設計 + 20% データ品質 + 10% トレーニングパラメータ
+
+
+この記事は「データ構造設計」にのみ焦点を当てます。
+
+高品質SFTデータの5つのレベル
+
+
+  Level 1 基本的なQ&amp;A
+  Level 2 システムプロンプト
+  Level 3 思考の連鎖 (CoT)
+  Level 4 多段対話
+  ...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-03-15
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-03-14-%E7%A7%81%E6%9C%89rag%E3%81%AE%E6%A5%B5%E9%99%90%E6%9C%80%E9%81%A9%E5%8C%96%E5%BE%85%E6%A9%9F%E6%99%82%E9%96%93/">
+      <h2 class="post-title">私有RAGの極限最適化待機時間</h2>
+      
+      <h3 class="post-subtitle">私有RAG</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  RAGシステムの構築過程で、Query Rewrite、Rerank、Structural Chunk、Structural promptなどを設計することで、RAGによって検索される知識の精度を大幅に向上させました。しかし、このRAGを統合したflaskプログラムを使用しているときに大量の待ち時間が発生することに気づいたため、本記事では可能な限り待ち時間の最適化を行います。
+...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-03-14
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-03-14-self-evolving%E7%9A%84%E8%A8%AD%E8%A8%88%E6%80%9D%E6%83%B3/">
+      <h2 class="post-title">Self-Evolving的設計思想</h2>
+      
+      <h3 class="post-subtitle">自己進化</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  自己で継続的に研究開発（Self-R&amp;D）が可能なエージェントシステム。新しいツール、アルゴリズム、戦略、システムを継続的に開発できる。
+
+
+Self-Improving Agent の設計コンセプト
+
+全体構成：
+
+User Goal
+   ↓
+Task System
+   ↓
+Agent System
+   ↓
+Performance Monitoring
+   ↓...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-03-14
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-03-14-%E5%9F%8B%E3%82%81%E8%BE%BC%E3%81%BF%E3%81%AE%E5%A2%97%E5%88%86%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB%E6%9B%B4%E6%96%B0%E6%88%A6%E7%95%A5/">
+      <h2 class="post-title">埋め込みの増分ベクトル更新戦略</h2>
+      
+      <h3 class="post-subtitle">埋め込みの重複を避ける方法</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  「新規または変更されたコンテンツ」のみをembeddingし、毎回すべてのドキュメントを再処理しない。
+
+
+1. 増分更新の3つのレベル
+
+
+  
+    
+      レベル
+      粒度
+      推奨度
+    
+  
+  
+    
+      ファイルレベル
+      PDF
+      ⭐⭐⭐⭐
+    
+    
+      ページレベル
+      ペー...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-03-14
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-03-13-%E8%87%AA%E5%B7%B1%E6%94%B9%E5%96%84%E7%9A%84%E8%A8%AD%E8%A8%88%E6%80%9D%E6%83%B3/">
+      <h2 class="post-title">自己改善的設計思想</h2>
+      
+      <h3 class="post-subtitle">自己改善</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  本記事ではSelf-Improving Agentの設計思想について解説します。これはAutonomous AgentのアーキテクチャをベースにSelf-improving（自己改善）の要素を追加したものです。
+
+
+「Autonomous Agentのアーキテクチャ」:
+https://strictfrog.com/2026/03/07/AutoGPT%E5%88%86%E6%...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-03-13
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-03-12-%E6%9C%AA%E6%9D%A5agentos%E3%81%AE%E3%82%B3%E3%82%A2%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3/">
+      <h2 class="post-title">未来AgentOSのコアアーキテクチャ</h2>
+      
+      <h3 class="post-subtitle">エージェントOS</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  現実世界で多くのAgentが失敗する原因に基づき、未来のAgentOSのコアアーキテクチャを構築する
+
+
+AgentOSのコアアーキテクチャ
+
+State Machine Agent
+        │
+        │
+Context Engine
+        │
+        │
+Tools (MCP)
+        │
+        │
+Memory + RA...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-03-12
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-03-11-%E3%82%A8%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%97%E3%83%A9%E3%82%A4%E3%82%BA%E7%B4%9Aaios%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3/">
+      <h2 class="post-title">エンタープライズ級AIOSアーキテクチャ</h2>
+      
+      <h3 class="post-subtitle">AIOS</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+このアーキテクチャの目標は、完全な AI オペレーティングシステム（AI OS）を構築することです。これにより以下が可能になります：
+
+
+  LLM の接続
+  ツールの管理
+  スキルの管理
+  メモリの管理
+  エージェントのサポート
+  ワークフローのサポート
+  MCP のサポート
+  複数データソースのサポート
+
+
+多くの AI プロダクトの基盤構造はこれに似ています（例：...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-03-11
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-03-10-chatgpt%E3%81%AEaiagent%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3/">
+      <h2 class="post-title">ChatGPTのAIAgentシステムアーキテクチャ</h2>
+      
+      <h3 class="post-subtitle">アーキテクチャ</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  前回の記事ではChatGPTの限界について説明しました。ChatGPTだけでは対応できない部分を補うために、本記事を書きました。
+
+
+完全なAIエージェントシステムアーキテクチャ
+
+                User
+                 │
+                 ▼
+        ┌─────────────────┐
+        │   ...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-03-10
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-03-08-chatgpt%E3%81%AE%E8%83%BD%E5%8A%9B%E9%99%90%E7%95%8C/">
+      <h2 class="post-title">ChatGPTの能力限界</h2>
+      
+      <h3 class="post-subtitle">ChatGPT</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  自己と相手を知ることで、より良いプライベートAIAgentを開発できる
+
+
+1. ChatGPTが本来得意とすること（LLMのネイティブ能力）
+
+
+  
+    
+      1 言語理解と生成
+      2 知識推論
+      3 プログラミング能力
+      4 情報の構造化
+      5 マルチモーダル理解
+    
+  
+  
+    
+      質問応答
+ ...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-03-08
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-03-07-workflowlimitedplanning%E3%81%AE%E8%A8%AD%E8%A8%88%E6%80%9D%E6%83%B3/">
+      <h2 class="post-title">Workflow+limitedPlanningの設計思想</h2>
+      
+      <h3 class="post-subtitle">ワークフロー＋限定プランニング</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  実際の AI エージェントシステムでは、多くのチームが妥協案として次のアーキテクチャを採用しています：
+Workflow + Limited Planning、つまり LLM を使って軽量な計画を行い、その後にあらかじめ定義されたワークフローを実行します。
+
+
+実世界の多くの AI プロダクトがこのアーキテクチャを使っています
+多くのシステムは基本的に Workflow + L...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-03-07
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-03-07-autogpt%E5%88%86%E6%9E%90%E3%81%A8%E8%87%AA%E5%BE%8B%E7%9A%84%E6%80%9D%E8%80%83/">
+      <h2 class="post-title">AutoGPT分析と自律的思考</h2>
+      
+      <h3 class="post-subtitle">オートGPT</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  Auto-GPTはユーザーの目標入力に基づいて計画を立て、計画を解析し、分解し、実行し、実行結果を評価し、外部リソースを活用しながら継続的に結果を生成し、段階的に目的を達成する自己完結型エージェントです。
+
+
+
+  私はAuto-GPTのプロンプトが自動で更新される仕組みに非常に興味を持っています。
+
+
+Auto-GPTの詳細説明
+
+
+
+ユーザーの目標入力 + 初期システムプロ...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-03-07
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-03-01-%E5%A4%A2%E3%81%A8%E8%87%AA%E5%B7%B1%E5%8F%8D%E7%9C%81/">
+      <h2 class="post-title">夢と自己反省</h2>
+      
+      <h3 class="post-subtitle">完全なフィクション</h3>
+      
+      <div class="post-content-preview">
+        夢の風景
+
+夢の舞台は、小学校が少し高い丘の頂上にあり、私の家は学校から遠いが、決して届かない距離ではない場所から始まります。
+
+真っ暗な夜、手を伸ばしても指先が見えないほどの闇の中、まるでこの夢の世界は永遠にこうした夜のままのようです。足元の道は見えず、周囲の物も感じ取れません。ただ広がる空間だけを感じながらも、私は目標が小学校の右上の「ゴミ捨て場」にあることをはっきり認識しています。小学...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-03-01
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-02-28-aiagent%E3%81%AE%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%82%B3%E3%82%B9%E3%83%88%E7%AE%A1%E7%90%86/">
+      <h2 class="post-title">AIAgentのトークンコスト管理</h2>
+      
+      <h3 class="post-subtitle">コスト管理</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  AIプロダクト開発の過程で、ユーザー数の増加に伴い、LLMを呼び出すたびにプロンプトに対してコストが発生します。結果に影響を与えずに、いかに不要なコストを極限まで削減するかが課題です。
+
+
+LLMの料金体系
+
+
+  ここではOpenAIを例に説明します。
+
+
+
+
+最新のOpenAI APIのトークン課金構造は次の通りです:
+
+Input 入力: Cached inputの10倍...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-02-28
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-02-23-aiagent%E3%81%AE%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E6%84%8F%E5%9B%B3%E5%88%86%E6%9E%90/">
+      <h2 class="post-title">AIAgentのユーザー意図分析</h2>
+      
+      <h3 class="post-subtitle">ルーター</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+  ユーザーのクエリには単純な情報検索やツール呼び出し、あるいはただの雑談などがありますが、特定のAIAgentシステムを使ってユーザーのクエリの意図をどのように解析すれば良いのでしょうか？（あるいはクエリ分類と言えます）
+
+
+特定のAIAgentのユースケース紹介
+
+
+  特定のAIAgentにおけるRAGシステムのデータセットは以下の通りです：（これは明らかに履歴書をチャンクに分...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-02-23
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-02-22-camel%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AE%E8%A9%B3%E7%B4%B0%E8%A7%A3%E8%AA%AC%E3%81%A8%E8%80%83%E5%AF%9F/">
+      <h2 class="post-title">CAMELフレームワークの詳細解説と考察</h2>
+      
+      <h3 class="post-subtitle">キャメル</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  CAMELは大規模モデルに基づく初のマルチエージェントフレームワークであり、その設計は複数の役割を演じながら相互に対話し、共通のユーザータスクを達成することを目的としています。
+
+
+CAMEL原文解説
+
+
+
+人間のアイデアとして、「Task Specifier」を通じて翻訳・補完・具体化されたタスクに基づき、2つの異なる役割を設定します：AIアシスタントとAIユーザー。この2つ...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-02-22
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-02-19-aiagent%E3%81%AE%E5%AE%8C%E5%85%A8%E3%81%AA%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3/">
+      <h2 class="post-title">AIAgentの完全なシステムアーキテクチャ</h2>
+      
+      <h3 class="post-subtitle">アーキテクチャ</h3>
+      
+      <div class="post-content-preview">
+        完全なアーキテクチャ構造 Architecture
+1. Intent Layer
+2. Planning Layer
+3. Execution Layer
+4. Tool Layer
+5. Memory Layer
+6. Knowledge Layer
+7. Policy &amp; Guardrail Layer
+8. Observability Layer
+9. Persistence...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-02-19
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-02-18-%E4%BC%81%E6%A5%AD%E5%90%91%E3%81%91aiagent%E3%83%AB%E3%83%BC%E3%82%BF%E3%83%BC-react-%E9%96%A2%E6%95%B0%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97/">
+      <h2 class="post-title">企業向けAIAgent：ルーター + ReAct + 関数呼び出し</h2>
+      
+      <h3 class="post-subtitle">アーキテクチャ</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+  ユーザーのクエリには単純な情報検索とツール呼び出しの両方が含まれるため、汎用かつ再利用可能な成熟したシステムアーキテクチャの設計が必要です。
+
+
+アーキテクチャ構造 Architecture
+User Query
+      ↓
+1️⃣ Intent Router
+      ↓
+┌───────────────┬──────────────────┐
+│ Simple QA  ...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-02-18
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-02-17-%E4%BC%81%E6%A5%AD%E5%90%91%E3%81%91aiagentreact-%E9%96%A2%E6%95%B0%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97/">
+      <h2 class="post-title">企業向けAIAgent：ReAct + 関数呼び出し</h2>
+      
+      <h3 class="post-subtitle">ReActフレームワーク</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  完全なAIエージェントでは、ツールの呼び出しにChatGPTのFunction Callingのコンセプトを採用し、「Tools Schema」を定義してLLMとツールの呼び出しを連携させています。
+
+
+アーキテクチャ構成
+User Query
+    ↓
+Agent (LLM with tool access)
+    ↓
+Decide:
+    - Call Tool?
+ ...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-02-17
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-02-16-%E4%BC%81%E6%A5%AD%E5%90%91%E3%81%91ai%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E8%A8%88%E7%94%BB%E3%81%A8%E5%AE%9F%E8%A1%8C-%E9%96%A2%E6%95%B0%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97/">
+      <h2 class="post-title">企業向けAIエージェント：計画と実行 + 関数呼び出し</h2>
+      
+      <h3 class="post-subtitle">Plan-and-Executeフレームワーク</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  完全なAIエージェントでは、ツールの呼び出しにChatGPTのFunction Callingの考え方を採用し、「Tools Schema」を定義することでLLMとツールの連携を実現しています。
+
+
+1, まずTools Schemaを定義する
+
+
+  ここで使うツール：Search Database、Send Mail、Get Weatherなど。これらのツールはカスタムツー...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-02-16
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-02-15-plan-and-execute%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AE%E8%80%83%E3%81%88%E6%96%B9%E3%81%A8%E5%BF%9C%E7%94%A8/">
+      <h2 class="post-title">Plan-and-Executeフレームワークの考え方と応用</h2>
+      
+      <h3 class="post-subtitle">計画と解決</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  LangChainのPlan-and-Executeフレームワークは、Plan-and-Solveに関する論文に触発されています。Plan-and-Executeは、複雑な長期計画に非常に適しており、複雑な問題を複数のサブタスクに分解して一つずつ解決します。これにより大規模モデルの呼び出しは頻繁に行われますが、ReActエージェントのループ中に発生するプロンプトの長さ超過問題を...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-02-15
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-02-14-rag%E6%A4%9C%E7%B4%A2%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8Bqueryrewrite%E3%81%A8reranker/">
+      <h2 class="post-title">RAG検索におけるQueryReWriteとReranker</h2>
+      
+      <h3 class="post-subtitle">クエリの書き換え</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  RAGシステムを設計する中で、Structural ChunksとStructural Promptを設計した後、検索結果は理想的な精度に達しました。しかし、さらに精度を向上させるには、Query RewriteとRerankerによる二段階検索が必要でした。
+
+
+Query Rewrite
+
+方法1: 同義語拡張
+
+例:
+
+ユーザークエリ: python
+
+書き換え: 
+py...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-02-14
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-02-11-react%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E8%A9%B3%E7%B4%B0%E8%A7%A3%E8%AA%AC%E3%81%A8%E8%80%83%E5%AF%9F/">
+      <h2 class="post-title">ReActフレームワーク詳細解説と考察</h2>
+      
+      <h3 class="post-subtitle">ReActプロンプト</h3>
+      
+      <div class="post-content-preview">
+        背景
+
+
+  論文において、さまざまなスマートエージェントの推論ロジック（フレームワークとも呼ばれる）が提案されています：CoT、ToT、LLM+Pなど。その中で、ReActフレームワークはLangChainやLlamaIndexなど、複数のAIアプリケーション開発ツールで推論エンジンとして利用されています。
+
+
+ReActフレームワーク
+
+
+  ReAct: Synergizing Rea...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-02-11
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-01-31-rag%E3%81%AE%E6%A7%8B%E9%80%A0%E3%83%81%E3%83%A3%E3%83%B3%E3%82%AF%E8%A8%AD%E8%A8%88/">
+      <h2 class="post-title">RAGの構造チャンク設計</h2>
+      
+      <h3 class="post-subtitle">構造化カッティング</h3>
+      
+      <div class="post-content-preview">
+        はじめに
+
+
+  RAGシステム構築において、検索と生成結果の精度を向上させるための核心は、構造化されたChunksの設計にあります。
+
+
+1. 一般的なChunks分割方法
+
+1. 固定サイズChunk分割（Fixed-size Chunking）
+
+from langchain.text_splitter import CharacterTextSplitter
+
+text = "これは...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-01-31
+    </p>
+  </div>
+  <hr>
+
+  <div class="post-preview">
+    <a href="/ja/2026-01-11-prompt%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%A8%E6%A7%8B%E9%80%A0%E5%8C%96%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88%E3%81%AE%E8%AA%AC%E6%98%8E/">
+      <h2 class="post-title">Promptフレームワークと構造化プロンプトの説明</h2>
+      
+      <h3 class="post-subtitle">構造化プロンプト</h3>
+      
+      <div class="post-content-preview">
+        はじめに
+
+
+  異なるAIエージェントの開発においては、それぞれに合ったプロンプトをカスタマイズする必要があります。そのため、プロンプトの書き方はより専門的で簡潔かつLLMに理解されやすいものが重要になります。
+
+
+1. 主流のプロンプトフレームワーク
+
+CRISPEフレームワーク
+
+CR: Capacity and Role（能力と役割）。AIにどのような役割を担ってほしいか。
+
+I: ...
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 LuochuanAD，
+      日期 2026-01-11
+    </p>
+  </div>
+  <hr>
+
+
+
+
+    		</div>
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                            
+                                <a href="/tags/#iOS" title="iOS" rel="37">
+                                    iOS
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#error" title="error" rel="6">
+                                    error
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Html" title="Html" rel="6">
+                                    Html
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#JavaScript" title="JavaScript" rel="7">
+                                    JavaScript
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#ipa" title="ipa" rel="2">
+                                    ipa
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#HTML" title="HTML" rel="2">
+                                    HTML
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#Python" title="Python" rel="6">
+                                    Python
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#python" title="python" rel="3">
+                                    python
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#Excel" title="Excel" rel="2">
+                                    Excel
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Csv" title="Csv" rel="2">
+                                    Csv
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Prompt" title="Prompt" rel="11">
+                                    Prompt
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#AI" title="AI" rel="17">
+                                    AI
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#RAG" title="RAG" rel="8">
+                                    RAG
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Chunks" title="Chunks" rel="3">
+                                    Chunks
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#QueryReWriting" title="QueryReWriting" rel="2">
+                                    QueryReWriting
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Reranker" title="Reranker" rel="2">
+                                    Reranker
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Function Tools" title="Function Tools" rel="7">
+                                    Function Tools
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#AI Agent" title="AI Agent" rel="13">
+                                    AI Agent
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#ReAct" title="ReAct" rel="5">
+                                    ReAct
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Architecture" title="Architecture" rel="12">
+                                    Architecture
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Router" title="Router" rel="3">
+                                    Router
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#AIAgent" title="AIAgent" rel="12">
+                                    AIAgent
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#token" title="token" rel="3">
+                                    token
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Reflection" title="Reflection" rel="3">
+                                    Reflection
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Autonomous" title="Autonomous" rel="3">
+                                    Autonomous
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#AutoGPT" title="AutoGPT" rel="3">
+                                    AutoGPT
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#workflows" title="workflows" rel="3">
+                                    workflows
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#structured" title="structured" rel="3">
+                                    structured
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#ChatGPT" title="ChatGPT" rel="2">
+                                    ChatGPT
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#AgentOS" title="AgentOS" rel="3">
+                                    AgentOS
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#SelfImproving" title="SelfImproving" rel="3">
+                                    SelfImproving
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Embedding" title="Embedding" rel="3">
+                                    Embedding
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Self-Evolving" title="Self-Evolving" rel="3">
+                                    Self-Evolving
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#Fine-tuning" title="Fine-tuning" rel="12">
+                                    Fine-tuning
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#SFT" title="SFT" rel="3">
+                                    SFT
+                                </a>
+                            
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Short About -->
+                <section class="visible-xs visible-sm visible-md visible-lg">
+                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
+                    <div class="short-about">
+                        
+                            <a href="/about">
+                                <img src="/img/myPicture.PNG"/>
+                            </a>
+                        
+
+                        
+                            <p>keep hungry keep foolish</p>
+                            <span id="busuanzi_container_site_pv">Total visits <span id="busuanzi_value_site_pv"></span> </span>
+                            <span id="busuanzi_container_site_uv">Total visitors <span id="busuanzi_value_site_uv"></span> </span>
+                        
+                        <!-- SNS Link -->
+                        <ul class="list-inline">
+                            
+                            <!-- add jianshu add target = "_blank" to <a> by BY -->
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        </ul>
+                        
+                            <p>✉️ luochuanad@gmail.com</p>
+                        
+                    </div>
+                </section>
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="https://github.com/LuochuanAD">Github:LuochuanAD</a></li>
+                    
+                        <li><a href="https://twitter.com/luochuanAD">X:@luochuanAD</a></li>
+                    
+                        <li><a href="https://www.linkedin.com/in/luochuanad/">Linkedin:luochuan</a></li>
+                    
+                        <li><a href="https://blog.csdn.net/luochuanAD">CSDN:LuochuanAD</a></li>
+                    
+                        <li><a href="https://www.instagram.com/louis_monet_w?igsh=MTN3bXNpYXVyMjE4OA%3D%3D&utm_source=qr">Instagram:louis_monet_w</a></li>
+                    
+                        <li><a href="https://www.facebook.com/share/1JV6mMhGCf/?mibextid=wwXIfr">Facebook:Louis Luo</a></li>
+                    
+                </ul>
+                
+    		</div>
+        
+	</div>
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <!-- add jianshu add target = "_blank" to <a> by BY -->
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Strict Frog's Blog 2026
+                    <br>
+                    Theme on <a href="https://github.com/luochuanad/luochuanad.github.io.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=&repo=.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/apple-touch-icon.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

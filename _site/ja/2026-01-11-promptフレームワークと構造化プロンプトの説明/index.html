@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="keep hungry keep foolish">
+    <meta name="keywords"  content="iOS,AI,Agent,Python">
+    <meta name="theme-color" content="#000000">
+    
+    <title>Promptフレームワークと構造化プロンプトの説明 - Louis | strictfrog.com </title>
+    
+     
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- canonical -->
+    <link rel="canonical" href="http://localhost:4000/ja/2026-01-11-prompt%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%A8%E6%A7%8B%E9%80%A0%E5%8C%96%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88%E3%81%AE%E8%AA%AC%E6%98%8E/">
+
+    
+
+    <link rel="alternate" hreflang="zh" href="http://localhost:4000/zh/ja/2026-01-11-prompt%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%A8%E6%A7%8B%E9%80%A0%E5%8C%96%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88%E3%81%AE%E8%AA%AC%E6%98%8E/">
+    <link rel="alternate" hreflang="en" href="http://localhost:4000/en/ja/2026-01-11-prompt%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%A8%E6%A7%8B%E9%80%A0%E5%8C%96%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88%E3%81%AE%E8%AA%AC%E6%98%8E/">
+    <link rel="alternate" hreflang="ja" href="http://localhost:4000/jp/ja/2026-01-11-prompt%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%A8%E6%A7%8B%E9%80%A0%E5%8C%96%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88%E3%81%AE%E8%AA%AC%E6%98%8E/">
+    <link rel="alternate" hreflang="x-default" href="http://localhost:4000/en/ja/2026-01-11-prompt%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%A8%E6%A7%8B%E9%80%A0%E5%8C%96%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88%E3%81%AE%E8%AA%AC%E6%98%8E/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4199R84NLQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-4199R84NLQ');
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</head>
+
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+</style>
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+  
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Strict Frog's Blog</a>
+            <p class="navbar-brand" id="my-link"> 🌐 <span id="current-lang">EN</span></p>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+
+    const path = window.location.pathname;
+
+    let lang = "EN";
+    document.getElementById('my-link').style.display = 'block';
+
+    if(path.startsWith("/zh")){
+    lang = "中文";
+    }
+    else if(path.startsWith("/jp")){
+    lang = "JP";
+    }
+    else if(path.startsWith("/en")){
+    lang = "EN";
+    }else{
+        document.getElementById('my-link').style.display = 'none';
+    }
+
+    document.getElementById("current-lang").innerText = lang;
+
+
+</script>
+<script>
+
+
+
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home_blog_background.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home_blog_background.jpg')
+    }
+
+    
+
+        /* Donation Box */
+    .donation-box {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e5e7eb;
+      font-size: 0.95rem;
+      color: #374151;
+    }
+
+    .donation-box h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .donation-intro {
+      margin-bottom: 1rem;
+      color: #6b7280;
+    }
+
+    /* Primary sponsor button */
+    .sponsor-primary {
+      display: inline-block;
+      padding: 0.45rem 0.9rem;
+      margin-bottom: 0.8rem;
+      border-radius: 6px;
+      background-color: #24292e;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .sponsor-primary:hover {
+      opacity: 0.9;
+    }
+
+    /* Toggle button */
+    .donation-toggle {
+      display: inline-block;
+      margin-left: 0.5rem;
+      background: none;
+      border: none;
+      color: #2563eb;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .donation-toggle:hover {
+      text-decoration: underline;
+    }
+
+    /* Hidden methods */
+    .donation-methods {
+      display: none;
+      margin-top: 1rem;
+      padding-left: 0.5rem;
+    }
+
+    .donation-item {
+      margin-bottom: 1.2rem;
+    }
+
+    .donation-item img {
+      margin-top: 0.4rem;
+      width: 150px;
+      max-width: 100%;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+    }
+</style>
+<header class="intro-header" >
+    
+
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Prompt" title="Prompt">Prompt</a>
+                        
+                        <a class="tag" href="/tags/#AI" title="AI">AI</a>
+                        
+                    </div>
+                    <h1>Promptフレームワークと構造化プロンプトの説明</h1>
+                    
+                    
+                    <h2 class="subheading">構造化プロンプト</h2>
+                    
+                    <span class="meta">Posted by LuochuanAD on January 11, 2026</span>
+                    
+                    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+                    <span id="busuanzi_value_page_pv">本文总阅读量 <i class="fa fa-spinner fa-spin"></i> 次</span>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h2 id="はじめに">はじめに</h2>
+
+<blockquote>
+  <p>異なるAIエージェントの開発においては、それぞれに合ったプロンプトをカスタマイズする必要があります。そのため、プロンプトの書き方はより専門的で簡潔かつLLMに理解されやすいものが重要になります。</p>
+</blockquote>
+
+<h3 id="1-主流のプロンプトフレームワーク">1. 主流のプロンプトフレームワーク</h3>
+
+<h4 id="crispeフレームワーク">CRISPEフレームワーク</h4>
+
+<p>CR: Capacity and Role（能力と役割）。AIにどのような役割を担ってほしいか。</p>
+
+<p>I: Insight（洞察）、背景情報やコンテキスト（正直に言えばContextの方が良いと思います）。</p>
+
+<p>S: Statement（指示）、AIに何をしてほしいか。</p>
+
+<p>P: Personality（個性）、AIにどのようなスタイルや調子で応答してほしいか。</p>
+
+<p>E: Experiment（試行）、AIに複数の回答を求める。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Act as an expert on software development on the topic of machine learning frameworks, and an expert blog writer. 
+The audience for this blog is technical professionals who are interested in learning about the latest advancements in machine learning. 
+Provide a comprehensive overview of the most popular machine learning frameworks, including their strengths and weaknesses. 
+Include real-life examples and case studies to illustrate how these frameworks have been successfully used in various industries. 
+When responding, use a mix of the writing styles of Andrej Karpathy, Francois Chollet, Jeremy Howard, and Yann LeCun.
+
+</code></pre></div></div>
+<h4 id="rtfフレームワーク">RTFフレームワーク</h4>
+
+<p>Role：AIにどのような役割を担ってほしいか。</p>
+
+<p>Task：AIに何をしてほしいか。</p>
+
+<p>Format：どのような出力形式を期待するか。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>あなたは財務分析担当者です。
+このプロジェクトが投資に値するかどうか分析し、主要なリスクを指摘してください。 
+表形式＋要点の形式で出力してください。
+
+</code></pre></div></div>
+<h4 id="careフレームワーク">CAREフレームワーク</h4>
+
+<p>Context：背景情報。</p>
+
+<p>Action：AIに実行させるアクション。</p>
+
+<p>Result：期待結果／品質基準。</p>
+
+<p>Example：出力例。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>私たちは資本予算プロジェクトを評価しています。
+NPV（正味現在価値）を計算し説明してください。
+結論はプロジェクトの立ち上げ可否の意思決定を支援するものであること。
+MBAケーススタイルでお願いします。
+</code></pre></div></div>
+
+<h4 id="co-starフレームワーク">CO-STARフレームワーク</h4>
+
+<p>Context：背景。</p>
+
+<p>Objective：目的。</p>
+
+<p>Style：文体（例：マッキンゼー）。</p>
+
+<p>Tone：トーン（理性的｜中立｜強気）。</p>
+
+<p>Audience：対象読者。</p>
+
+<p>Response：出力形式。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>会社は海外の市場拡大を評価しています。
+取締役会に向けて意思決定の助言をしてください。
+コンサルティングレポート風に。
+専門的で控えめなトーン。
+非技術系の経営幹部向け。
+3枚のPPTスライドの要点形式。
+</code></pre></div></div>
+<h4 id="scqaフレームワーク">SCQAフレームワーク</h4>
+
+<p>Situation：現状。</p>
+
+<p>Complication：問題／矛盾。</p>
+
+<p>Question：核心的な問題。</p>
+
+<p>Answer：解決策。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>会社のキャッシュフローはプラスです。
+しかし純利益には遠く及びません。
+財務リスクは存在しますか？
+原因を分析し判断を示してください。
+</code></pre></div></div>
+
+<h4 id="reactフレームワーク">ReActフレームワーク</h4>
+
+<p><a href="https://strictfrog.com/2026/02/11/ReAct%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3%E4%B8%8E%E6%80%9D%E8%80%83/">https://strictfrog.com/2026/02/11/ReAct%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3%E4%B8%8E%E6%80%9D%E8%80%83/</a></p>
+
+<h4 id="apeフレームワークai自身にプロンプト最適化を行わせる">APEフレームワーク（AI自身にプロンプト最適化を行わせる）</h4>
+
+<p>Automatic Prompt Engineer。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>資本予算分析に使える3つのプロンプトを生成し、それぞれの長所と短所を比較してください。
+</code></pre></div></div>
+
+<h3 id="2-構造化プロンプト">2. 構造化プロンプト</h3>
+
+<p>以下は、例示されたプロンプトで使われる属性語の説明です：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Role: 役割名を設定。見出し1で全体グローバルに作用。
+
+## Profile: 役割概要を設定。見出し2で該当段落に作用。
+
+- Author: yzfly    プロンプトの作成者を設定し、オリジナル権利を保護。
+- Version: 1.0     プロンプトのバージョン番号。バージョン管理。
+- Language: 日本語 言語指定。日本語か英語か。
+- Description:     役割設定、背景、スキルなどの簡潔な説明。
+
+### Skill: スキル設定。以下に箇条書きで詳細説明。
+1. xxx
+2. xxx
+
+## Rules        ルール設定。詳細内容を箇条書き。
+1. xxx
+2. xxx
+
+## Workflow     ワークフロー設定。ユーザーとの交流方法やインタラクション。
+1. ユーザーに「形式：[], テーマ：[]」の形で詩の形式とテーマを指定させる。
+2. 指定されたテーマをもとに詩を創作。タイトルと詩句も含む。
+
+## Initialization  初期設定手順。プロンプトの各内容間の関係と動きを定義し、初期化を行う。
+
+&lt;Role&gt;として厳守すべき&lt;Rules&gt;を守り、デフォルトの&lt;Language&gt;でユーザーと会話し、親しみやすく歓迎します。その後、自己紹介をし、&lt;Workflow&gt;を伝えます。
+</code></pre></div></div>
+
+<p>ChatGPTへの入力はスタイルを持たないため、markdownやyamlのようなマークアップ言語やjsonのようなデータ構造の手法を借用し、見出し記号で階層を表現したりします。jsonやyamlといった成熟したデータ構造を利用すると、プロンプト開発のエンジニアリングに非常に適します。</p>
+
+<h2 id="プロンプト適用例">プロンプト適用例</h2>
+
+<h3 id="few-shot-prompt少量例示プロンプト">Few-shot Prompt（少量例示プロンプト）</h3>
+
+<p>CRISPEフレームワーク＋Few-shotサンプル</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>prompt = f“ 中国の詩詞愛好家として、以下の例を参考にしてください。『{keyword}』に関連する詩を一首書いてください。詩を書く思考方法も示してください。豪放派詩人のスタイルを参考にしています。 
+例1：
+キーワード：春
+詩句：春風が頬をなで、暖かい陽射し帰る。百花繚乱、芳香競う。
+例2：
+キーワード：恋愛
+千度も彼女を探し求め、ふと振り返れば、灯火のかげにその人がいた。
+”
+</code></pre></div></div>
+
+<h3 id="chain-of-thought-prompt思考連鎖プロンプト">Chain-of-Thought Prompt（思考連鎖プロンプト）</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>prompt = f"あなたは広告マーケティング業界で20年の経験があるビジネスアナリストで、特にマーケティング診断とビジネス交渉に長けています。私は潜在顧客と会い、彼らのマーケティングの課題、問題、可能な解決策や協業機会について議論します。以下の顧客テキスト情報：{content}に基づき、対象を絞った分析を行い、問題解決のアプローチとアドバイスを提供してください。
+より良い支援のため、以下の思考チェーンを参考にしてください：
+1. *顧客情報の解読* 提供情報を精読し、キーワードを抽出。業界、規模、ターゲット顧客、現行マーケティング戦略、課題など。
+2. *マーケティング診断* 豊富な経験に基づいて顧客の課題と根本原因を分析。ブランド認知度の低さ？ターゲットの不明確さ？魅力のないコンテンツ？チャネルの不安定さ？など。
+3. *解決案* 具体的な問題に対し実行可能な解決策を提案。
+4. *協業の機会* 専門知識と経験を生かして潜在的協業機会を掘り起こす。
+"
+</code></pre></div></div>
+
+<p>重点：TOT（Think-Over-Thought）の考え方はCoT思考プロンプトへの重要な補完です。分析や意思決定時に不可欠な考え方ですが、ここでは詳細説明しません。興味があれば別途検索してください。</p>
+
+<h3 id="step-back-prompt後退思考プロンプト">Step-back Prompt（後退思考プロンプト）</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>prompt= f"あなたは豊富な経験を持つ交通警察官です。特定の交通事故問題をより一般化した問題に変換し、その一般問題から特定の交通事故回答に必要な基本ルールを導き出すことが得意です。
+例：
+Q：交通事故責任分析にあたり、考慮すべき重要要素は？行為者の責任にどう関連？
+A：交通事故責任分析の主な要素：
+1. 行為者が交通ルール違反をしたか（飲酒運転、追越、追突、赤信号無視など）。
+2. 被害者に過失があるか（交通規則違反、赤信号無視など）。
+3. 事故の結果の重大性（死亡事故か資産損失かなど）。
+
+上記例を参考に、特定の交通問題をより一般的な質問に変換し、その問題を回答しやすくしてください。
+特定の交通問題：{Question}
+"
+</code></pre></div></div>
+
+<h3 id="分析型万能プロンプトテンプレート">分析型万能プロンプトテンプレート</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>prompt = f"あなたは{Role}で、{Context}の状況において、次の問いに‘一歩ずつ分析’してください：{Question}。
+1. 重要な仮定
+2. 中核的な論理
+3. 結論の堅牢性
+最終的に{Format}で出力し、リスクや不確実性についてコメントしてください。
+"
+</code></pre></div></div>
+
+<h2 id="参考">参考</h2>
+
+<p><a href="https://github.com/langgptai/LangGPT/blob/main/Docs/HowToWritestructuredPrompts.md">https://github.com/langgptai/LangGPT/blob/main/Docs/HowToWritestructuredPrompts.md</a></p>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/en/2026-01-11-explanation-of-the-prompt-framework-and-structural-prompt/" data-toggle="tooltip" data-placement="top" title="Explanation of the Prompt Framework and Structural Prompt">
+                        Previous<br>
+                        <span>Explanation of the Prompt Framework and Structural Prompt</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/zh/2026-01-11-Prompt%E6%A1%86%E6%9E%B6%E5%92%8CStructural%20Prompt%E7%9A%84%E6%80%9D%E8%80%83/" data-toggle="tooltip" data-placement="top" title="Prompt框架和Structural Prompt的说明">
+                        Next<br>
+                        <span>Prompt框架和Structural Prompt的说明</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                <!--Gitalk评论start  -->
+                
+                <!-- 引入Gitalk评论插件  -->
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+                <div id="gitalk-container"></div>
+                <!-- 引入一个生产md5的js，用于对id值进行处理，防止其过长 -->
+                <!-- Thank DF:https://github.com/NSDingFan/NSDingFan.github.io/issues/3#issuecomment-407496538 -->
+                <script src="/js/md5.min.js"></script>
+                <script type="text/javascript">
+                    var gitalk = new Gitalk({
+                    clientID: '0cf1cb5fe7051c16de71',
+                    clientSecret: '5d7e5d162ab576a222f72715ccf525a5cb60b68a',
+                    repo: 'gitalk-comment',
+                    owner: 'LuochuanAD',
+                    admin: ['LuochuanAD'],
+                    distractionFreeMode: true,
+                    id: md5(location.pathname),
+                    });
+                    gitalk.render('gitalk-container');
+                </script>
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container donation-box">
+                <h5>关于作者</h5>
+                <p class="donation-intro">我是Louis,一名长期从事<strong>iOS与AI相关工程实践</strong>的工程师,也是一个正在探索产品与商业可能性的准创始人.</p>
+                <p class="donation-intro">这里的文章,更多是我在项目中用过,踩过坑,反复验证过的东西,而不是为了流量而写的“快内容”.</p>
+                
+                
+                <section class="donation-box">
+                  <h5>☕ 打赏</h5>
+
+                  <p class="donation-intro">
+                    如果这篇文章对你有帮助,欢迎请我喝一杯咖啡☕️
+                  </p >
+
+                  <!-- GitHub Sponsors -->
+                  <a
+                    class="sponsor-primary"
+                    href="https://github.com/sponsors/LuochuanAD"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    GitHub Sponsors（推荐）
+                  </a >
+
+                  <!-- Toggle button -->
+                  <button class="donation-toggle" onclick="toggleDonate()">
+                    其他支持方式
+                  </button>
+
+                  <!-- Hidden donation methods -->
+                  <div id="donation-methods" class="donation-methods">
+                    <div class="donation-item">
+                      <strong>PayPal</strong><br />
+                      <a href="https://www.paypal.me/你的用户名" target="_blank">
+                        https://www.paypal.me/luochuan188
+                      </a >
+                    </div>
+
+                    <div class="donation-item">
+                      <strong>PayPay</strong><br />
+                      <p>You can support my work via PayPay by searching my PayPay ID:
+                      </p >
+
+                      <p style="font-weight: bold;">
+                        PayPay ID: <code>luochuan</code>
+                      </p >
+                    </div>
+
+                    <div class="donation-item">
+                      <strong>微信支付</strong><br />
+                      
+                      <img src="/img/wechat_louis.jpg" alt="WeChat Pay QR" />
+                    </div>
+
+                    <div class="donation-item">
+                      <strong>支付宝</strong><br />
+                      <img src="/img/alipay_louis.jpg" alt="Alipay QR" />
+                    </div>
+                  </div>
+                
+                    <p class="donation-intro">你的支持会让我有更多时间,把真实项目中的经验持续整理和分享出来.</p>
+                    <p class="donation-intro">不打赏也完全没关系,感谢你读到这里.</p>
+                </section>
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>联系与合作</h5>
+                <p class="donation-intro"><strong>如果你:</strong></p>
+                <p class="donation-intro">· 正在做iOS App / AI / 自动化相关的项目</p>
+                <p class="donation-intro">· 对技术选型、架构设计、产品落地有困惑</p>
+                <p class="donation-intro">· 或希望进行技术交流、合作探讨</p>
+                <p class="donation-intro"><strong>欢迎通过以下邮箱联系我:</strong></p>
+                <ul class="list-inline">
+                    
+                        <li><p>luochuanad@gmail.com</p></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<script>
+  function toggleDonate() {
+    const el = document.getElementById("donation-methods");
+    el.style.display = el.style.display === "block" ? "none" : "block";
+  }
+</script>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        // BY Fix:去除标题前的‘#’ issues:<https://github.com/qiubaiying/qiubaiying.github.io/issues/137>
+        // anchors.options = {
+        //   visible: 'always',
+        //   placement: 'right',
+        //   icon: '#'
+        // };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <!-- add jianshu add target = "_blank" to <a> by BY -->
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Strict Frog's Blog 2026
+                    <br>
+                    Theme on <a href="https://github.com/luochuanad/luochuanad.github.io.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=&repo=.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/apple-touch-icon.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

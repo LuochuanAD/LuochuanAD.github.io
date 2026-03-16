@@ -1,0 +1,1370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Strict Frog&apos;s Blog</title>
+    <description>keep hungry keep foolish</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Tue, 17 Mar 2026 00:08:29 +0900</pubDate>
+    <lastBuildDate>Tue, 17 Mar 2026 00:08:29 +0900</lastBuildDate>
+    <generator>Jekyll v3.10.0</generator>
+    
+      <item>
+        <title></title>
+        <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;複雑なRAG設計なしに、LlamaIndexのReAct RAG Agentフレームワークを使って財務諸表の分析を行うだけで、初級のビジネスアナリストと同レベルの成果が得られます。しかし、多くの制限もあります。個人的には、小規模な企業向けに適していると考えています。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;財務分析構造図&quot;&gt;財務分析構造図&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/refs/heads/master/BlogSourceImage/BlogSourceImage2026/%E8%B4%A2%E6%8A%A5%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B%E5%9B%BE.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;1-a社b社などの財務諸表ファイルの読み込み&quot;&gt;1. A社、B社などの財務諸表ファイルの読み込み&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from llama_index.core import SimpleDirectoryReader
+
+A_doc = SimpleDirectoryReader(
+	imput_file = [&quot;./A会社財務諸表ファイル_2025.pdf&quot;]
+).load_data()
+
+......
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;2-財務データに基づいてベクトルデータを生成しローカルに保存&quot;&gt;2. 財務データに基づいてベクトルデータを生成しローカルに保存&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from llama_index.core import VectorStoreIndex
+
+A_index = VectorStoreIndex.frome_documents(A_doc)
+
+......
+
+frome llama_index.core import StorageContext
+
+A_index.storage_context.persist(persist_dir=&quot;./storage/A&quot;)
+
+......
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;ローカルのベクトルデータのディレクトリ構成:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;A
+|- default_vectory_store.json
+|- docstore.json
+|- graph_store.json
+|- image_vectore_store.json
+|- index_store.json
+B
+|- default_vectory_store.json
+|- docstore.json
+|- graph_store.json
+|- image_vectore_store.json
+|- index_store.json
+
+......
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;3-クエリツールの設定ab&quot;&gt;3. クエリツールの設定：(A/B/……）&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from llama_index.core.tools import QueryEngineerTool, ToolMetadata
+
+query_engineer_tools= [
+	QueryEngineerTool(
+		query_engineer = A_engineer,
+		metadata = ToolMetadata(
+			name = &quot;A_finance&quot;,
+			description= (&quot;A社の財務諸表情報を提供するためのツール&quot;),
+		),
+	),
+
+	......
+
+]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;4-llmの作成react-rag-agent&quot;&gt;4. LLMの作成：ReAct RAG Agent&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from llama_index.core.agent import ReActAgent
+
+agent = ReActAgent.from_tools(query_tools, llm=llm, verbose=True)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;考察react-rag-agent&quot;&gt;考察：(ReAct RAG Agent)&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;メリット:
+1. 会社の財務諸表ファイルを提供するだけで良い
+2. シンプルかつ迅速で、既存のLlamaIndexを使ってすぐにReAct RAG Agentを構築できる
+3. 分析結果は初級ビジネスアナリストのレベルに達している
+
+デメリット:
+1. RAGプロセスの詳細設計がなく、LlamaIndex本体の能力に依存している
+2. ReActプロセスの設計がなく、同様にLlamaIndexの能力に依存している
+3. 大規模モデルのファインチューニングがされていないため、分析結果が初級レベルに留まる
+4. 人間の思考ポイントが組み込まれておらず、最大限の知的活用：AI+人を実現できていない
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;この4つの課題をクリアすれば、トップクラスのビジネスアナリストのレベルに到達します。この点に基づき、私は今後のAIの発展と応用に大きな期待を持っています。 なぜなら、このようなシステムの開発は最長でも半年で、トップビジネスアナリストが20年かけて得た経験に匹敵する能力を達成できるからです。これは人類最大のレバレッジとなります。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;参考文献&quot;&gt;参考文献&lt;/h2&gt;
+
+&lt;p&gt;記事の例は『動手做AI Agent』著者：黄佳 より引用しています。&lt;/p&gt;
+</description>
+        <pubDate>Tue, 17 Mar 2026 00:08:29 +0900</pubDate>
+        <link>http://localhost:4000/ja/2026-02-21-%E8%B4%A2%E5%8B%99%E8%AB%B8%E8%A1%A8%E5%88%86%E6%9E%90aiagent%E3%81%AE%E6%A7%8B%E7%AF%89%E3%81%A8%E8%80%83%E5%AF%9F-react-rag%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88/</link>
+        <guid isPermaLink="true">http://localhost:4000/ja/2026-02-21-%E8%B4%A2%E5%8B%99%E8%AB%B8%E8%A1%A8%E5%88%86%E6%9E%90aiagent%E3%81%AE%E6%A7%8B%E7%AF%89%E3%81%A8%E8%80%83%E5%AF%9F-react-rag%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title></title>
+        <description>&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Know yourself and your opponent to better develop private AI Agents&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;1-innate-capabilities-of-chatgpt-llm-native-abilities&quot;&gt;1. Innate Capabilities of ChatGPT (LLM Native Abilities)&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1 Language Understanding &amp;amp; Generation&lt;/th&gt;
+      &lt;th&gt;2 Knowledge Reasoning&lt;/th&gt;
+      &lt;th&gt;3 Programming Skills&lt;/th&gt;
+      &lt;th&gt;4 Information Structuring&lt;/th&gt;
+      &lt;th&gt;5 Multimodal Understanding&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Q&amp;amp;A&lt;/td&gt;
+      &lt;td&gt;Logical Reasoning&lt;/td&gt;
+      &lt;td&gt;Writing Code&lt;/td&gt;
+      &lt;td&gt;Extracting from Text&lt;/td&gt;
+      &lt;td&gt;Image Understanding&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Summarization&lt;/td&gt;
+      &lt;td&gt;Common-sense Reasoning&lt;/td&gt;
+      &lt;td&gt;Debugging&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;OCR&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Translation&lt;/td&gt;
+      &lt;td&gt;Solution Design&lt;/td&gt;
+      &lt;td&gt;Code Explanation&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Chart Interpretation&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Paraphrasing&lt;/td&gt;
+      &lt;td&gt;Architecture Design&lt;/td&gt;
+      &lt;td&gt;API Design&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Information Extraction&lt;/td&gt;
+      &lt;td&gt;Programming Issues&lt;/td&gt;
+      &lt;td&gt;Architecture Design&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Text Classification&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Dialogue&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;2-limitations-of-chatgpt-by-design&quot;&gt;2. Limitations of ChatGPT by Design&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;1 No Access to Private Data&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;2 Cannot Operate Real-World Systems&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;3 No Long-Term Memory&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;4 Cannot Handle Complex Multi-Step Planning&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;5 Cannot Guarantee 100% Accuracy&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;6 Context Window Limitations&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;7 Poor Stability for Long Tasks&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Examples: Company internal knowledge bases, emails, contracts, user data, CRM&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Examples: Sending emails, creating calendar events, creating Jira tickets, querying databases, payments, code deployment&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ChatGPT is stateless by default. It doesn’t remember: who the user is, past behavior, preferences, long-term goals&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Although LLMs can reason, they are unstable, prone to skipping steps, and don’t self-correct&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;LLMs suffer from hallucinations&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Example: 1000k tokens limit; excess data is lost&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Example: 100-step tasks tend to forget steps and deviate from goals&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Solution: RAG systems&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Solution: Function Tools&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Solution: Memory systems&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Solution: Agent systems&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Solution: Tool verification, retrieval grounding, rule engines&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Solution: Chunking, retrieval&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Solution: Agent loops&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;3-tasks-unsuitable-for-chatgpt&quot;&gt;3. Tasks Unsuitable for ChatGPT&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;1 Precise Calculations&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;2 Database Queries&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;3 Large-Scale Data Processing&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Examples: Financial calculations, statistics, scientific computing&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Examples: LLM-generated SQL, database execution&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Examples: Processing millions of records&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        <pubDate>Tue, 17 Mar 2026 00:08:29 +0900</pubDate>
+        <link>http://localhost:4000/en/2026-03-08-chatgpt-capability-limits/</link>
+        <guid isPermaLink="true">http://localhost:4000/en/2026-03-08-chatgpt-capability-limits/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title></title>
+        <description>&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Without complex RAG design, simply using LlamaIndex’s ReAct RAG Agent framework to analyze financial statements can achieve a level comparable to a junior business analyst. However, there are many limitations. Personally, I think it is only suitable for micro and small enterprises.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;financial-report-analysis-architecture&quot;&gt;Financial Report Analysis Architecture&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/refs/heads/master/BlogSourceImage/BlogSourceImage2026/%E8%B4%A2%E6%8A%A5%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B%E5%9B%BE.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;1-load-financial-report-files-for-companies-a-b-&quot;&gt;1. Load Financial Report Files for Companies A, B, …&lt;/h2&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;llama_index.core&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SimpleDirectoryReader&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;A_doc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SimpleDirectoryReader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;imput_file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;./A公司财务报表文件_2025.pdf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;......&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;2-build-vector-data-based-on-financial-report-and-save-locally&quot;&gt;2. Build Vector Data Based on Financial Report and Save Locally&lt;/h2&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;llama_index.core&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VectorStoreIndex&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;A_index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VectorStoreIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;frome_documents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A_doc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;......&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;frome&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;llama_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;core&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;StorageContext&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;A_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;storage_context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;persist_dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;./storage/A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;......&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Local Vector Data Directory Structure:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;A
+|- default_vectory_store.json
+|- docstore.json
+|- graph_store.json
+|- image_vectore_store.json
+|- index_store.json
+B
+|- default_vectory_store.json
+|- docstore.json
+|- graph_store.json
+|- image_vectore_store.json
+|- index_store.json
+
+......
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;3-configure-query-tools-ab&quot;&gt;3. Configure Query Tools: (A/B/…)&lt;/h2&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;llama_index.core.tools&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QueryEngineerTool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ToolMetadata&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;query_engineer_tools&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;QueryEngineerTool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;query_engineer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A_engineer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ToolMetadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;A_finance&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Used to provide financial report information for company A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+
+	&lt;span class=&quot;p&quot;&gt;......&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;4-create-llm-react-rag-agent&quot;&gt;4. Create LLM: ReAct RAG Agent&lt;/h2&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;llama_index.core.agent&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ReActAgent&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;agent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ReActAgent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_tools&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;query_tools&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;llm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;llm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;reflection-react-rag-agent&quot;&gt;Reflection: (ReAct RAG Agent)&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Advantages:
+1. Only need to provide the company’s financial report files.
+2. Simple and fast, leveraging existing LlamaIndex to quickly build a ReAct RAG Agent.
+3. The analysis results reach the level of a junior business analyst.
+
+Disadvantages:
+1. No detailed RAG process design; performance depends solely on LlamaIndex capabilities.
+2. No design for the ReAct process; again, dependent on LlamaIndex itself.
+3. No fine-tuning of the large model, so analysis results are limited to junior business analyst level.
+4. No human-in-the-loop thinking added, which limits maximizing cognitive synergy: AI + Human.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;If the above four drawbacks are addressed, the system could reach the level of a top-tier business analyst. Based on this, I am very optimistic about the future development and application of AI.&lt;br /&gt;
+Because developing such a system would take at most six months and could embody the expertise of a top business analyst with 20 years of experience. This is humanity’s greatest leverage.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;p&gt;Example article source: &lt;em&gt;Hands-on AI Agent&lt;/em&gt; by Huang Jia&lt;/p&gt;
+</description>
+        <pubDate>Tue, 17 Mar 2026 00:08:29 +0900</pubDate>
+        <link>http://localhost:4000/en/2026-02-21-building-and-reflections-on-a-financial-statement-analysis-ai-agent-react-rag-agent/</link>
+        <guid isPermaLink="true">http://localhost:4000/en/2026-02-21-building-and-reflections-on-a-financial-statement-analysis-ai-agent-react-rag-agent/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title></title>
+        <description>&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;User queries include both simple information retrieval and tool invocation, so a mature, reusable, and general system architecture is needed.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;architecture&quot;&gt;Architecture&lt;/h2&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;User Query
+      ↓
+1️⃣ Intent Router
+      ↓
+┌───────────────┬──────────────────┐
+│ Simple QA     │ Tool Required    │
+│ (LLM only)    │ (ReAct loop)     │
+└───────────────┴──────────────────┘
+                      ↓
+            2️⃣ ReAct Tool Loop
+                      ↓
+            3️⃣ Structured Tool Layer
+                      ↓
+            4️⃣ Guardrails &amp;amp; Policies
+                      ↓
+                   Final Output
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;1-layer-one-intent-router&quot;&gt;1. Layer One: Intent Router&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The router needs to determine whether to invoke tools.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Router Prompt:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;prompt = ‘
+
+    You are a task classifier.
+    User query: {query}
+ 
+    Classify the user query into one of:
+ 
+    1. simple_qa
+    2. retrieval
+    3. tool_call
+    4. multi_step
+ 
+    Return JSON:
+    {
+        &quot;type&quot;: &quot;...&quot;
+    }
+’
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;2-layer-two-react-tool-core&quot;&gt;2. Layer Two: ReAct Tool Core&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1. simple_qa ==&amp;gt; LLM answers directly
+
+2. retrieval ==&amp;gt; Call vector database for direct retrieval / call Browser for retrieval
+
+3. tool_call ==&amp;gt; Enter ReAct loop
+4. multi_step ==&amp;gt; Enter ReAct loop
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;architecture-of-the-react-loop&quot;&gt;Architecture of the ReAct loop:&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;LLM decides next action
+↓
+Call one tool
+↓
+Append tool result
+↓
+Repeat
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Sample Code:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;while True:
+ 
+    response = llm(messages, tools=tool_schema)
+ 
+    if response.tool_calls:
+        result = execute_tool(...)
+        messages.append(tool_result)
+ 
+    else:
+        break
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;3-layer-three-structured-tool-layer&quot;&gt;3. Layer Three: Structured Tool Layer&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This layer adopts ChatGPT’s Function Calling concept, connecting the LLM and tools invocation by defining “&lt;strong&gt;Tools Schema&lt;/strong&gt;”.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Enterprise-grade AI Agent: ReAct + Function Calling:&lt;br /&gt;
+&lt;a href=&quot;https://strictfrog.com/2026/02/17/%E4%BC%81%E4%B8%9A%E7%BA%A7AIAgent%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8Tools%E4%B9%8BReAct/&quot;&gt;https://strictfrog.com/2026/02/17/%E4%BC%81%E4%B8%9A%E7%BA%A7AIAgent%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8Tools%E4%B9%8BReAct/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;4-layer-four-guardrails--policies&quot;&gt;4. Layer Four: Guardrails &amp;amp; Policies&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Maximum Step Limit:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;max_steps = 15
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Disallow Sending Sensitive Emails:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if tool = send_mail:
+    require confirmation
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;evaluation-router--react-framework--function-calling-recommendation-&quot;&gt;Evaluation: (Router + ReAct Framework + Function Calling Recommendation: 🌟🌟🌟🌟🌟)&lt;/h2&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Advantages:
+
+1. Generality      Very High
+2. Controllability High
+3. Extensibility   Very High
+4. Complex Tasks   Very High
+5. Simple Task Efficiency Very High
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 17 Mar 2026 00:08:29 +0900</pubDate>
+        <link>http://localhost:4000/en/2026-02-18-enterprise-level-ai-agent-router-react-function-calling/</link>
+        <guid isPermaLink="true">http://localhost:4000/en/2026-02-18-enterprise-level-ai-agent-router-react-function-calling/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title></title>
+        <description>&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In a complete AI Agent, tool invocation adopts the Function Calling concept from ChatGPT, connecting LLM and tool calls through defining a “&lt;strong&gt;Tools Schema&lt;/strong&gt;.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;architecture&quot;&gt;Architecture&lt;/h2&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;User Query
+    ↓
+Agent (LLM with tool access)
+    ↓
+Decide:
+    - Call Tool?
+    - Or Final Answer?
+    ↓
+Tool Result
+    ↓
+Append to Context
+    ↓
+Repeat
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;1-define-the-tools-schema-first&quot;&gt;1. Define the Tools Schema first&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The tools used here: Search Database, Send Mail, Get Weather, etc. These tools correspond to the names of custom tool methods.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tools = [
+
+	{
+		&quot;type&quot;: &quot;function&quot;,
+		&quot;function&quot;: {
+			&quot;name&quot;: &quot;Search Database&quot;,
+			&quot;description&quot;: &quot;Retrieve profile from database&quot;,
+			&quot;parameters&quot;:{
+				&quot;type&quot;: &quot;object&quot;,
+				&quot;properties&quot;: {
+					&quot;name&quot;: {&quot;type&quot;: &quot;string&quot;}
+				},
+				&quot;required&quot;: [&quot;name&quot;]
+			}
+		}
+	},
+	{
+		&quot;type&quot;: &quot;function&quot;,
+		&quot;function&quot;: {
+			&quot;name&quot;: &quot;Send Mail&quot;,
+			&quot;description&quot;: &quot;Send Mail to Gmail&quot;,
+			&quot;parameters&quot;:{
+				&quot;to&quot;: {&quot;type&quot;: &quot;string&quot;},
+				&quot;subject&quot;: {&quot;type&quot;: &quot;string&quot;},
+				&quot;body&quot;: {&quot;type&quot;: &quot;string&quot;}
+			}
+		}
+	},
+	{
+		&quot;type&quot;: &quot;function&quot;,
+		&quot;function&quot;: {
+			&quot;name&quot;: &quot;Get Weather&quot;,
+			&quot;description&quot;: &quot;Get Weather from location&quot;,
+			&quot;parameters&quot;:{
+				&quot;type&quot;: &quot;object&quot;,
+				&quot;properties&quot;: {
+					&quot;location&quot;: {&quot;type&quot;: &quot;string&quot;}
+				},
+				&quot;required&quot;: [&quot;location&quot;]
+			}
+		}
+	},
+......
+
+]
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;2-llm-decides-the-next-action-react-framework&quot;&gt;2. LLM decides the next action (ReAct framework)&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Agent Prompt:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;prompt = ‘
+	You are an intelligent task agent.
+
+	User query: {Query}
+	At each step:
+	- Decide whether to call a tool.
+	- If needed, call exactly one tool.
+	- If enough information is gathered, provide final answer.
+	- Always reason step-by-step.
+ 
+	Available tools:
+	1. Search Database
+	2. Send Mail
+	3. Get Weather
+’
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+messages = [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user_query}]
+ 
+while True:
+ 
+    response = client.chat.completions.create(
+        model=&quot;gpt-4o&quot;,
+        messages=messages,
+        tools=tools
+    )
+ 
+    message = response.choices[0].message
+ 
+    if message.tool_calls:
+        tool_call = message.tool_calls[0]
+        result = execute_tool(tool_call)
+ 
+        messages.append(message)
+        messages.append({
+            &quot;role&quot;: &quot;tool&quot;,
+            &quot;tool_call_id&quot;: tool_call.id,
+            &quot;content&quot;: json.dumps(result)
+        })
+ 
+    else:
+        final_answer = message.content
+        break
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;evaluation-react-framework--function-calling-recommended-rating-&quot;&gt;Evaluation: (ReAct framework + Function Calling recommended rating: 🌟🌟🌟🌟)&lt;/h2&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Advantages:
+
+1. Dynamic planning 
+2. Automatic condition judgment
+3. Supports branching logic
+4. Self-correction
+5. More aligned with human thinking: ReAct
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 17 Mar 2026 00:08:29 +0900</pubDate>
+        <link>http://localhost:4000/en/2026-02-17-enterprise-level-ai-agent-react-function-calling/</link>
+        <guid isPermaLink="true">http://localhost:4000/en/2026-02-17-enterprise-level-ai-agent-react-function-calling/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title></title>
+        <description>&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In a complete AI Agent, the invocation of tools here follows the concept of ChatGPT’s Function Calling, connecting the LLM with tool calls by defining a “&lt;strong&gt;Tools Schema&lt;/strong&gt;.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;1-define-the-tools-schema-first&quot;&gt;1. Define the Tools Schema First&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The tools used here include: Search Database, Send Mail, Get Weather, etc. These tools correspond to the names of custom tool methods.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tools = [
+
+	{
+		&quot;type&quot;: &quot;function&quot;,
+		&quot;function&quot;: {
+			&quot;name&quot;: &quot;Search Database&quot;,
+			&quot;description&quot;: &quot;Retrieve profile from database&quot;,
+			&quot;parameters&quot;:{
+				&quot;type&quot;: &quot;object&quot;,
+				&quot;properties&quot;: {
+					&quot;name&quot;: {&quot;type&quot;: &quot;string&quot;}
+				},
+				&quot;required&quot;: [&quot;name&quot;]
+			}
+		}
+	},
+	{
+		&quot;type&quot;: &quot;function&quot;,
+		&quot;function&quot;: {
+			&quot;name&quot;: &quot;Send Mail&quot;,
+			&quot;description&quot;: &quot;Send Mail to Gmail&quot;,
+			&quot;parameters&quot;:{
+				&quot;to&quot;: {&quot;type&quot;: &quot;string&quot;},
+				&quot;subject&quot;: {&quot;type&quot;: &quot;string&quot;},
+				&quot;body&quot;: {&quot;type&quot;: &quot;string&quot;}
+			}
+		}
+	},
+	{
+		&quot;type&quot;: &quot;function&quot;,
+		&quot;function&quot;: {
+			&quot;name&quot;: &quot;Get Weather&quot;,
+			&quot;description&quot;: &quot;Get Weather from location&quot;,
+			&quot;parameters&quot;:{
+				&quot;type&quot;: &quot;object&quot;,
+				&quot;properties&quot;: {
+					&quot;location&quot;: {&quot;type&quot;: &quot;string&quot;}
+				},
+				&quot;required&quot;: [&quot;location&quot;]
+			}
+		}
+	},
+......
+
+]
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;2-loop-execution-of-execute-plan-and-execute-framework&quot;&gt;2. Loop Execution of Execute (Plan-and-Execute Framework)&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Planner Prompt:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;prompt = ‘
+	You are a task planner in a multi-step AI system.
+	User query: {Query}
+	Your job:
+	1, Break down the user query into executable steps.
+	2, Each step must be atomic and tool-executable.
+	3, Steps should be ordered logically.
+	4, Do NOT execute anything.
+	5, Only return JSON.
+’
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import json
+ 
+# 1️⃣ Let the Planner generate the plan
+planner_response = client.chat.completions.create(
+    model=&quot;gpt-4o&quot;,
+    messages=[
+        {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: planner_prompt},
+        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user_query}
+    ]
+)
+ 
+plans = json.loads(planner_response.choices[0].message.content)[&quot;plans&quot;]
+ 
+# 2️⃣ Execute step-by-step
+context_memory = {}
+ 
+for step in plans:
+    tool_name = step[&quot;tool&quot;]
+    args = step[&quot;arguments&quot;]
+ 
+    result = execute_tool(tool_name, args, context_memory)
+ 
+    # Add the result to context
+    context_memory[f&quot;step_{step[&apos;step_id&apos;]}&quot;] = result
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def execute_tool(tool_name, args, memory):
+ 
+    if tool_name == &quot;Search Database&quot;:
+        return search_Database(args[&quot;name&quot;])
+ 
+    elif tool_name == &quot;Send Mail&quot;:
+        
+        return send_Mail(args[&quot;to&quot;],args[&quot;subject&quot;],args[&quot;body&quot;])
+ 
+    elif tool_name == &quot;Get Weather&quot;:
+        return get_Weather(args[&quot;location&quot;])
+ 
+    else:
+        raise Exception(&quot;Unknown tool&quot;)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;evaluation-plan-and-execute-framework--function-calling-recommendation-&quot;&gt;Evaluation: (Plan-and-Execute Framework + Function Calling Recommendation: 🌟🌟)&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Advantages:
+
+1. Task Decomposition: Breaking down large tasks into smaller ones enables effective management and resolution of complex tasks.
+2. Detailed Guidance: Providing detailed instructions improves the quality and accuracy of reasoning steps.
+3. Adaptability: Can be adjusted for different types of tasks and performs well on various complex problems.
+
+Disadvantages:
+
+1. The Planner Prompt generates the plan all at once; steps may be missed, unordered, and intermediate states are not perceivable.
+2. The Execute loop is too mechanical, lacking conditional jumps, branching, dynamic decisions, and failure retries.
+3. The Planner does not know the execution results, such as whether they are empty or not.
+
+Suitable Scenarios:
+
+1. Fixed steps and stable workflows
+2. No need for dynamic decision-making or branching logic
+
+Unsuitable Scenarios:
+
+1. Decision-driven tasks
+2. Conditional jumps
+3. Data-driven reasoning
+4. Long-chain tasks
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 17 Mar 2026 00:08:29 +0900</pubDate>
+        <link>http://localhost:4000/en/2026-02-16-enterprise-level-ai-agent-plan-and-execute-function-calling/</link>
+        <guid isPermaLink="true">http://localhost:4000/en/2026-02-16-enterprise-level-ai-agent-plan-and-execute-function-calling/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title></title>
+        <description>&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;LangChain’s Plan-and-Execute framework is inspired by the Plan-and-Solve paper. Plan-and-Execute is well-suited for more complex long-term planning by breaking down complicated problems into smaller sub-tasks and tackling them one by one. Although this involves frequent calls to large models, it avoids the issue of overly long prompts during the ReAct Agent loop.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;plan-and-solve-strategy&quot;&gt;Plan-and-Solve Strategy&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/refs/heads/master/BlogSourceImage/BlogSourceImage2026/COT%E5%92%8CPlan-and-Solve%E5%AF%B9%E6%AF%94.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The above diagram compares zero-shot COT and Plan-and-Solve. Essentially, Plan-and-Solve concretizes COT by breaking it into small tasks and then solving these tasks one by one. The Plan-and-Execute framework shares the same philosophy as Plan-and-Solve, but in practice, Plan-and-Execute is more focused on AI practical implementation.&lt;/p&gt;
+
+&lt;h2 id=&quot;example-application-of-plan-and-execute-framework&quot;&gt;Example Application of Plan-and-Execute Framework&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Suitable for Question Rewriting design, multi-agent coordination work, and more.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Scenario: Within a complete AI agent system built on a RAG system.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;For example:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Question&lt;/strong&gt;: Find personal information about Louis and Liu Yifei, then generate a wedding invitation based on their information and send the invitation content to the email worldXXTest@gmail.com.&lt;/p&gt;
+
+&lt;p&gt;Plan-and-Execute decomposes the task into: Plan, Execute&lt;/p&gt;
+
+&lt;p&gt;Use LLM to break down the question into about 5 &lt;strong&gt;Plans&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;|-1- Search the database for personal information about Louis
+|-2- Search the web for personal information about Liu Yifei
+|-3- Search for wedding invitation templates online
+|-4- Generate the wedding invitation content for Louis and Liu Yifei
+|-5- Send the invitation content to the email worldXXTest@gmail.com
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Use the ReAct framework’s LLM to handle these 5 plans one by one in the &lt;strong&gt;Execute&lt;/strong&gt; phase:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;|-1- &quot;Louis’s personal info: iOS and AI Engineer, male, good temperament, gentle, kind, humorous...&quot;
+|-2- Use the Browser tool, obtain: “Liu Yifei’s personal info: Qianxi, female, film and TV actress, both beauty and talent, likes freedom...”
+|-3- Wedding invitation template: “We are getting married. Dear Mr./Ms. xxx, you are welcome to join us on xx/xx/2026 at...”
+|-4- Wedding invitation content for Louis and Liu Yifei: “We are getting married. Dear Mr./Ms. xxx, you are welcome to attend our grand wedding on February 31, 2026, at the North Pole Palace on the Moon. We will dispatch the interstellar ship LL001 to pick you up. Please board the ship at midnight on February 30 at the top floor of the Oriental Pearl Tower in Shanghai.”
+|-5- Call tool sendMail to send the wedding invitation content
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Summary: Call LLM once to generate 5 plans, then call the ReAct Agent 5 times to handle each plan.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;planner-prompt&quot;&gt;Planner Prompt:&lt;/h4&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;prompt = ‘
+	You are a task planner in a multi-step AI system.
+	User query: {Query}
+	Your job:
+	1, Break down the user query into executable steps.
+	2, Each step must be atomic and tool-executable.
+	3, Steps should be ordered logically.
+	4, Do NOT execute anything.
+	5, Only return JSON.
+’
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;For example:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Query: I want to find someone who holds an English CET-6 certificate and has 3 years of Python development experience. Then send their personal information to luochuanad@gmail.com&lt;/p&gt;
+
+&lt;p&gt;The LLM(&lt;strong&gt;Planner Prompt&lt;/strong&gt;) outputs:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;json
+[
+ {
+	&quot;step&quot;: 1,
+	&quot;action&quot;: &quot;Search Database&quot;,
+	&quot;description&quot;: &quot;Query the database to find individuals with an English CET-6 certificate 					and 3 years of Python development experience.&quot;,
+	&quot;parameters&quot;: {
+		&quot;certificate&quot;: &quot;CET-6&quot;,
+		&quot;experience&quot;: {
+			&quot;Language&quot;: &quot;Python&quot;,
+			&quot;years&quot;: 3
+		}
+	}
+ },
+ {
+	&quot;step&quot;: 2,
+	&quot;action&quot;: &quot;Retrieve Personal Information&quot;,
+	&quot;description&quot;: &quot;Extract the personal information of the individual(s) found in the 					previous step.&quot;,
+	&quot;parameters&quot;: {
+		&quot;fields&quot;: [&quot;name&quot;, &quot;email&quot;, &quot;phone&quot;, &quot;address&quot;]
+	}
+ },
+ {
+	&quot;step&quot;: 3,
+	&quot;action&quot;: &quot;Format Email&quot;,
+	&quot;description&quot;: &quot;Prepare an email containing the personal information of the individual(s) 					found.&quot;,
+	&quot;parameters&quot;: {
+		&quot;recipient&quot;: &quot;luochuanad@gmail.com&quot;,
+		&quot;subject&quot;: &quot;Candidate Information&quot;,
+		&quot;body&quot;: &quot;Include the personal information retrieved in step 2.&quot;
+ 	}
+ },
+ {
+ 	&quot;step&quot;: 4,
+	&quot;action&quot;: &quot;Send Email&quot;,
+	&quot;description&quot;: &quot;Send the formatted email to the specified email address.&quot;,
+	&quot;parameters&quot;: {
+		&quot;recipient&quot;: &quot;xxx@gmail.com&quot;,
+		&quot;content&quot;: &quot;Use the email content prepared in step 3.&quot;
+ 	}
+ }
+]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;p&gt;Lei Wang et al.’s paper “Plan-and-Solve Prompting: Improving Zero-Shot Chain-of-Thought Reasoning by Large Language Models” &lt;a href=&quot;https://aclanthology.org/2023.acl-long.147.pdf&quot;&gt;https://aclanthology.org/2023.acl-long.147.pdf&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 17 Mar 2026 00:08:29 +0900</pubDate>
+        <link>http://localhost:4000/en/2026-02-15-plan-and-execute-framework-concepts-and-applications/</link>
+        <guid isPermaLink="true">http://localhost:4000/en/2026-02-15-plan-and-execute-framework-concepts-and-applications/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title></title>
+        <description>&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In designing the RAG system, after implementing Structural Chunks and Structural Prompt, the retrieval results achieved the desired accuracy. However, to further improve accuracy, dual retrieval with Query Rewrite and Reranker is necessary.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;query-rewrite&quot;&gt;Query Rewrite&lt;/h2&gt;
+
+&lt;h3 id=&quot;approach-1-synonym-expansion&quot;&gt;Approach 1: Synonym Expansion&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;For example:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;User query: python
+
+Rewrite as: 
+python language
+python development
+python version
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Evaluation: Fast, low cost, limited coverage&lt;/p&gt;
+
+&lt;h3 id=&quot;approach-2-llm-rewrite-recommended&quot;&gt;Approach 2: LLM Rewrite (Recommended)&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The most common method is to use an LLM to generate 3 sub-queries, then merge the results retrieved from 3 searches.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Note: For clarity, prompts are shown in Chinese here, but English is preferred.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;prompt = “Rewrite the user query into multiple search queries and return 3 different query results“
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Process:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;User Query
+    ↓
+LLM Rewrite
+    ↓
+Query 1
+Query 2
+Query 3
+    ↓
+Vector Search
+    ↓
+Merge results
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;approach-3-hyde-use-with-caution&quot;&gt;Approach 3: HyDE (Use With Caution)&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Use the LLM’s knowledge to generate an expected answer from the user query, then perform semantic search in the vector DB using that answer.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Process:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;User Query
+    ↓
+LLM generates expected answer
+    ↓
+Embedding
+    ↓
+Vector Search
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Note: Because the knowledge in the LLM and the RAG knowledge base can differ significantly and LLM knowledge is limited by its update period, the expected answer may be incorrect or outdated. Use HyDE cautiously.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;approach-4-multilingual-translation-recommended&quot;&gt;Approach 4: Multilingual Translation (Recommended)&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;What if the RAG knowledge base is in English and Japanese, but the user query is in Chinese?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;For example:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;User query: 输出日志的保留时间是多少?
+
+First translate to English and Japanese:
+
+What is the retention period for the output logs?
+
+出力ログの保存期間はどれくらいですか?
+
+Then search the vector DB with all three queries.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Process:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;User Query
+    ↓
+LLM Translation
+    ↓
+Query 1 (Chinese)
+Query 2 (English)
+Query 3 (Japanese)
+    ↓
+Vector Search
+    ↓
+Merge results
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;reranker-re-ranking&quot;&gt;Reranker Re-ranking&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;“Vector Search” only performs preliminary retrieval to ensure high recall, typically with TopK of 20-50.&lt;/li&gt;
+  &lt;li&gt;Reranker refines ranking to ensure high precision, typically with TopK of 3-5.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;approach-1-llm-based-reranker&quot;&gt;Approach 1: LLM-based Reranker&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Use an LLM to score or select the top documents from preliminary retrieval.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;prompt = “
+	Given the query and the following documents, rank the documents by relevance.
+	Query: {query}
+	Documents:
+	{chunk_1}
+	{chunk_2}
+	{chunk_3}
+	...
+	Return the IDs of the most relevant documents.
+
+”
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Evaluation: High token consumption, slow&lt;/p&gt;
+
+&lt;h3 id=&quot;approach-2-similarity-fine-tuned-model-recommended&quot;&gt;Approach 2: Similarity Fine-tuned Model (Recommended)&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Feed the retrieved Chunk + user query directly into the model to get a relevance score.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;English:
+ms-marco-MiniLM-L-6-v2
+ms-marco-MiniLM-L-12-v2
+bge-reranker-base
+
+Japanese:
+japanese-reranker-cross-encoder-xsmall-v1
+japanese-reranker-cross-encoder-base-v1
+japanese-reranker-cross-encoder-large-v1
+
+Chinese:
+bge-reranker-large
+bge-reranker-base
+m3e-reranker
+
+Cross-lingual Cross-Encoder models:
+
+BAAI/bge-reranker-v2-m3
+Alibaba-NLP/gte-multilingual-reranker-base
+cross-encoder/ms-marco-MiniLM-L6-v2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Evaluation: High accuracy&lt;/p&gt;
+</description>
+        <pubDate>Tue, 17 Mar 2026 00:08:29 +0900</pubDate>
+        <link>http://localhost:4000/en/2026-02-14-rag-retrieval-query-rewrite-and-reranker/</link>
+        <guid isPermaLink="true">http://localhost:4000/en/2026-02-14-rag-retrieval-query-rewrite-and-reranker/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Fine-tuning之高质量SFT数据结构设计</title>
+        <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;微调模型能力 = &lt;strong&gt;70% 数据结构设计&lt;/strong&gt; + 20% 数据质量 + 10% 训练参数&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这篇文章只讲 ”&lt;strong&gt;数据结构设计&lt;/strong&gt;“.&lt;/p&gt;
+
+&lt;h2 id=&quot;高质量sft数据的5个层级&quot;&gt;高质量SFT数据的5个层级&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Level 1  基础问答&lt;/li&gt;
+  &lt;li&gt;Level 2  System Prompt&lt;/li&gt;
+  &lt;li&gt;Level 3  思考链 (CoT)&lt;/li&gt;
+  &lt;li&gt;Level 4  多轮对话&lt;/li&gt;
+  &lt;li&gt;Level 5  Tool / RAG&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;分析&quot;&gt;分析&lt;/h2&gt;
+
+&lt;h3 id=&quot;level-1-基础问答&quot;&gt;Level 1 基础问答&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;基础应答能力,会胡说,不会推理&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+ &quot;messages&quot;:[
+  {&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;What is XAI?&quot;},
+  {&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:&quot;XAI is the process...&quot;}
+ ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;level-2--system-prompt&quot;&gt;Level 2  System Prompt&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;增加了 system, 让模型学习角色行为,并且形成某种人格&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+ &quot;messages&quot;:[
+  {
+   &quot;role&quot;:&quot;system&quot;,
+   &quot;content&quot;:&quot;You are a professional biology teacher.&quot;
+  },
+  {
+   &quot;role&quot;:&quot;user&quot;,
+   &quot;content&quot;:&quot;Explain photosynthesis&quot;
+  },
+  {
+   &quot;role&quot;:&quot;assistant&quot;,
+   &quot;content&quot;:&quot;Photosynthesis is...&quot;
+  }
+ ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;level-3--思考链-cot&quot;&gt;Level 3  思考链 (CoT)&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;提升推理能力&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+ &quot;messages&quot;:[
+  {&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;If I have 20 apples and give away 7, how many remain?&quot;},
+  {&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:
+   &quot;Let&apos;s think step by step.\n
+    1. Start with 20 apples\n
+    2. Give away 7 apples\n
+    3. 20 - 7 = 13\n
+    Therefore, 13 apples remain.&quot;
+  }
+ ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;level-4--多轮对话&quot;&gt;Level 4  多轮对话&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;真实聊天是多轮会话的,模型会学会上下文记忆和连续推理&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+ &quot;messages&quot;:[
+  {&quot;role&quot;:&quot;system&quot;,&quot;content&quot;:&quot;You are a math tutor.&quot;},
+  {&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;What is 12 * 8?&quot;},
+  {&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:&quot;12 × 8 = 96.&quot;},
+  {&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;What about 96 ÷ 3?&quot;},
+  {&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:&quot;96 ÷ 3 = 32.&quot;}
+ ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;level-5--tool--rag&quot;&gt;Level 5  Tool / RAG&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;模型会根据用户问题,学会选择工具,调用API,返回答案&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+ &quot;messages&quot;:[
+  {&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;What&apos;s the weather in Tokyo?&quot;},
+  {
+   &quot;role&quot;:&quot;assistant&quot;,
+   &quot;content&quot;:&quot;I will check the weather API.&quot;,
+   &quot;tool_call&quot;:{
+      &quot;name&quot;:&quot;get_weather&quot;,
+      &quot;arguments&quot;:{&quot;city&quot;:&quot;Tokyo&quot;}
+   }
+  },
+  {
+   &quot;role&quot;:&quot;tool&quot;,
+   &quot;content&quot;:&quot;Temperature: 20°C&quot;
+  },
+  {
+   &quot;role&quot;:&quot;assistant&quot;,
+   &quot;content&quot;:&quot;The temperature in Tokyo is 20°C.&quot;
+  }
+ ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;模型会读取上下文Context&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+ &quot;messages&quot;:[
+  {
+   &quot;role&quot;:&quot;system&quot;,
+   &quot;content&quot;:&quot;Use the provided context to answer.&quot;
+  },
+  {
+   &quot;role&quot;:&quot;user&quot;,
+   &quot;content&quot;:&quot;Context: Tokyo is the capital of Japan.\nQuestion: What is the capital of Japan?&quot;
+  },
+  {
+   &quot;role&quot;:&quot;assistant&quot;,
+   &quot;content&quot;:&quot;The capital of Japan is Tokyo.&quot;
+  }
+ ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;推荐高质量的sft数据结构如下&quot;&gt;推荐高质量的SFT数据结构如下&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+ &quot;messages&quot;:[
+  {&quot;role&quot;:&quot;system&quot;,&quot;content&quot;:&quot;You are a helpful AI.&quot;},
+
+  {&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;Calculate 25 * 14&quot;},
+
+  {&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:
+  &quot;Let&apos;s solve step by step.\n
+   25 × 14 = (25 × 10) + (25 × 4)\n
+   = 250 + 100\n
+   = 350\n
+   Therefore the answer is 350.&quot;
+  }
+ ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sun, 15 Mar 2026 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/zh/2026-03-15-Fine-tuning%E4%B9%8B%E9%AB%98%E8%B4%A8%E9%87%8FSFT%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/</link>
+        <guid isPermaLink="true">http://localhost:4000/zh/2026-03-15-Fine-tuning%E4%B9%8B%E9%AB%98%E8%B4%A8%E9%87%8FSFT%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/</guid>
+        
+        <category>Fine-tuning</category>
+        
+        <category>SFT</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Fine-tuning之简单的数据准备与预处理</title>
+        <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;私有LLM,最重要的是用私有数据对LLM进行微调(Fine-tuning).这篇文章先讲如何进行数据准备和预处理&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;数据准备&quot;&gt;数据准备&lt;/h2&gt;
+
+&lt;p&gt;通过下载“斯坦福Alpaca训练所使用的数据集”得到如下格式的json文件:
+&lt;strong&gt;alpaca_data.json&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[
+    {
+        &quot;instruction&quot;: &quot;Give three tips for staying healthy.&quot;,
+        &quot;input&quot;: &quot;&quot;,
+        &quot;output&quot;: &quot;1.Eat a balanced diet and make sure to include plenty of fruits and vegetables. \n2. Exercise regularly to keep your body active and strong. \n3. Get enough sleep and maintain a consistent sleep schedule.&quot;
+    },
+.......
+    {
+        &quot;instruction&quot;: &quot;What are the three primary colors?&quot;,
+        &quot;input&quot;: &quot;&quot;,
+        &quot;output&quot;: &quot;The three primary colors are red, blue, and yellow.&quot;
+    }
+]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;数据预处理&quot;&gt;数据预处理&lt;/h2&gt;
+
+&lt;p&gt;Fine-tuning要求的数据格式(&lt;strong&gt;基础的SFT数据结构&lt;/strong&gt;)如下:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+	&quot;message&quot;:[
+		{
+			&quot;role&quot;: &quot;user&quot;,
+			&quot;content&quot;: &quot;xxxx_question_1&quot;
+		},
+		{
+			&quot;role&quot;: &quot;assistant&quot;,
+			&quot;content&quot;: &quot;xxxx_answer_1&quot;
+		}
+	]
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;通过一段python脚本将alpaca_data.json的数据格式转化为Fine-tuning要求的数据格式.
+并且转化后的数据要有&lt;strong&gt;训练数据集&lt;/strong&gt;和&lt;strong&gt;验证数据集&lt;/strong&gt;2种. (训练:验证 = 7:3)&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import json
+import random
+
+def load_data():
+    with open(&apos;alpaca_data.json&apos;,&apos;r&apos;,encoding=&apos;utf-8&apos;) as f:
+        data=json.load(f)
+    return data
+
+def conversion_to_jsonl(data):
+
+    random.shuffle(data)
+
+    split=int(len(data)*0.7)
+
+    train=data[:split]
+    valid=data[split:]
+
+    def convert(item):
+        return {
+            &quot;messages&quot;:[
+                {
+                    &quot;role&quot;:&quot;user&quot;,
+                    &quot;content&quot;:item[&quot;instruction&quot;]+&quot;\n&quot;+item.get(&quot;input&quot;,&quot;&quot;)
+                },
+                {
+                    &quot;role&quot;:&quot;assistant&quot;,
+                    &quot;content&quot;:item[&quot;output&quot;]
+                }
+            ]
+        }
+
+    with open(&quot;train.jsonl&quot;,&quot;w&quot;,encoding=&quot;utf-8&quot;) as f:
+        for item in train:
+            f.write(json.dumps(convert(item),ensure_ascii=False)+&quot;\n&quot;)
+
+    with open(&quot;valid.jsonl&quot;,&quot;w&quot;,encoding=&quot;utf-8&quot;) as f:
+        for item in valid:
+            f.write(json.dumps(convert(item),ensure_ascii=False)+&quot;\n&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    original_data = load_data()
+    conversion_to_jsonl(original_data)
+
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;完整的代码链接如下:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/LuochuanAD/Fine-tuning-Learn&quot;&gt;https://github.com/LuochuanAD/Fine-tuning-Learn&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;数据来源:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;“斯坦福Alpaca训练所使用的数据集”:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://raw.githubusercontent.com/tatsu-lab/stanford_alpaca/refs/heads/main/alpaca_data.json&quot;&gt;https://raw.githubusercontent.com/tatsu-lab/stanford_alpaca/refs/heads/main/alpaca_data.json&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 15 Mar 2026 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/zh/2026-03-15-Fine-tuning%E4%B9%8B%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87%E4%B8%8E%E9%A2%84%E5%A4%84%E7%90%86/</link>
+        <guid isPermaLink="true">http://localhost:4000/zh/2026-03-15-Fine-tuning%E4%B9%8B%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87%E4%B8%8E%E9%A2%84%E5%A4%84%E7%90%86/</guid>
+        
+        <category>Fine-tuning</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

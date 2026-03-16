@@ -2,12 +2,16 @@
 layout: page
 title: "About"
 description: "Louis Luo — iOS and AI Engineer based in Tokyo."
-header-img: "img/about_head_background.jag"
+header-img: "img/about_head_background.jpg"
 ---
 
 <style>
 .zh,.en,.ja{
-display:none;
+  display:none;
+}
+.post-container{
+  max-width: 800px;
+  margin: auto;
 }
 </style>
 
@@ -32,7 +36,6 @@ display:none;
 
 </div>
 
-
 <!-- English Version -->
 <div class="en post-container">
 
@@ -55,7 +58,6 @@ display:none;
 <p>I enjoy building scalable, production-ready systems and continuously exploring how AI can generate real business value.</p>
 
 </div>
-
 
 <!-- Japanese Version -->
 <div class="ja post-container">
@@ -80,85 +82,59 @@ display:none;
 
 </div>
 
-
 <script>
 document.addEventListener("DOMContentLoaded", function(){
+  const zh = document.querySelector(".zh");
+  const en = document.querySelector(".en");
+  const ja = document.querySelector(".ja");
 
-const zh = document.querySelector(".zh");
-const en = document.querySelector(".en");
-const ja = document.querySelector(".ja");
+  const lang = navigator.language || navigator.userLanguage;
 
-const lang = navigator.language || navigator.userLanguage;
-
-if(lang.startsWith("zh")){
-zh.style.display="block";
-}
-else if(lang.startsWith("ja")){
-ja.style.display="block";
-}
-else{
-en.style.display="block";
-}
-
+  if(lang.startsWith("zh")){
+    zh.style.display="block";
+  }
+  else if(lang.startsWith("ja")){
+    ja.style.display="block";
+  }
+  else{
+    en.style.display="block";
+  }
 });
 </script>
-
 
 <!-- SEO Person Schema -->
 <script type="application/ld+json">
 {
-"@context":"https://schema.org",
-"@type":"Person",
-"name":"Louis Luo",
-"alternateName":"罗川",
-"jobTitle":"iOS Engineer & AI Engineer",
-"url":"{{site.url}}/about",
-"image":"{{site.url}}/img/avatar.jag",
-"sameAs":[
-"https://github.com/",
-"https://www.linkedin.com/"
-],
-"worksFor":{
-"@type":"Organization",
-"name":"Independent Developer"
-},
-"address":{
-"@type":"PostalAddress",
-"addressLocality":"Tokyo",
-"addressCountry":"Japan"
-},
-"knowsAbout":[
-"iOS Development",
-"Swift",
-"Objective-C",
-"Artificial Intelligence",
-"Python",
-"Machine Learning",
-"Web Development"
-]
+  "@context":"https://schema.org",
+  "@type":"Person",
+  "name":"Louis Luo",
+  "alternateName":"罗川",
+  "jobTitle":"iOS Engineer & AI Engineer",
+  "url":"{{site.url}}/about",
+  "image":"{{site.url}}/img/avatar.jag",
+  "sameAs":[
+    "https://github.com/",
+    "https://www.linkedin.com/"
+  ],
+  "worksFor":{
+    "@type":"Organization",
+    "name":"Independent Developer"
+  },
+  "address":{
+    "@type":"PostalAddress",
+    "addressLocality":"Tokyo",
+    "addressCountry":"Japan"
+  },
+  "knowsAbout":[
+    "iOS Development",
+    "Swift",
+    "Objective-C",
+    "Artificial Intelligence",
+    "Python",
+    "Machine Learning",
+    "Web Development"
+  ]
 }
-</script>
-
-<script>
-
-const path = window.location.pathname;
-
-if (path === "/about/" || path === "/about") {
-
-    const lang = navigator.language || navigator.userLanguage;
-
-    if (lang.startsWith("zh")) {
-        window.location.href = "/zh/about/";
-    }
-    else if (lang.startsWith("ja")) {
-        window.location.href = "/ja/about/";
-    }
-    else {
-        window.location.href = "/en/about/";
-    }
-
-}
-
 </script>
 
 <!-- Gitalk 评论 -->
@@ -170,22 +146,20 @@ if (path === "/about/" || path === "/about") {
 
 <script>
 var gitalk = new Gitalk({
-clientID: '{{site.gitalk.clientID}}',
-clientSecret: '{{site.gitalk.clientSecret}}',
-repo: '{{site.gitalk.repo}}',
-owner: '{{site.gitalk.owner}}',
-admin: ['{{site.gitalk.admin}}'],
-distractionFreeMode: {{site.gitalk.distractionFreeMode}},
-id: 'about'
+  clientID: '{{site.gitalk.clientID}}',
+  clientSecret: '{{site.gitalk.clientSecret}}',
+  repo: '{{site.gitalk.repo}}',
+  owner: '{{site.gitalk.owner}}',
+  admin: ['{{site.gitalk.admin}}'],
+  distractionFreeMode: {{site.gitalk.distractionFreeMode}},
+  id: 'about'
 });
 gitalk.render('gitalk-container');
 </script>
 {% endif %}
 
-
 <!-- Disqus 评论 -->
 {% if site.disqus.enable %}
-
 <div class="comment">
 <div id="disqus_thread"></div>
 </div>
@@ -196,12 +170,11 @@ var disqus_identifier = "{{site.disqus.username}}/{{page.url}}";
 var disqus_url = "{{site.url}}{{page.url}}";
 
 (function(){
-var dsq=document.createElement('script');
-dsq.type='text/javascript';
-dsq.async=true;
-dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';
-(document.head||document.body).appendChild(dsq);
+  var dsq=document.createElement('script');
+  dsq.type='text/javascript';
+  dsq.async=true;
+  dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';
+  (document.head||document.body).appendChild(dsq);
 })();
 </script>
-
 {% endif %}

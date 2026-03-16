@@ -1,0 +1,51 @@
+---
+layout: page
+lang: en  # 修改为 zh 或 ja 对应语言主页
+permalink: /en/
+description: "When Heaven is about to confer a great responsibility on man, it will first fill his heart with suffering..."
+---
+
+{% comment %}
+直接获取中文文章 (_posts/en/)
+按日期倒序排序
+{% endcomment %}
+{% assign en_posts = site.posts | where_exp:"post","post.url contains '/en/'" | sort: "date" | reverse %}
+
+{% for post in en_posts %}
+  <div class="post-preview">
+    <a href="{{ post.url | relative_url }}">
+      <h2 class="post-title">{{ post.title }}</h2>
+      {% if post.subtitle %}
+      <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+      {% endif %}
+      <div class="post-content-preview">
+        {{ post.content | strip_html | truncate:200 }}
+      </div>
+    </a>
+    <p class="post-meta">
+      发布者 {{ post.author | default: site.title }}，
+      日期 {{ post.date | date: "%Y-%m-%d" }}
+    </p>
+  </div>
+  <hr>
+{% endfor %}
+
+{% comment %}
+自动重定向主页 /index.html 到对应语言
+- zh -> /zh/
+- ja -> /ja/
+- 默认 -> /en/
+{% endcomment %}
+{% if page.url == "/" %}
+<script>
+const userLang = navigator.language || navigator.userLanguage;
+
+if (userLang.startsWith("zh")) {
+    window.location.href = "{{ '/zh/' | relative_url }}";
+} else if (userLang.startsWith("ja")) {
+    window.location.href = "{{ '/ja/' | relative_url }}";
+} else {
+    window.location.href = "{{ '/en/' | relative_url }}";
+}
+</script>
+{% endif %}

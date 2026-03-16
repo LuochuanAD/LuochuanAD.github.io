@@ -1,89 +1,77 @@
 ---
 layout: page
-description: "When Heaven is about to confer a great responsibility on man,it will first fill his heart with suffering,toil his sinews and bones,exposes his body to huger,subjects him to extreme poverty,confounds his journey with setbacks and troubles,so as to stimulate his alertness, toughen his nature,eventually bridging his incompetence gap and prepare him for the task."
+lang: zh  # 修改为 zh 或 ja 对应语言主页
+description: "When Heaven is about to confer a great responsibility on man, it will first fill his heart with suffering..."
 ---
 
-{% assign lang = "en" %}
-{% if page.url contains "/zh/" %}{% assign lang = "zh" %}{% endif %}
-{% if page.url contains "/ja/" %}{% assign lang = "ja" %}{% endif %}
+{% comment %}
+设置当前语言
+页面 front matter 中的 lang 属性会确定文章语言
+{% endcomment %}
+{% assign lang = page.lang | default: "en" %}
 
+{% comment %}
+循环显示当前语言的文章
+路径约定：
+  - 英文文章在 /en/
+  - 中文文章在 /zh/
+  - 日文文章在 /ja/
+{% endcomment %}
 {% for post in paginator.posts %}
-
-{% if lang == "zh" and post.path contains "/zh/" or
-      lang == "ja" and post.path contains "/ja/" or
-      lang == "en" and post.path contains "/en/" %}
-
-<div class="post-preview">
-
-    <a href="{{ post.url | relative_url }}">
-
-        <h2 class="post-title">
-            {{ post.title }}
-        </h2>
-
-        {% if post.subtitle %}
-        <h3 class="post-subtitle">
-            {{ post.subtitle }}
-        </h3>
-        {% endif %}
-
-        <div class="post-content-preview">
-            {{ post.content | strip_html | truncate:200 }}
-        </div>
-
-    </a>
-
-    <p class="post-meta">
-        Posted by 
-        {% if post.author %}
-            {{ post.author }}
-        {% else %}
-            {{ site.title }}
-        {% endif %}
-        on {{ post.date | date: "%B %-d, %Y" }}
-    </p>
-
-</div>
-
-<hr>
-
-{% endif %}
+  {% if post.path contains '/' | append: lang | append: '/' %}
+    <div class="post-preview">
+        <a href="{{ post.url | relative_url }}">
+            <h2 class="post-title">{{ post.title }}</h2>
+            {% if post.subtitle %}
+            <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+            {% endif %}
+            <div class="post-content-preview">
+                {{ post.content | strip_html | truncate:200 }}
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by {{ post.author | default: site.title }}
+            on {{ post.date | date: "%B %-d, %Y" }}
+        </p>
+    </div>
+    <hr>
+  {% endif %}
 {% endfor %}
+
 <div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}">
+      ← Newer Posts
+    </a>
+  {% endif %}
 
-{% if paginator.previous_page %}
-<a href="{{ paginator.previous_page_path | relative_url }}">
-← Newer Posts
-</a>
-{% endif %}
+  <span>
+    Page {{ paginator.page }} / {{ paginator.total_pages }}
+  </span>
 
-<span>
-Page {{ paginator.page }} / {{ paginator.total_pages }}
-</span>
-
-{% if paginator.next_page %}
-<a href="{{ paginator.next_page_path | relative_url }}">
-Older Posts →
-</a>
-{% endif %}
-
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}">
+      Older Posts →
+    </a>
+  {% endif %}
 </div>
+
+{% comment %}
+自动重定向主页 /index.html 到对应语言
+- zh -> /zh/
+- ja -> /ja/
+- 默认 -> /en/
+{% endcomment %}
+{% if page.url == "/" %}
 <script>
+const userLang = navigator.language || navigator.userLanguage;
 
-if (window.location.pathname === "{{ '/' | relative_url }}") {
-
-    const lang = navigator.language || navigator.userLanguage;
-
-    if (lang.startsWith("zh")) {
-        window.location.href = "{{ '/zh/' | relative_url }}";
-    }
-    else if (lang.startsWith("ja")) {
-        window.location.href = "{{ '/jp/' | relative_url }}";
-    }
-    else {
-        window.location.href = "{{ '/en/' | relative_url }}";
-    }
-
+if (userLang.startsWith("zh")) {
+    window.location.href = "{{ '/zh/' | relative_url }}";
+} else if (userLang.startsWith("ja")) {
+    window.location.href = "{{ '/ja/' | relative_url }}";
+} else {
+    window.location.href = "{{ '/en/' | relative_url }}";
 }
-
 </script>
+{% endif %}

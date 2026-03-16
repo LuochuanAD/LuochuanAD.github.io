@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="keep hungry keep foolish">
+    <meta name="keywords"  content="iOS,AI,Agent,Python">
+    <meta name="theme-color" content="#000000">
+    
+    <title>自定义SFSafariViewController - Louis | strictfrog.com </title>
+    
+     
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- canonical -->
+    <link rel="canonical" href="http://localhost:4000/zh/2019-08-25-%E8%87%AA%E5%AE%9A%E4%B9%89SFSafariViewController/">
+
+    
+
+    <link rel="alternate" hreflang="zh" href="http://localhost:4000/zh/2019-08-25-%E8%87%AA%E5%AE%9A%E4%B9%89SFSafariViewController/">
+    <link rel="alternate" hreflang="en" href="http://localhost:4000/en/2019-08-25-%E8%87%AA%E5%AE%9A%E4%B9%89SFSafariViewController/">
+    <link rel="alternate" hreflang="ja" href="http://localhost:4000/jp/2019-08-25-%E8%87%AA%E5%AE%9A%E4%B9%89SFSafariViewController/">
+    <link rel="alternate" hreflang="x-default" href="http://localhost:4000/en/2019-08-25-%E8%87%AA%E5%AE%9A%E4%B9%89SFSafariViewController/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4199R84NLQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-4199R84NLQ');
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+</head>
+
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+</style>
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+  
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Strict Frog's Blog</a>
+            <p class="navbar-brand" id="my-link"> 🌐 <span id="current-lang">EN</span></p>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+
+    const path = window.location.pathname;
+
+    let lang = "EN";
+    document.getElementById('my-link').style.display = 'block';
+
+    if(path.startsWith("/zh")){
+    lang = "中文";
+    }
+    else if(path.startsWith("/jp")){
+    lang = "JP";
+    }
+    else if(path.startsWith("/en")){
+    lang = "EN";
+    }else{
+        document.getElementById('my-link').style.display = 'none';
+    }
+
+    document.getElementById("current-lang").innerText = lang;
+
+
+</script>
+<script>
+
+
+
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home_blog_background.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home_blog_background.jpg')
+    }
+
+    
+
+        /* Donation Box */
+    .donation-box {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e5e7eb;
+      font-size: 0.95rem;
+      color: #374151;
+    }
+
+    .donation-box h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .donation-intro {
+      margin-bottom: 1rem;
+      color: #6b7280;
+    }
+
+    /* Primary sponsor button */
+    .sponsor-primary {
+      display: inline-block;
+      padding: 0.45rem 0.9rem;
+      margin-bottom: 0.8rem;
+      border-radius: 6px;
+      background-color: #24292e;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .sponsor-primary:hover {
+      opacity: 0.9;
+    }
+
+    /* Toggle button */
+    .donation-toggle {
+      display: inline-block;
+      margin-left: 0.5rem;
+      background: none;
+      border: none;
+      color: #2563eb;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .donation-toggle:hover {
+      text-decoration: underline;
+    }
+
+    /* Hidden methods */
+    .donation-methods {
+      display: none;
+      margin-top: 1rem;
+      padding-left: 0.5rem;
+    }
+
+    .donation-item {
+      margin-bottom: 1.2rem;
+    }
+
+    .donation-item img {
+      margin-top: 0.4rem;
+      width: 150px;
+      max-width: 100%;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+    }
+</style>
+<header class="intro-header" >
+    
+
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#iOS" title="iOS">iOS</a>
+                        
+                        <a class="tag" href="/tags/#SFSafariViewController" title="SFSafariViewController">SFSafariViewController</a>
+                        
+                    </div>
+                    <h1>自定义SFSafariViewController</h1>
+                    
+                    
+                    <h2 class="subheading">SFSafariViewController</h2>
+                    
+                    <span class="meta">Posted by LuochuanAD on August 25, 2019</span>
+                    
+                    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+                    <span id="busuanzi_value_page_pv">本文总阅读量 <i class="fa fa-spinner fa-spin"></i> 次</span>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h2 id="前言">前言</h2>
+
+<blockquote>
+  <p>iOS9.0新出了一个加载网页的控件:SFSafariViewControoler, 它具有Safari浏览器的众多优点,加载更快,兼容更强. 但也有人反映SFSafariViewController的自定义不强, 接下来看看它详细的API讲解以及Demo样例.</p>
+</blockquote>
+
+<p>自定义的样式为下图:</p>
+
+<p><img src="https://raw.githubusercontent.com/LuochuanAD/LCSafariViewControllerDemo/master/LCSafariViewControllerDemo/example.png" alt="" /></p>
+
+<h2 id="分析">分析</h2>
+
+<blockquote>
+  <p>关键词：SFSafariViewController</p>
+</blockquote>
+
+<h3 id="一导入">一,导入</h3>
+
+<blockquote>
+  <p>导入#import &lt;SafariServices/SafariServices.h&gt; 并且遵守SFSafariViewControllerDelegate代理</p>
+</blockquote>
+
+<blockquote>
+  <p>详细代码LCSafariViewControllerDemo已上传到<a href="https://github.com/LuochuanAD/LCSafariViewControllerDemo">Github</a></p>
+</blockquote>
+
+<h3 id="二sfsafariviewcontroller初始化-两种方法">二,SFSafariViewController初始化 (两种方法)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SFSafariViewController * sf;
+
+/*
+*  初始化方法一:适用iOS9.0及以上
+*
+*  @param url 注意:1,不能加载本地HTML文件(已在模拟器测试过); 2,URL需要加https://或者http:// 否则会崩溃
+*/
+sf = [[SFSafariViewController alloc]initWithURL:[NSURL URLWithString:@"https://strictfrog.com"]];//API_AVAILABLE(ios(9.0, *))
+
+
+/*
+*  初始化方法二:适用iOS9.0~iOS11.0 和 iOS11.0及以上
+*
+*  @param url 注意:1,不能加载本地HTML文件(已在模拟器测试过); 2,URL需要加https://或者http:// 否则会崩溃
+*
+*  @param entersReaderIfAvailable 是否能开启阅读模式 只适用iOS9.0~iOS11.0
+*
+*  @param SFSafariViewControllerConfiguration 配置文件 适用iOS11.0及以上 属性entersReaderIfAvailable:是否能开启阅读模式; 属性barCollapsingEnabled: 滑动网页时是否隐藏导航栏和标签栏
+*/
+if (@available(iOS 11.0, *)) {
+SFSafariViewControllerConfiguration * sfConfig = [[SFSafariViewControllerConfiguration alloc]init];//API_AVAILABLE(ios(11.0))
+sfConfig.entersReaderIfAvailable = YES;
+sfConfig.barCollapsingEnabled = YES;
+sf = [[SFSafariViewController alloc]initWithURL:[NSURL URLWithString:@"https://strictfrog.com"] configuration:sfConfig];
+}else{
+sf = [[SFSafariViewController alloc]initWithURL:[NSURL URLWithString:@"https://strictfrog.com"] entersReaderIfAvailable:YES];//API_AVAILABLE(ios(9.0, 11.0))
+}
+
+sf.delegate = self;
+
+</code></pre></div></div>
+
+<h3 id="三sfsafariviewcontroller的属性设置">三,SFSafariViewController的属性设置</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+/*
+*  设置SFSafariViewController属性
+*
+*  preferredBarTintColor:导航栏和标签栏背景颜色 (建议run一下) 只适用iOS10.0及以上
+*
+*  preferredControlTintColor 导航栏和标签栏里的字颜色 (建议run一下) 只适用iOS10.0及以上
+*
+*  dismissButtonStyle 返回按钮的样式 Done/Cancel/Close 这三种字都已做了文字国际化 只适用iOS11.0及以上
+*/
+if (@available(iOS 10.0, *)) {
+sf.preferredBarTintColor = [UIColor lightGrayColor];
+sf.preferredControlTintColor = [UIColor blackColor];
+
+if (@available(iOS 11.0, *)) {
+sf.dismissButtonStyle = SFSafariViewControllerDismissButtonStyleCancel;
+}
+}
+
+</code></pre></div></div>
+
+<h3 id="四跳转方式2种方法">四,跳转方式(2种方法)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+*  跳转方式一: 默认
+*/
+[self presentViewController:sf animated:YES completion:nil];
+
+
+/*
+*  自定义跳转方式二:
+*/
+[self.navigationController pushViewController:sf animated:YES];
+
+
+</code></pre></div></div>
+<blockquote>
+  <p>如果想使用push跳转, 需要做额外一些代码设置</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+- (void)viewDidAppear:(BOOL)animated{
+[super viewDidAppear:animated];
+self.navigationController.navigationBar.hidden = NO;
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+[super viewWillDisappear:animated];
+//自定义跳转方式二 设置
+self.navigationController.navigationBar.hidden = YES;
+
+}
+
+
+//此方法为SFSafariViewControllerDelegate代理方法
+- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller{
+//自定义跳转方式二 设置
+[self.navigationController popViewControllerAnimated:YES];
+}
+
+</code></pre></div></div>
+
+<h3 id="五sfsafariviewcontrollerdelegate代理方法">五,SFSafariViewControllerDelegate代理方法</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+*  点击左上角Done/Cancel/Close按钮
+*/
+- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller{
+//自定义跳转方式二 设置
+[self.navigationController popViewControllerAnimated:YES];
+}
+
+
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+*  只有初始化加载页面完成加载一次
+*
+*  @param didLoadSuccessfully  YES:加载成功;NO:加载失败
+*/
+- (void)safariViewController:(SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully{
+
+}
+
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+/*
+*  重定向url 只适用iOS11.0及以上
+*
+*  @param URL  网页重定向时会调用该方法,并且返回重定向页面的URL
+*/
+- (void)safariViewController:(SFSafariViewController *)controller initialLoadDidRedirectToURL:(NSURL *)URL API_AVAILABLE(ios(11.0)){
+
+}
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+*  过滤safari浏览器点击分享按钮,弹出窗口中的内容
+*
+*  @param URL 当前网页的URL
+*
+*  @param title 当前网页的title
+*
+*  @result 返回一个数组, 数组中包含你要过滤掉的UIActivityType类型, 默认是不过滤
+*/
+- (NSArray&lt;UIActivityType&gt; *)safariViewController:(SFSafariViewController *)controller excludedActivityTypesForURL:(NSURL *)URL title:(nullable NSString *)title API_AVAILABLE(ios(11.0)){
+/**
+UIActivityTypePostToFacebook      发送到Facebook
+UIActivityTypePostToTwitter       发送到Twitter
+UIActivityTypePostToWeibo         发送到微博
+UIActivityTypeMessage             发送到Message
+UIActivityTypeMail                发送到Mail
+UIActivityTypePrint               打印
+UIActivityTypeCopyToPasteboard    拷贝到粘贴板
+UIActivityTypeAssignToContact     发送给指定联系人
+UIActivityTypeSaveToCameraRoll    保存到相机
+UIActivityTypeAddToReadingList    添加到阅读标签
+UIActivityTypePostToFlickr        发送到Flicker
+UIActivityTypePostToVimeo         发送到Vimeo
+UIActivityTypePostToTencentWeibo  发送到腾讯微博
+UIActivityTypeAirDrop             传送给Airdrop
+UIActivityTypeOpenInIBooks        打开iBooks
+UIActivityTypeMarkupAsPDF         作为PDF收藏
+*/
+return @[UIActivityTypeAddToReadingList];
+}
+</code></pre></div></div>
+
+<blockquote>
+  <p>最后一个代理方法,如果有需求,就需要一个自定义的UIActivity,详细看Demo</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+/*
+*  点击分享按钮,UIActivityViewController弹出窗口将要显示的时候, 调用该方法
+*
+*  @param URL 当前网页的URL
+*
+*  @param title 当前网页的title
+*
+*  @result 返回一个UIActivity数组, 可以自定义添加UIActivity到数组中
+*/
+
+- (NSArray&lt;UIActivity *&gt; *)safariViewController:(SFSafariViewController *)controller activityItemsForURL:(NSURL *)URL title:(nullable NSString *)title{
+LCActivity * activity = [[LCActivity alloc]init];
+
+
+return @[activity];
+}
+
+</code></pre></div></div>
+
+<h3 id="六自定义uiactivity">六,自定义UIActivity</h3>
+
+<blockquote>
+  <p>覆盖UIActivity的几个方法就好</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+#import &lt;UIKit/UIKit.h&gt;
+
+@interface LCActivity : UIActivity
+@property (nonatomic, copy) void(^activityBlock)(void);
+
+@end
+
+#import "LCActivity.h"
+
+@implementation LCActivity
+- (NSString *)activityType {
+
+return @"CustomActivity";
+}
+
+- (NSString *)activityTitle {
+
+return @"自定义Activity";
+}
+
+- (UIImage *)activityImage {//只有iOS8才支持彩色,所以不建议使用彩色照片
+
+
+return [UIImage imageNamed:@"luochuan"];
+}
+
+- (void)performActivity {
+[self activityDidFinish:YES];
+
+if (self.activityBlock) {
+self.activityBlock();
+}
+}
+
+- (BOOL)canPerformWithActivityItems:(NSArray *)activityItems {
+
+if (activityItems.count &gt; 0) {
+
+return YES;
+}
+
+return NO;
+}
+
+@end
+
+
+</code></pre></div></div>
+
+<h2 id="结语">结语</h2>
+
+<p>SFSafariViewController所有的属性及方法 全都讲解完毕. 如果有不理解的可以对照github上代码查看</p>
+
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/zh/2018-12-09-%E4%BB%8A%E5%B9%B4%E7%9A%84%E6%80%BB%E7%BB%93%E5%8F%8A%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%A7%84%E5%88%92/" data-toggle="tooltip" data-placement="top" title="2018年总结及未来规划">
+                        Previous<br>
+                        <span>2018年总结及未来规划</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/zh/2019-12-09-%E4%BB%8A%E5%B9%B4%E7%9A%84%E6%80%BB%E7%BB%93%E5%8F%8A%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%A7%84%E5%88%92/" data-toggle="tooltip" data-placement="top" title="2019年总结及未来规划">
+                        Next<br>
+                        <span>2019年总结及未来规划</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                <!--Gitalk评论start  -->
+                
+                <!-- 引入Gitalk评论插件  -->
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+                <div id="gitalk-container"></div>
+                <!-- 引入一个生产md5的js，用于对id值进行处理，防止其过长 -->
+                <!-- Thank DF:https://github.com/NSDingFan/NSDingFan.github.io/issues/3#issuecomment-407496538 -->
+                <script src="/js/md5.min.js"></script>
+                <script type="text/javascript">
+                    var gitalk = new Gitalk({
+                    clientID: '0cf1cb5fe7051c16de71',
+                    clientSecret: '5d7e5d162ab576a222f72715ccf525a5cb60b68a',
+                    repo: 'gitalk-comment',
+                    owner: 'LuochuanAD',
+                    admin: ['LuochuanAD'],
+                    distractionFreeMode: true,
+                    id: md5(location.pathname),
+                    });
+                    gitalk.render('gitalk-container');
+                </script>
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container donation-box">
+                <h5>关于作者</h5>
+                <p class="donation-intro">我是Louis,一名长期从事<strong>iOS与AI相关工程实践</strong>的工程师,也是一个正在探索产品与商业可能性的准创始人.</p>
+                <p class="donation-intro">这里的文章,更多是我在项目中用过,踩过坑,反复验证过的东西,而不是为了流量而写的“快内容”.</p>
+                
+                
+                <section class="donation-box">
+                  <h5>☕ 打赏</h5>
+
+                  <p class="donation-intro">
+                    如果这篇文章对你有帮助,欢迎请我喝一杯咖啡☕️
+                  </p >
+
+                  <!-- GitHub Sponsors -->
+                  <a
+                    class="sponsor-primary"
+                    href="https://github.com/sponsors/LuochuanAD"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    GitHub Sponsors（推荐）
+                  </a >
+
+                  <!-- Toggle button -->
+                  <button class="donation-toggle" onclick="toggleDonate()">
+                    其他支持方式
+                  </button>
+
+                  <!-- Hidden donation methods -->
+                  <div id="donation-methods" class="donation-methods">
+                    <div class="donation-item">
+                      <strong>PayPal</strong><br />
+                      <a href="https://www.paypal.me/你的用户名" target="_blank">
+                        https://www.paypal.me/luochuan188
+                      </a >
+                    </div>
+
+                    <div class="donation-item">
+                      <strong>PayPay</strong><br />
+                      <p>You can support my work via PayPay by searching my PayPay ID:
+                      </p >
+
+                      <p style="font-weight: bold;">
+                        PayPay ID: <code>luochuan</code>
+                      </p >
+                    </div>
+
+                    <div class="donation-item">
+                      <strong>微信支付</strong><br />
+                      
+                      <img src="/img/wechat_louis.jpg" alt="WeChat Pay QR" />
+                    </div>
+
+                    <div class="donation-item">
+                      <strong>支付宝</strong><br />
+                      <img src="/img/alipay_louis.jpg" alt="Alipay QR" />
+                    </div>
+                  </div>
+                
+                    <p class="donation-intro">你的支持会让我有更多时间,把真实项目中的经验持续整理和分享出来.</p>
+                    <p class="donation-intro">不打赏也完全没关系,感谢你读到这里.</p>
+                </section>
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>联系与合作</h5>
+                <p class="donation-intro"><strong>如果你:</strong></p>
+                <p class="donation-intro">· 正在做iOS App / AI / 自动化相关的项目</p>
+                <p class="donation-intro">· 对技术选型、架构设计、产品落地有困惑</p>
+                <p class="donation-intro">· 或希望进行技术交流、合作探讨</p>
+                <p class="donation-intro"><strong>欢迎通过以下邮箱联系我:</strong></p>
+                <ul class="list-inline">
+                    
+                        <li><p>luochuanad@gmail.com</p></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<script>
+  function toggleDonate() {
+    const el = document.getElementById("donation-methods");
+    el.style.display = el.style.display === "block" ? "none" : "block";
+  }
+</script>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        // BY Fix:去除标题前的‘#’ issues:<https://github.com/qiubaiying/qiubaiying.github.io/issues/137>
+        // anchors.options = {
+        //   visible: 'always',
+        //   placement: 'right',
+        //   icon: '#'
+        // };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <!-- add jianshu add target = "_blank" to <a> by BY -->
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Strict Frog's Blog 2026
+                    <br>
+                    Theme on <a href="https://github.com/luochuanad/luochuanad.github.io.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=&repo=.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/apple-touch-icon.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
