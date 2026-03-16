@@ -257,39 +257,20 @@ chart.render();
 
 <script>
 
-const path=window.location.pathname;
+const path = window.location.pathname;
 
-if(path==="/tags/"||path==="/tags"){
-
-const lang=navigator.language||navigator.userLanguage;
-
-if(lang.startsWith("zh")){
-window.location.href="/zh/tags/";
-}
-else if(lang.startsWith("ja")){
-window.location.href="/jp/tags/";
-}
-else{
-window.location.href="/en/tags/";
-}
-
-}
-
-</script>
-<script>
-
-if (window.location.pathname === "{{ '/' | relative_url }}") {
+if (path === "/tags/" || path === "/tags") {
 
     const lang = navigator.language || navigator.userLanguage;
 
     if (lang.startsWith("zh")) {
-        window.location.href = "{{ '/zh/' | relative_url }}";
+        window.location.href = "/zh/tags/";
     }
     else if (lang.startsWith("ja")) {
-        window.location.href = "{{ '/jp/' | relative_url }}";
+        window.location.href = "/jp/tags/";
     }
     else {
-        window.location.href = "{{ '/en/' | relative_url }}";
+        window.location.href = "/en/tags/";
     }
 
 }
