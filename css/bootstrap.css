@@ -4218,6 +4218,33 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     display: none;
   }
 }
+.language-menu {
+position: relative;
+}
+
+.language-dropdown {
+display: none;
+position: absolute;
+background: white;
+list-style: none;
+padding: 10px 0;
+right: 0;
+top: 40px;
+border-radius: 6px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.language-dropdown li {
+padding: 5px 20px;
+}
+
+.language-dropdown li a {
+color: #333;
+}
+
+.language-menu:hover .language-dropdown {
+display: block;
+}
 .navbar-nav {
   margin: 7.5px -15px;
 }

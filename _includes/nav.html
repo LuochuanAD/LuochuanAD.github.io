@@ -10,11 +10,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.title }}</a>
-            <div class="navbar-header">
-                <a href="/zh/">中文</a> |
-                <a href="/en/">EN</a> |
-                <a href="/jp/">JP</a>
-            </div>
+            
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -29,6 +25,14 @@
                         <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
                     </li>
                     {% endif %}{% endfor %}
+                    <li class="language-menu">
+                      <a href="#">🌐 <span id="current-lang">EN</span></a>
+                      <ul class="language-dropdown">
+                          <li><a href="/zh/">中文</a></li>
+                          <li><a href="/en/">English</a></li>
+                          <li><a href="/jp/">日本語</a></li>
+                      </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -87,4 +91,23 @@
         if(e.target.className == 'icon-bar') return;
         __HuxNav__.close();
     })
+
+    const path = window.location.pathname;
+
+    let lang = "EN";
+
+    if(path.startsWith("/zh")){
+    lang = "中文";
+    }
+    else if(path.startsWith("/jp")){
+    lang = "JP";
+    }
+
+    document.getElementById("current-lang").innerText = lang;
+
+</script>
+<script>
+
+
+
 </script>
