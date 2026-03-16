@@ -3,26 +3,31 @@ layout: page
 description: "When Heaven is about to confer a great responsibility on man,it will first fill his heart with suffering,toil his sinews and bones,exposes his body to huger,subjects him to extreme poverty,confounds his journey with setbacks and troubles,so as to stimulate his alertness, toughen his nature,eventually bridging his incompetence gap and prepare him for the task."
 ---
 
+<!-- Language Switch -->
 <div class="lang-switch">
     <a href="/zh/">中文</a> |
     <a href="/en/">EN</a> |
     <a href="/jp/">JP</a>
 </div>
 
-{% assign lang = page.url | split:'/' | second | default: "en" %}
+{% assign path_parts = page.url | split: "/" %}
+{% assign lang = path_parts[1] | default: "en" %}
 
 {% if lang == "zh" %}
-    {% assign posts = site.zh %}
+    {% assign posts = site.posts | where_exp: "post", "post.path contains '/zh/'" %}
 {% elsif lang == "jp" %}
-    {% assign posts = site.jp %}
+    {% assign posts = site.posts | where_exp: "post", "post.path contains '/jp/'" %}
 {% else %}
-    {% assign posts = site.en %}
+    {% assign posts = site.posts | where_exp: "post", "post.path contains '/en/'" %}
 {% endif %}
 
 
 {% for post in posts %}
+
 <div class="post-preview">
+
     <a href="{{ post.url | prepend: site.baseurl }}">
+
         <h2 class="post-title">
             {{ post.title }}
         </h2>
@@ -48,11 +53,13 @@ description: "When Heaven is about to confer a great responsibility on man,it wi
         {% endif %}
         on {{ post.date | date: "%B %-d, %Y" }}
     </p>
+
 </div>
 
 <hr>
 
 {% endfor %}
+
 
 <script>
 
