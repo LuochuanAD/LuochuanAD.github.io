@@ -2,11 +2,11 @@
 layout: page
 title: "About"
 description: "Louis Luo — iOS and AI Engineer based in Tokyo."
-header-img: "img/about_head_background.jpg"
+header-img: "img/about_head_background.jag"
 ---
 
 <style>
-.zh,.en,.jp{
+.zh,.en,.ja{
 display:none;
 }
 </style>
@@ -58,7 +58,7 @@ display:none;
 
 
 <!-- Japanese Version -->
-<div class="jp post-container">
+<div class="ja post-container">
 
 <blockquote>
 <p>天がまさに大任をこの人に下そうとするとき、必ずまずその心志を苦しめ、その筋骨を労し、その体を飢えさせる。</p>
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 const zh = document.querySelector(".zh");
 const en = document.querySelector(".en");
-const jp = document.querySelector(".jp");
+const ja = document.querySelector(".ja");
 
 const lang = navigator.language || navigator.userLanguage;
 
@@ -94,7 +94,7 @@ if(lang.startsWith("zh")){
 zh.style.display="block";
 }
 else if(lang.startsWith("ja")){
-jp.style.display="block";
+ja.style.display="block";
 }
 else{
 en.style.display="block";
@@ -113,7 +113,7 @@ en.style.display="block";
 "alternateName":"罗川",
 "jobTitle":"iOS Engineer & AI Engineer",
 "url":"{{site.url}}/about",
-"image":"{{site.url}}/img/avatar.jpg",
+"image":"{{site.url}}/img/avatar.jag",
 "sameAs":[
 "https://github.com/",
 "https://www.linkedin.com/"
@@ -151,7 +151,7 @@ if (path === "/about/" || path === "/about") {
         window.location.href = "/zh/about/";
     }
     else if (lang.startsWith("ja")) {
-        window.location.href = "/jp/about/";
+        window.location.href = "/ja/about/";
     }
     else {
         window.location.href = "/en/about/";

@@ -5,12 +5,12 @@ description: "When Heaven is about to confer a great responsibility on man,it wi
 
 {% assign lang = "en" %}
 {% if page.url contains "/zh/" %}{% assign lang = "zh" %}{% endif %}
-{% if page.url contains "/jp/" %}{% assign lang = "jp" %}{% endif %}
+{% if page.url contains "/ja/" %}{% assign lang = "ja" %}{% endif %}
 
 {% for post in paginator.posts %}
 
 {% if lang == "zh" and post.path contains "/zh/" or
-      lang == "jp" and post.path contains "/jp/" or
+      lang == "ja" and post.path contains "/ja/" or
       lang == "en" and post.path contains "/en/" %}
 
 <div class="post-preview">
