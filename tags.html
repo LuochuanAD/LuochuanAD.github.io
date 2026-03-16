@@ -276,3 +276,22 @@ window.location.href="/en/tags/";
 }
 
 </script>
+<script>
+
+if (window.location.pathname === "{{ '/' | relative_url }}") {
+
+    const lang = navigator.language || navigator.userLanguage;
+
+    if (lang.startsWith("zh")) {
+        window.location.href = "{{ '/zh/' | relative_url }}";
+    }
+    else if (lang.startsWith("ja")) {
+        window.location.href = "{{ '/jp/' | relative_url }}";
+    }
+    else {
+        window.location.href = "{{ '/en/' | relative_url }}";
+    }
+
+}
+
+</script>
