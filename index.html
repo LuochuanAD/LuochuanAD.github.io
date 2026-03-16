@@ -10,7 +10,7 @@ description: "When Heaven is about to confer a great responsibility on man,it wi
     <a href="/jp/">JP</a>
 </div>
 
-{% assign path_parts = page.url | split: "/" %}
+{% assign path_parts = page.url | split: "/" | sort: "date" | reverse %}
 {% assign lang = path_parts[1] | default: "en" %}
 
 {% if lang == "zh" %}
