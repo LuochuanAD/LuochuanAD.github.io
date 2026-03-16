@@ -14,26 +14,27 @@ permalink: /404.html
 				<div class="site-heading" id="tag-heading">
 					<h1>404</h1>
 					<span class="subheading">{{ page.description }}</span>
+					<p>zh: {{ site.zh | size }}</p>
+					<p>en: {{ site.en | size }}</p>
+					<p>jp: {{ site.jp | size }}</p>
+
+					<h2>Posts</h2>
+
+					{% for post in site.zh %}
+					<p>{{ post.title }}</p>
+					{% endfor %}
+
+					<h1>404 Debug Page</h1>
+
+					<p id="debug-url"></p>
+					<p id="debug-lang"></p>
 				</div>
 			</div>
 		</div>
 	</div>
 </header>
 
-<p>zh: {{ site.zh | size }}</p>
-<p>en: {{ site.en | size }}</p>
-<p>jp: {{ site.jp | size }}</p>
 
-<h2>Posts</h2>
-
-{% for post in site.zh %}
-<p>{{ post.title }}</p>
-{% endfor %}
-
-<h1>404 Debug Page</h1>
-
-<p id="debug-url"></p>
-<p id="debug-lang"></p>
 
 
 
