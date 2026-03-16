@@ -3,34 +3,19 @@ layout: page
 description: "When Heaven is about to confer a great responsibility on man,it will first fill his heart with suffering,toil his sinews and bones,exposes his body to huger,subjects him to extreme poverty,confounds his journey with setbacks and troubles,so as to stimulate his alertness, toughen his nature,eventually bridging his incompetence gap and prepare him for the task."
 ---
 
-<!-- Language Switch -->
-<!-- <div class="lang-switch">
-    <a href="/zh/">中文</a> |
-    <a href="/en/">EN</a> |
-    <a href="/jp/">JP</a>
-</div> -->
+{% assign lang = "en" %}
+{% if page.url contains "/zh/" %}{% assign lang = "zh" %}{% endif %}
+{% if page.url contains "/jp/" %}{% assign lang = "jp" %}{% endif %}
 
-{% assign path_parts = page.url | split: "/" %}
-{% assign lang = path_parts[1] | default: "en" %}
+{% for post in paginator.posts %}
 
-{% assign sorted_posts = site.posts | sort: "date" %}
-
-{% if lang == "zh" %}
-    {% assign posts = sorted_posts 
-        | where_exp: "post", "post.path contains '/zh/'" %}
-{% elsif lang == "jp" %}
-    {% assign posts = sorted_posts 
-        | where_exp: "post", "post.path contains '/jp/'" %}
-{% else %}
-    {% assign posts = sorted_posts 
-        | where_exp: "post", "post.path contains '/en/'" %}
-{% endif %}
-
-{% for post in posts %}
+{% if lang == "zh" and post.path contains "/zh/" or
+      lang == "jp" and post.path contains "/jp/" or
+      lang == "en" and post.path contains "/en/" %}
 
 <div class="post-preview">
 
-    <a href="{{ post.url | prepend: site.baseurl }}">
+    <a href="{{ post.url | relative_url }}">
 
         <h2 class="post-title">
             {{ post.title }}
@@ -62,25 +47,24 @@ description: "When Heaven is about to confer a great responsibility on man,it wi
 
 <hr>
 
+{% endif %}
 {% endfor %}
+<div class="pagination">
 
+{% if paginator.previous_page %}
+<a href="{{ paginator.previous_page_path | relative_url }}">
+← Newer Posts
+</a>
+{% endif %}
 
-<script>
+<span>
+Page {{ paginator.page }} / {{ paginator.total_pages }}
+</span>
 
-if (window.location.pathname === "/") {
+{% if paginator.next_page %}
+<a href="{{ paginator.next_page_path | relative_url }}">
+Older Posts →
+</a>
+{% endif %}
 
-    const lang = navigator.language || navigator.userLanguage;
-
-    if (lang.startsWith("zh")) {
-        window.location.href = "/zh/";
-    }
-    else if (lang.startsWith("ja")) {
-        window.location.href = "/jp/";
-    }
-    else {
-        window.location.href = "/en/";
-    }
-
-}
-
-</script>
+</div>
