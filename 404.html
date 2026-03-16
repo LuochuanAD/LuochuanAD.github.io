@@ -14,12 +14,6 @@ permalink: /404.html
 				<div class="site-heading" id="tag-heading">
 					<h1>404</h1>
 					<span class="subheading">{{ page.description }}</span>
-					<p>zh: {{ site.zh | size }}</p>
-					<p>en: {{ site.en | size }}</p>
-					<p>jp: {{ site.jp | size }}</p>
-
-					<p id="debug-url"></p>
-					<p id="debug-lang"></p>
 				</div>
 			</div>
 		</div>
@@ -28,25 +22,6 @@ permalink: /404.html
 
 
 
-
-
-<script>
-
-console.log("404 page loaded");
-
-const path = window.location.pathname;
-const lang = navigator.language;
-
-console.log("Current path:", path);
-console.log("Browser language:", lang);
-
-document.getElementById("debug-url").innerText =
-"Current URL: " + path;
-
-document.getElementById("debug-lang").innerText =
-"Browser Language: " + lang;
-
-</script>
 
 <script>
 	document.body.classList.add('page-fullscreen');
