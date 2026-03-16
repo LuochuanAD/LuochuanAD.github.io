@@ -13,23 +13,18 @@ description: "When Heaven is about to confer a great responsibility on man,it wi
 {% assign path_parts = page.url | split: "/" %}
 {% assign lang = path_parts[1] | default: "en" %}
 
-{% if lang == "zh" %}
-    {% assign posts = site.posts 
-        | where_exp: "post", "post.path contains '/zh/'"
-        | sort: "date" 
-        | reverse %}
-{% elsif lang == "jp" %}
-    {% assign posts = site.posts 
-        | where_exp: "post", "post.path contains '/jp/'"
-        | sort: "date" 
-        | reverse %}
-{% else %}
-    {% assign posts = site.posts 
-        | where_exp: "post", "post.path contains '/en/'"
-        | sort: "date" 
-        | reverse %}
-{% endif %}
+{% assign sorted_posts = site.posts | sort: "date" | reverse %}
 
+{% if lang == "zh" %}
+    {% assign posts = sorted_posts 
+        | where_exp: "post", "post.path contains '/zh/'" %}
+{% elsif lang == "jp" %}
+    {% assign posts = sorted_posts 
+        | where_exp: "post", "post.path contains '/jp/'" %}
+{% else %}
+    {% assign posts = sorted_posts 
+        | where_exp: "post", "post.path contains '/en/'" %}
+{% endif %}
 
 {% for post in posts %}
 
