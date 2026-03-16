@@ -10,7 +10,11 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.title }}</a>
-            
+            <div class="language-menu">
+                <p id="my-link">
+                    🌐 <span id="current-lang">EN</span>
+                </p>
+            </div>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -25,13 +29,6 @@
                         <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
                     </li>
                     {% endif %}{% endfor %}
-                    <li class="language-menu">
-
-                    <p id="my-link">
-                    🌐 <span id="current-lang">EN</span>
-                    </p>
-
-                    </li>
                 </ul>
             </div>
         </div>
