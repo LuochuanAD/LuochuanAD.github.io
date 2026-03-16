@@ -17,15 +17,10 @@ sidebar-avatar: /img/myPicture.PNG      # use absolute URL, seeing it's used in 
 collections:
   zh:
     output: true
-    permalink: /zh/:path/
-
   en:
     output: true
-    permalink: /en/:path/
-
   jp:
     output: true
-    permalink: /jp/:path/
 
 
 # SNS settings
