@@ -4,16 +4,16 @@ description: "When Heaven is about to confer a great responsibility on man,it wi
 ---
 
 <!-- Language Switch -->
-<div class="lang-switch">
+<!-- <div class="lang-switch">
     <a href="/zh/">中文</a> |
     <a href="/en/">EN</a> |
     <a href="/jp/">JP</a>
-</div>
+</div> -->
 
 {% assign path_parts = page.url | split: "/" %}
 {% assign lang = path_parts[1] | default: "en" %}
 
-{% assign sorted_posts = site.posts | sort: "date" | reverse %}
+{% assign sorted_posts = site.posts | sort: "date" %}
 
 {% if lang == "zh" %}
     {% assign posts = sorted_posts 
