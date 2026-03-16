@@ -20,6 +20,41 @@ permalink: /404.html
 	</div>
 </header>
 
+<p>zh: {{ site.zh | size }}</p>
+<p>en: {{ site.en | size }}</p>
+<p>jp: {{ site.jp | size }}</p>
+
+<h2>Posts</h2>
+
+{% for post in site.zh %}
+<p>{{ post.title }}</p>
+{% endfor %}
+
+<h1>404 Debug Page</h1>
+
+<p id="debug-url"></p>
+<p id="debug-lang"></p>
+
+
+
+<script>
+
+console.log("404 page loaded");
+
+const path = window.location.pathname;
+const lang = navigator.language;
+
+console.log("Current path:", path);
+console.log("Browser language:", lang);
+
+document.getElementById("debug-url").innerText =
+"Current URL: " + path;
+
+document.getElementById("debug-lang").innerText =
+"Browser Language: " + lang;
+
+</script>
+
 <script>
 	document.body.classList.add('page-fullscreen');
 </script>
