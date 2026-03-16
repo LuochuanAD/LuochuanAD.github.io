@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
 {% include head.html %}
 
@@ -18,54 +18,22 @@ img {
   max-width: 100%;
   height: auto;
 }
-
-.lang-switch{
-  position:absolute;
-  top:20px;
-  right:20px;
-  font-size:14px;
-}
 </style>
 
+<!-- hack iOS CSS :active style -->
 <body ontouchstart="">
   
-{% include nav.html %}
+    {% include nav.html %}
 
-<div class="lang-switch">
-  <a href="/zh/">中文</a> |
-  <a href="/en/">EN</a> |
-  <a href="/jp/">JP</a>
-</div>
+    {{ content }}
 
-{{ content }}
+    {% include footer.html %}
 
-{% include footer.html %}
 
+<!-- Image to hack wechat -->
 <img src="/img/apple-touch-icon.png" width="0" height="0" />
-
-<script>
-(function() {
-
-  var path = window.location.pathname;
-
-  if (path.startsWith("/zh") || path.startsWith("/en") || path.startsWith("/jp")) {
-      return;
-  }
-
-  var lang = navigator.language;
-
-  if (lang.startsWith("zh")) {
-      window.location.href = "/zh/";
-  }
-  else if (lang.startsWith("ja")) {
-      window.location.href = "/jp/";
-  }
-  else {
-      window.location.href = "/en/";
-  }
-
-})();
-</script>
+<!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>
+
 </html>

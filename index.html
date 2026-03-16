@@ -3,7 +3,13 @@ layout: page
 description: "When Heaven is about to confer a great responsibility on man,it will first fill his heart with suffering,toil his sinews and bones,exposes his body to huger,subjects him to extreme poverty,confounds his journey with setbacks and troubles,so as to stimulate his alertness, toughen his nature,eventually bridging his incompetence gap and prepare him for the task."
 ---
 
-{% assign lang = page.url | split:'/' | second %}
+<div class="lang-switch">
+    <a href="/zh/">中文</a> |
+    <a href="/en/">EN</a> |
+    <a href="/jp/">JP</a>
+</div>
+
+{% assign lang = page.url | split:'/' | second | default: "en" %}
 
 {% if lang == "zh" %}
     {% assign posts = site.zh %}
@@ -47,3 +53,23 @@ description: "When Heaven is about to confer a great responsibility on man,it wi
 <hr>
 
 {% endfor %}
+
+<script>
+
+if (window.location.pathname === "/") {
+
+    const lang = navigator.language || navigator.userLanguage;
+
+    if (lang.startsWith("zh")) {
+        window.location.href = "/zh/";
+    }
+    else if (lang.startsWith("ja")) {
+        window.location.href = "/jp/";
+    }
+    else {
+        window.location.href = "/en/";
+    }
+
+}
+
+</script>
