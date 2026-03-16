@@ -10,16 +10,13 @@ description: "When Heaven is about to confer a great responsibility on man,it wi
     <a href="/jp/">JP</a>
 </div>
 
-{% assign path_parts = page.url | split: "/" | sort: "date" | reverse %}
+{% assign path_parts = page.url | split: "/" %}
 {% assign lang = path_parts[1] | default: "en" %}
 
-{% if lang == "zh" %}
-    {% assign posts = site.posts | where_exp: "post", "post.path contains '/zh/'" %}
-{% elsif lang == "jp" %}
-    {% assign posts = site.posts | where_exp: "post", "post.path contains '/jp/'" %}
-{% else %}
-    {% assign posts = site.posts | where_exp: "post", "post.path contains '/en/'" %}
-{% endif %}
+{% assign posts = site.posts
+    | where_exp: "post", "post.path contains '/' | append: lang | append: '/'"
+    | sort: "date"
+    | reverse %}
 
 
 {% for post in posts %}
