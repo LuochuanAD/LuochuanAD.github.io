@@ -4,10 +4,7 @@ description: "When Heaven is about to confer a great responsibility on man,it wi
 permalink: /en/
 ---
 
-
-
 {% assign posts = site.en %}
-
 
 {% for post in posts %}
 <div class="post-preview">
@@ -42,23 +39,3 @@ permalink: /en/
 <hr>
 
 {% endfor %}
-
-<script>
-
-if (window.location.pathname === "/") {
-
-    const lang = navigator.language || navigator.userLanguage;
-
-    if (lang.startsWith("zh")) {
-        window.location.href = "/zh/";
-    }
-    else if (lang.startsWith("ja")) {
-        window.location.href = "/jp/";
-    }
-    else {
-        window.location.href = "/en/";
-    }
-
-}
-
-</script>
