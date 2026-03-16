@@ -175,3 +175,24 @@ header-img: "img/tags_head_background.jpg"
 
   chart.render();
 </script>
+<script>
+
+const path = window.location.pathname;
+
+if (path === "/tags/" || path === "/tags") {
+
+    const lang = navigator.language || navigator.userLanguage;
+
+    if (lang.startsWith("zh")) {
+        window.location.href = "/zh/tags/";
+    }
+    else if (lang.startsWith("ja")) {
+        window.location.href = "/jp/tags/";
+    }
+    else {
+        window.location.href = "/en/tags/";
+    }
+
+}
+
+</script>
