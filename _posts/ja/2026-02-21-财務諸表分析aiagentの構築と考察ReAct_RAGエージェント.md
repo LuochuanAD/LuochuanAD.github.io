@@ -1,6 +1,6 @@
 ---
 layout:     post
-title: 财務諸表分析AIAgentの構築と考察: ReAct RAGエージェント
+title: 财務諸表分析AIAgentの構築と考察ReAct_RAGエージェント
 subtitle: アーキテクチャ
 date:       2026-02-21
 author:     LuochuanAD

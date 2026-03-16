@@ -1,6 +1,6 @@
 ---
 layout:     post
-title: Enterprise-level AI Agent: Router + ReAct + Function Calling
+title: Enterprise-level AI Agent for Router + ReAct + Function Calling
 subtitle: Architecture
 date:       2026-02-18
 author:     LuochuanAD

@@ -1,14 +1,14 @@
 ---
 layout:     post
-title: Enterprise-level AI Agent: ReAct + Function Calling
+title: Enterprise-level AI Agent for ReAct + Function Calling
 subtitle: ReAct Framework
 date:       2026-02-17
 author:     LuochuanAD
 header-img: img/home_blog_background.jpg
 catalog: true
 tags:
-- Function Tools 
-- AI Agent
+- FunctionTools 
+- AIAgent
 - ReAct
 
 ---

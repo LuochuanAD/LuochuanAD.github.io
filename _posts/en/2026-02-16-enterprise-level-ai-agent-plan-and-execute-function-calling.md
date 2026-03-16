@@ -1,14 +1,14 @@
 ---
 layout:     post
-title: Enterprise-level AI Agent: Plan-and-Execute + Function Calling
+title: Enterprise-level AI Agent for Plan-and-Execute + Function Calling
 subtitle: Plan-and-Execute Framework
 date:       2026-02-16
 author:     LuochuanAD
 header-img: img/home_blog_background.jpg
 catalog: true
 tags:
-- Function Tools 
-- AI Agent
+- FunctionTools 
+- AIAgent
 
 ---
 

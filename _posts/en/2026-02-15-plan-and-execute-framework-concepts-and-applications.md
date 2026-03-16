@@ -1,6 +1,6 @@
 ---
 layout:     post
-title: Plan-and-Execute Framework: Concepts and Applications
+title: Plan-and-Execute Framework for Concepts and Applications
 subtitle: Plan-and-Solve
 date:       2026-02-15
 author:     LuochuanAD

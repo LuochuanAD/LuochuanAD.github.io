@@ -1,6 +1,6 @@
 ---
 layout:     post
-title: Building and Reflections on a Financial Statement Analysis AI Agent: ReAct RAG Agent
+title: Building and Reflections on a Financial Statement Analysis AI Agent for ReAct RAG Agent
 subtitle: Architecture
 date:       2026-02-21
 author:     LuochuanAD
@@ -8,7 +8,7 @@ header-img: img/home_blog_background.jpg
 catalog: true
 tags:
 - Function Tools 
-- AI Agent
+- AIAgent
 - ReAct
 
 ---

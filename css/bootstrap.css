@@ -3042,7 +3042,7 @@ fieldset[disabled] .btn {
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
   color: #333;
-  background-color: #e6e6e6;
+  background-color: transparent;
   border-color: #adadad;
 }
 .btn-default:active,
@@ -4075,6 +4075,21 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .navbar-header {
     float: left;
   }
+}
+#lang-switcher .dropdown-toggle {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px 12px;
+    font-size: 0.95rem;
+}
+
+#lang-switcher .dropdown-menu {
+    min-width: 120px;
+}
+
+#lang-switcher .dropdown-item:hover {
+    background-color: #f0f0f0;
+    color: #333;
 }
 .navbar-collapse {
   padding-right: 15px;

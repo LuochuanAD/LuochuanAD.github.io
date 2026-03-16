@@ -1,7 +1,7 @@
 ---
 layout:     post
 title: ChatGPT Capability Limits
-subtitle: Optimizing Distributed Systems with ChatGPT: Techniques and Best Practices
+subtitle: Optimizing Distributed Systems with ChatGPT for Techniques and Best Practices
 date:       2026-03-08
 author:     LuochuanAD
 header-img: img/home_blog_background.jpg

@@ -1,6 +1,6 @@
 ---
 layout:     post
-title: RAG Retrieval: Query ReWrite and Reranker
+title: RAG Retrieval for Query ReWrite and Reranker
 subtitle: Query ReWriting
 date:       2026-02-14
 author:     LuochuanAD
