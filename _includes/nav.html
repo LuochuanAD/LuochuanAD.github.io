@@ -27,19 +27,9 @@
                     {% endif %}{% endfor %}
                     <li class="language-menu">
 
-                    <a href="#">
+                    <a href="#" id="my-link">
                     🌐 <span id="current-lang">EN</span>
                     </a>
-
-                    <ul class="language-dropdown">
-
-                    <li><a href="{{ '/zh/' | prepend: site.baseurl }}">中文</a></li>
-
-                    <li><a href="{{ '/en/' | prepend: site.baseurl }}">English</a></li>
-
-                    <li><a href="{{ '/jp/' | prepend: site.baseurl }}">日本語</a></li>
-
-                    </ul>
 
                     </li>
                 </ul>
@@ -104,6 +94,7 @@
     const path = window.location.pathname;
 
     let lang = "EN";
+    document.getElementById('my-link').style.display = 'block';
 
     if(path.startsWith("/zh")){
     lang = "中文";
@@ -113,6 +104,8 @@
     }
     else if(path.startsWith("/en")){
     lang = "EN";
+    }else{
+        document.getElementById('my-link').style.display = 'none';
     }
 
     document.getElementById("current-lang").innerText = lang;
