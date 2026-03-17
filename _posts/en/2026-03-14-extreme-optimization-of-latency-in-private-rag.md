@@ -180,7 +180,7 @@ Speed improvement: CPU → GPU approximately 10x
 However, here I used Structural Chunking, so fixed-size chunking isn’t necessary.
 
 Article: “Designing Structural Chunks for RAG”  
-[https://strictfrog.com/2026/01/31/RAG%E4%B9%8BStructural-Chunks%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%9D%E8%80%83/](https://strictfrog.com/2026/01/31/RAG%E4%B9%8BStructural-Chunks%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%9D%E8%80%83/)
+[https://strictfrog.com/en/2026-01-31-structural-chunks-design-of-rag/](https://strictfrog.com/en/2026-01-31-structural-chunks-design-of-rag/)
 
 Three common chunking methods:  
 ```
@@ -273,7 +273,7 @@ Configuration: worker = 2, batch_size = 128, onnxruntime-gpu
 
 Refer to this article: “Incremental Vector Update Strategy for Embeddings”
 
-[https://strictfrog.com/2026/03/14/Embedding%E4%B9%8B%E5%A2%9E%E9%87%8F%E5%90%91%E9%87%8F%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5/](https://strictfrog.com/2026/03/14/Embedding%E4%B9%8B%E5%A2%9E%E9%87%8F%E5%90%91%E9%87%8F%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5/)
+[https://strictfrog.com/en/2026-03-14-incremental-vector-update-strategy-for-embedding/](https://strictfrog.com/en/2026-03-14-incremental-vector-update-strategy-for-embedding/)
 
 ### 9. Model Warm-up
 

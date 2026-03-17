@@ -38,7 +38,7 @@ resume_chunks = [
 ### Method 1: Keyword Extraction and Matching
 
 In the following article, I have explained how to split datasets into specific chunks using a **keyword density algorithm**.
-[https://strictfrog.com/2026/01/31/RAG%E4%B9%8BStructural-Chunks%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%9D%E8%80%83/](https://strictfrog.com/2026/01/31/RAG%E4%B9%8BStructural-Chunks%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%9D%E8%80%83/)
+[https://strictfrog.com/en/2026-01-31-structural-chunks-design-of-rag/](https://strictfrog.com/en/2026-01-31-structural-chunks-design-of-rag/)
 
 ```
 type_keywords = {

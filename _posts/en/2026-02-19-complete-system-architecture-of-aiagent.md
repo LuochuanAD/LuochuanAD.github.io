@@ -96,7 +96,7 @@ while True:
 > Here we adopt ChatGPT's Function Calling concept, connecting LLM and Tools invocation by defining "**Tools Schema**".
 
 Enterprise-grade AIAgent: ReAct + Function calling:
-[https://strictfrog.com/2026/02/17/%E4%BC%81%E4%B8%9A%E7%BA%A7AIAgent%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8Tools%E4%B9%8BReAct/](https://strictfrog.com/2026/02/17/%E4%BC%81%E4%B8%9A%E7%BA%A7AIAgent%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8Tools%E4%B9%8BReAct/)
+[https://strictfrog.com/en/2026-02-17-enterprise-level-ai-agent-react-function-calling/](https://strictfrog.com/en/2026-02-17-enterprise-level-ai-agent-react-function-calling/)
 
 ## 4. Fourth Layer: Guardrails & Policies
 

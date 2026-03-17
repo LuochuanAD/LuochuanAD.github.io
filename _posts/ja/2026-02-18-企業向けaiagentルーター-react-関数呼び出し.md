@@ -106,7 +106,7 @@ while True:
 > ここではChatGPTのFunction Callingの考え方を取り入れ、「**Tools Schema**」を定義することでLLMとツール呼び出しを接続します。
 
 企業レベルのAIAgent:ReAct＋Function calling:
-[https://strictfrog.com/2026/02/17/%E4%BC%81%E4%B8%9A%E7%BA%A7AIAgent%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8Tools%E4%B9%8BReAct/](https://strictfrog.com/2026/02/17/%E4%BC%81%E4%B8%9A%E7%BA%A7AIAgent%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8Tools%E4%B9%8BReAct/)
+[https://strictfrog.com/ja/2026-02-17-%E4%BC%81%E6%A5%AD%E5%90%91%E3%81%91aiagentreact-%E9%96%A2%E6%95%B0%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97/](https://strictfrog.com/ja/2026-02-17-%E4%BC%81%E6%A5%AD%E5%90%91%E3%81%91aiagentreact-%E9%96%A2%E6%95%B0%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97/)
 
 ## 4, 第四層:Guardrails & Policies
 

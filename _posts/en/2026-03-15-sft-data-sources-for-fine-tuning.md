@@ -77,4 +77,4 @@ So you would need to write scrapers; examples are not provided here.
 For formatting, refer to the following article:  
 “High-Quality SFT Data Structure Design for Fine-tuning”
 
-[https://strictfrog.com/2026/03/15/Fine-tuning%E4%B9%8B%E9%AB%98%E8%B4%A8%E9%87%8FSFT%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/](https://strictfrog.com/2026/03/15/Fine-tuning%E4%B9%8B%E9%AB%98%E8%B4%A8%E9%87%8FSFT%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/)
+[https://strictfrog.com/en/2026-03-15-high-quality-sft-data-structure-design-for-fine-tuning/](https://strictfrog.com/en/2026-03-15-high-quality-sft-data-structure-design-for-fine-tuning/)

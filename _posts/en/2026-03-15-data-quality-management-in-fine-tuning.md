@@ -89,7 +89,7 @@ cosine similarity
 ```
 Refer to the article: “Incremental Vector Update Strategy for Embeddings”
 
-[https://strictfrog.com/2026/03/14/Embedding%E4%B9%8B%E5%A2%9E%E9%87%8F%E5%90%91%E9%87%8F%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5/](https://strictfrog.com/2026/03/14/Embedding%E4%B9%8B%E5%A2%9E%E9%87%8F%E5%90%91%E9%87%8F%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5/)
+[https://strictfrog.com/en/2026-03-14-incremental-vector-update-strategy-for-embedding/](https://strictfrog.com/en/2026-03-14-incremental-vector-update-strategy-for-embedding/)
 
 ### 2 Noise Filtering
 
@@ -117,7 +117,7 @@ For example, this article converts Alpaca data format into SFT data structure.
 
 “Simple Data Preparation and Preprocessing for Fine-tuning”:
 
-[https://strictfrog.com/2026/03/15/Fine-tuning%E4%B9%8B%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87%E4%B8%8E%E9%A2%84%E5%A4%84%E7%90%86/](https://strictfrog.com/2026/03/15/Fine-tuning%E4%B9%8B%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87%E4%B8%8E%E9%A2%84%E5%A4%84%E7%90%86/)
+[https://strictfrog.com/en/2026-03-15-simple-data-preparation-and-preprocessing-for-fine-tuning/](https://strictfrog.com/en/2026-03-15-simple-data-preparation-and-preprocessing-for-fine-tuning/)
 
 ### 4 Length Control
 

@@ -18,7 +18,7 @@ tags:
 > This article explains the design concept of the Self-Improving Agent, which adds self-improvement capabilities on top of the Autonomous Agent architecture.
 
 "Autonomous Agent architecture":
-[https://strictfrog.com/2026/03/07/AutoGPT%E5%88%86%E6%9E%90%E4%B8%8EAutonomous%E6%80%9D%E8%80%83/](https://strictfrog.com/2026/03/07/AutoGPT%E5%88%86%E6%9E%90%E4%B8%8EAutonomous%E6%80%9D%E8%80%83/)
+[https://strictfrog.com/en/2026-03-07-autogpt-analysis-and-autonomous-thinking/](https://strictfrog.com/en/2026-03-07-autogpt-analysis-and-autonomous-thinking/)
 
 
 ## Self-Improving Agent Design Concept

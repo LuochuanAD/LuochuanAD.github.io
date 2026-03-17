@@ -113,7 +113,7 @@ Analyze the cause and provide an assessment.
 
 #### ReAct Framework
 
-[https://strictfrog.com/2026/02/11/ReAct%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3%E4%B8%8E%E6%80%9D%E8%80%83/](https://strictfrog.com/2026/02/11/ReAct%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3%E4%B8%8E%E6%80%9D%E8%80%83/)
+[https://strictfrog.com/en/2026-02-11-detailed-explanation-and-insights-on-the-react-framework/](https://strictfrog.com/en/2026-02-11-detailed-explanation-and-insights-on-the-react-framework/)
 
 #### APE Framework (Let AI Optimize Prompts Itself)
 
