@@ -15,6 +15,12 @@ header-img: "img/about_head_background.jpg"
 }
 </style>
 
+<select id="lang-selector">
+  <option value="zh">中文 | Chinese | 中国語</option>
+  <option value="ja">日本語 | Japanese | 日语</option>
+  <option value="en">English | 英语 | 英語</option>
+</select>
+
 <!-- Chinese Version -->
 <div class="zh post-container">
 
@@ -40,7 +46,7 @@ header-img: "img/about_head_background.jpg"
 <div class="en post-container">
 
 <blockquote>
-<p>When Heaven is about to confer a great responsibility on a man, it will first test his mind with suffering and his body with toil.</p>
+<p>When Heaven is about to confer a great responsibility on a man, it will first fill his heart with suffering, toil his sinews and bones, exposes his body to hunger, subjects him to extreme poverty. confounds his journey with setbacks and troubles. so as to stimulate his alertness, toughen his nature, eventually bridging his incompetence gap and prepare him for the task.</p>
 </blockquote>
 
 <p>Hi, I'm <strong>Louis Luo</strong>.</p>
@@ -63,7 +69,7 @@ header-img: "img/about_head_background.jpg"
 <div class="ja post-container">
 
 <blockquote>
-<p>天がまさに大任をこの人に下そうとするとき、必ずまずその心志を苦しめ、その筋骨を労し、その体を飢えさせる。</p>
+<p>天のまさに大任をこの人にくださんとするや、必ずまずその心志を苦しめ、その筋骨を労し、その体膚を餓えしめ、その身をくうぼうにし、行いにはその為すところをふつらんす。心を動かし、性を忍び、そのよくせざるところをぞうえきするゆえんなり．</p>
 </blockquote>
 
 <p>はじめまして。<strong>羅川（ラセン）</strong>と申します。</p>
@@ -100,6 +106,37 @@ document.addEventListener("DOMContentLoaded", function(){
     en.style.display="block";
   }
 });
+
+const selector = document.getElementById('lang-selector');
+const posts = document.querySelectorAll('.post-container');
+
+// 函数：显示指定语言，隐藏其他
+function showLang(lang) {
+  posts.forEach(post => {
+    post.style.display = post.classList.contains(lang) ? 'block' : 'none';
+  });
+  selector.value = lang; // 同步下拉菜单
+}
+
+// 获取系统语言
+function detectSystemLang() {
+  const lang = navigator.language || navigator.userLanguage; // 例如 "zh-CN", "ja-JP", "en-US"
+  if (lang.startsWith('zh')) return 'zh';
+  if (lang.startsWith('ja')) return 'ja';
+  return 'en'; // 默认英文
+}
+
+// 页面加载时，根据系统语言显示
+document.addEventListener('DOMContentLoaded', () => {
+  const lang = detectSystemLang();
+  showLang(lang);
+});
+
+// 语言选择器切换
+selector.addEventListener('change', () => {
+  showLang(selector.value);
+});
+
 </script>
 
 <!-- SEO Person Schema -->
