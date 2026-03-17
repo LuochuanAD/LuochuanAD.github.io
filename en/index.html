@@ -5,6 +5,12 @@ permalink: /en/
 description: ""
 ---
 
+
+<select onchange="window.location.href=this.value">
+  <option value="/zh/" {% if page.url contains '/zh/' %}selected{% endif %}>中文 | Chinese | 中国語</option>
+  <option value="/en/" {% if page.url contains '/en/' %}selected{% endif %}>English | 英语 | 英語</option>
+  <option value="/ja/" {% if page.url contains '/ja/' %}selected{% endif %}>日本語 | Japanese | 日语</option>
+</select>
 {% comment %}
 直接获取中文文章 (_posts/en/)
 按日期倒序排序
