@@ -2,7 +2,7 @@
 layout:     post
 title: How to Survive in the Age of AI
 subtitle: Self-Reflection
-date:       2026-03-18
+date:       2026-03-17
 author:     LuochuanAD
 header-img: img/home_blog_background.jpg
 catalog: true
