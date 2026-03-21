@@ -201,6 +201,11 @@ One English word = 0.75 tokens,
 One Chinese word = 1.0 token
 ```
 
+### 11. manage the length of propmt
+
+"Context Management and Filtering in Prompts"
+[https://strictfrog.com/en/2026-03-20-context-management-and-filtering-in-prompts/](https://strictfrog.com/en/2026-03-20-context-management-and-filtering-in-prompts/)
+
 ## Summary
 
 **A penny per call is small, but with 10,000 users calling 10 times, costs become significant.**

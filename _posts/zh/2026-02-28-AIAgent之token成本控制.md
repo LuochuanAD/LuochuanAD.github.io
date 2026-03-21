@@ -217,6 +217,11 @@ cached_prompt = “
 一个中文单词 = 1.0 token
 ```
 
+### 11, 动态管理prompt上下文的长度和结构
+
+“Prompt之上下文管理和过滤”
+
+[https://strictfrog.com/zh/2026-03-20-Prompt%E4%B9%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%92%8C%E8%BF%87%E6%BB%A4/](https://strictfrog.com/zh/2026-03-20-Prompt%E4%B9%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%92%8C%E8%BF%87%E6%BB%A4/)
 
 ## 总结
 
