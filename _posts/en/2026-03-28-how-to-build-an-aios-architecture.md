@@ -1,13 +1,13 @@
 ---
 layout:     post
-title: Design and Considerations of Short-Term and Long-Term Memory in Lightweight AI Agents
-subtitle: Long Short-Term Memory
+title: How to build an AIOS architecture ?
+subtitle: architecture
 date:       2026-03-28
 author:     LuochuanAD
 header-img: img/home_blog_background.jpg
 catalog: true
 tags:
-- Memory
+- architecture
 
 ---
 
