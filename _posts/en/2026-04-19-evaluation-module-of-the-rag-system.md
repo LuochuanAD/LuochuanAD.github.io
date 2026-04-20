@@ -1,6 +1,6 @@
 ---
 layout:     post
-title: Evaluation Module of the RAG System
+title: Evaluation Module of the RAG System and Memory Layer
 subtitle: Evaluation Module
 date:       2026-04-19
 author:     LuochuanAD
@@ -8,6 +8,7 @@ header-img: img/home_blog_background.jpg
 catalog: true
 tags:
 - RAG
+- Memory
 - Evaluation
 
 
@@ -15,7 +16,7 @@ tags:
 
 ## Background
 
-> In several previous AI Agent projects, I built RAG systems. Now, I need to evaluate this RAG system from the following dimensions: accuracy_score, precision_score, recall_score, average coverage (avg_coverage), and average response latency (avg_latency).
+> In several previous AI Agent projects, I built RAG systems and Memory Layer. Now, I need to evaluate this RAG system and Memory Layer from the following dimensions: accuracy_score, precision_score, recall_score, average coverage (avg_coverage), and average response latency (avg_latency).
 
 ## Sample Data Source Construction
 
@@ -155,6 +156,10 @@ Pseudocode:
 f1_score = ---------------------------------------------------
 	     2 * Count([1, 1]) + Count([0, 1]) + Count([1, 0])
 ```
+
+## Code URL
+
+
 
 ## Future Directions
 

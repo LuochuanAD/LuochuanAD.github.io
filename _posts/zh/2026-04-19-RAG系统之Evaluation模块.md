@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      RAG系统之Evaluation模块
+title:      RAG系统和MemoryLayer之Evaluation模块
 subtitle:   Evaluation模块
 date:       2026-04-19
 author:     LuochuanAD
@@ -8,6 +8,7 @@ header-img: img/home_blog_background.jpg
 catalog: true
 tags:
 - RAG
+- Memory
 - Evaluation
 
 
@@ -15,7 +16,7 @@ tags:
 
 ## 背景
 
-> 在之前做过的几个AIAgent中,构建了RAG系统. 现在需要对这个RAG系统进行评估, 我会从以下几个维度来评估: 准确率评分(accuracy_score),精确率评分(precision_score),召回率评分(recall_score),平均覆盖率(avg_coverage),平均响应延迟的时间(avg_latency). 
+> 在之前做过的几个AIAgent中,构建了RAG系统和Memory Layer. 现在需要对这个RAG系统和Memory Layer进行评估, 我会从以下几个维度来评估: 准确率评分(accuracy_score),精确率评分(precision_score),召回率评分(recall_score),平均覆盖率(avg_coverage),平均响应延迟的时间(avg_latency). 
 
 
 ## 构建数据源样例
@@ -161,6 +162,10 @@ avg_latency = ------------------------------
 f1_score = ---------------------------------------------------
 	     2 * Count([1, 1]) + Count([0, 1]) + Count([1, 0])
 ```
+
+## 代码地址
+
+
 
 ## 未来
 
