@@ -29,6 +29,10 @@ tags:
 
 [https://github.com/LuochuanAD/Fine-tuning-Learn/tree/main/FastAPI%2BUvicorn%2BGradio_Demo](https://github.com/LuochuanAD/Fine-tuning-Learn/tree/main/FastAPI%2BUvicorn%2BGradio_Demo)
 
+**下面是语音聊天可视化的UI:**
+
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/refs/heads/master/BlogSourceImage/BlogSourceImage2026/voice_demo.PNG)
+
 
 ## 取舍
 

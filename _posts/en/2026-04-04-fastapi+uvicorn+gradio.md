@@ -29,6 +29,10 @@ tags:
 
 [https://github.com/LuochuanAD/Fine-tuning-Learn/tree/main/FastAPI%2BUvicorn%2BGradio_Demo](https://github.com/LuochuanAD/Fine-tuning-Learn/tree/main/FastAPI%2BUvicorn%2BGradio_Demo)
 
+**Below is the UI for Voice visualization:**
+
+![](https://raw.githubusercontent.com/LuochuanAD/BlogSourceImage/refs/heads/master/BlogSourceImage/BlogSourceImage2026/voice_demo.PNG)
+
 
 ## Trade-offs
 
