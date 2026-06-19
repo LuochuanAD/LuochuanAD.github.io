@@ -1,6 +1,6 @@
 ---
 layout:     post
-title: Enterprise-Level Development: Implementing Frontend and Backend Service Separation with Nextjs and FastAPI
+title: Implementing Frontend and Backend Service Separation with Nextjs and FastAPI
 subtitle: Building Efficient Web Interfaces
 date:       2026-06-18
 author:     LuochuanAD
